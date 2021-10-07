@@ -4,7 +4,8 @@ import { dbContext } from '../db/DbContext.js'
 
 class ProfileService {
   async getProfileProjects(profileId) {
-    const prpjects = await dbContext.Projects.find({ profileId }).populate('creator', 'name picture')
+    const projects = await dbContext.Projects.find({ profileId }).populate('creator', 'name picture')
+    return projects
   }
 
   /**

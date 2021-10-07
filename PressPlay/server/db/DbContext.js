@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import { AccountSchema, ProfileSchema } from '../models/Account'
-import { ProjectSchema } from '../models/Project';
+import { ProjectSchema } from '../models/Project'
 import { ValueSchema } from '../models/Value'
 
 class DbContext {
