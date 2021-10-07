@@ -11,6 +11,7 @@ class ProjectsService{
     if(!project) {
       throw  new BadRequest('Invalid Project Id')
     }
+    return project
   }
   async createProject(projectData) {
     const project = await dbContext.Projects.create(projectData)
@@ -32,8 +33,13 @@ class ProjectsService{
     await project.save()
     return project
   }
-  async deleteProject(id, projectId) {
-    
+  async deleteProject(projectId, userId) {
+    const project = await this.getProjectById(projectId)
+    if(userId !== project.creatorId.toString()){
+      throw new Forbidden('Not Authorized to Delete')
+    }
+    await project.remove()
+    return project
   }
  
 
