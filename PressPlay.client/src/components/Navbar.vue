@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-pink px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
         <img
@@ -23,21 +23,41 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
+          <router-link :to="{ name: 'About' }" class="btn selectable text-uppercase text-light ">
             About
           </router-link>
         </li>
+
+        <li>
+          <router-link :to="{ name: 'Profile', params: {id: account.id}}" class="btn selectable text-uppercase text-light ">
+            My Profile
+          </router-link>
+        </li>
+
+        <li>
+          <router-link :to="{ name: 'Account', params: {id: account.id} }" class="btn selectable text-uppercase text-light ">
+            Account
+          </router-link>
+        </li>
+
+        <li>
+          <router-link :to="{ name: 'Project', params: {id: project.id} }" class="btn selectable text-uppercase text-light ">
+            Projects
+          </router-link>
+        </li>
+
+
       </ul>
       <span class="navbar-text">
         <button
-          class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
+          class="btn selectable text-uppercase my-2 my-lg-0 text-light"
           @click="login"
           v-if="!user.isAuthenticated"
         >
           Login
         </button>
 
-        <div class="dropdown my-2 my-lg-0" v-else>
+        <div class="dropdown my-2 my-lg-0 text-light" v-else>
           <div
             class="dropdown-toggle selectable"
             data-bs-toggle="dropdown"
@@ -50,7 +70,7 @@
               height="40"
               class="rounded"
             />
-            <span class="mx-3 text-success lighten-30">{{ user.name }}</span>
+            <span class="mx-3">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
@@ -83,6 +103,10 @@ export default {
   setup() {
     return {
       user: computed(() => AppState.user),
+      profile: computed(() => AppState.profile),
+      account: computed(()=> AppState.account),
+      project: computed(()=> AppState.projects),
+
       async login() {
         AuthService.loginWithPopup()
       },
@@ -117,5 +141,8 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.bg-pink{
+  background: radial-gradient(circle, #F963EA, #493240);
 }
 </style>

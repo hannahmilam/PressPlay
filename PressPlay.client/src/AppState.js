@@ -11,7 +11,7 @@ export const AppState = reactive({
   projectSubscriptions: [],
   projectSubscribers: [],
     /** @type {import('.model/Profile.js').Profile[]} */
-  profiles: [],
+  profile: [],
   currentProfile: {},
     /** @type {import('.model/ProfileSubscriptions.js').ProfileSubscriptions[]} */
   profileSubscriptions: [],
