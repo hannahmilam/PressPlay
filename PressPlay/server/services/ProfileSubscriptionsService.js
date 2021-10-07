@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProfileSubscriptionsService {
   async getSubscribersByProfileId(profileId) {
-    const subscribers = await dbContext.ProfileSubscriptions.find({ profileId: profileId })
+    const subscribers = await dbContext.ProfileSubscriptions.find({ subscriberId: profileId })
     if (!subscribers) {
       throw new BadRequest('No matching subscribers')
     }
@@ -11,7 +11,7 @@ class ProfileSubscriptionsService {
   }
 
   async getProfileSubscriptions(profileId) {
-    const subscriptions = await dbContext.ProfileSubscriptions.find({ profileId: profileId })
+    const subscriptions = await dbContext.ProfileSubscriptions.find({ subscribingId: profileId })
     if (!subscriptions) {
       throw new BadRequest('No matching subscribers')
     }
@@ -32,6 +32,8 @@ class ProfileSubscriptionsService {
     if (userId !== subscription.subscriberId.toString()) {
       throw new Forbidden("You don't have that authority")
     }
+    await subscription.delete()
+    return subscription
   }
 }
 export const profileSubscriptionsService = new ProfileSubscriptionsService()
