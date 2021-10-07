@@ -7,7 +7,7 @@ export class ProfileSubscriptionsController extends BaseController {
     super('api/profile')
     this.router
       .get('/:profileId/subscribers', this.getSubscribersByProfileId)
-      .get('/:profileId/sunscriptions', this.getProfileSubscriptions)
+      .get('/:profileId/subscriptions', this.getProfileSubscriptions)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/:profileId/subscription', this.subscribeToProfile)
       .delete('/:profileId/subscription/:subscriptionId', this.unsubscribeProfile)
@@ -15,7 +15,7 @@ export class ProfileSubscriptionsController extends BaseController {
 
   async getSubscribersByProfileId(req, res, next) {
     try {
-      const subscribers = await profileSubscriptionsService.getSubscribersByProfileId(req.params.profileId)
+      const subscribers = await profileSubscriptionsService.getSubscribersByProfileId(req.query)
       res.send(subscribers)
     } catch (error) {
       next(error)
