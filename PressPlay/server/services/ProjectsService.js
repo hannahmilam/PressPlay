@@ -13,6 +13,10 @@ class ProjectsService{
     }
     return project
   }
+  async getProfileProjects(profileId) {
+    const projects = await dbContext.Projects.find({ profileId }).populate('creator', 'name picture')
+    return projects
+  }
   async createProject(projectData) {
     const project = await dbContext.Projects.create(projectData)
     await project.populate('creator', 'name picture')

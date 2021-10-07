@@ -4,17 +4,18 @@ import { projectsService } from "../services/ProjectsService";
 
 export class ProjectsController extends BaseController{
 constructor(){
-  super('api/projects')
+  super('api')
   this.router
-  .get('', this.getProjects)
-  .get('/:projectId', this.getProjectById)
+  .get('/projects', this.getProjects)
+  .get('/projects/:projectId', this.getProjectById)
+  .get('/profile/:profileId/projects', this.getProjectsByProfileId)
   // .get(':/projectId/comments', this.getComments) TODO needs to move to comments controller... need to make comments controller.
   // .get(':/projectId/subs', this.getProjectSubscribers) TODO need to move to subs controller
   // .get(':/projectId/contributions', this.getProjectContributions) TODO need to move to contributions controller
   .use(Auth0Provider.getAuthorizedUserInfo)
-  .post('', this.createProject)
-  .put('/:projectId', this.editProject)
-  .delete('/:projectId', this.deleteProject)
+  .post('/projects', this.createProject)
+  .put('/projects/:projectId', this.editProject)
+  .delete('/projects/:projectId', this.deleteProject)
 
 
 }
@@ -33,7 +34,13 @@ constructor(){
     } catch (error) {
       next(error)
     }
-
+  }
+  async getProjectsByProfileId(req, res, next) {
+    try {
+      const profileProjects = await projectsService.getProfileProjects(req.params.profileId)
+    } catch (error) {
+      next(error)
+    }
   }
   async createProject(req, res, next) {
     try {

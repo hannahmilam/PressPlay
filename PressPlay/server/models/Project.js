@@ -9,7 +9,7 @@ export const ProjectSchema = new Schema(
   genreTags: { type: String, required: true},
   instrumentTags: { type: String, required: true},
   neededInstrumentTags: { type: String, required: true},
-  spotlight: { type: String },
+  // spotlight: { type: String }, TODO review spotlight
   // followers: {} TODO we are confused about how to put this on the schema...
 },
 { timestamps: true, toJSON: {virtuals: true} }
