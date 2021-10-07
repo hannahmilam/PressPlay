@@ -33,7 +33,7 @@ export class ProjectsSubsController extends BaseController {
 
   async subscribeToProject(req, res, next) {
     try {
-      req.body.accountId = req.userInfo.id
+      req.body.profileId = req.userInfo.id
       req.body.projectId = req.params.projectId
       const project = await projectsSubsService.subscribeToProject(req.body)
       res.send(project)
