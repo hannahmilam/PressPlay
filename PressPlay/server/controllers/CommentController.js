@@ -1,5 +1,6 @@
 import BaseController from "../utils/BaseController";
 import { Auth0Provider } from '@bcwdev/auth0provider';
+import { commentsService } from "../services/CommentsService";
 export class commentController extends BaseController{
   constructor(){
     super('api')

@@ -22,6 +22,14 @@ class ProjectsService{
     await project.populate('creator', 'name picture')
     return project
   }
+  async deleteProject(projectId, userId) {
+    const project = await this.getProjectById(projectId)
+    if(userId !== project.creatorId.toString()){
+      throw new Forbidden('Not Authorized to Delete')
+    }
+    await project.remove()
+    return project
+  }
   async editProject(projectId, userId, projectData) {
     const project = await this.getProjectById(projectId)
     if(userId !== project.creatorId.toString()) {
@@ -35,14 +43,6 @@ class ProjectsService{
     project.spotlight = projectData.spotlight || project.spotlight
 
     await project.save()
-    return project
-  }
-  async deleteProject(projectId, userId) {
-    const project = await this.getProjectById(projectId)
-    if(userId !== project.creatorId.toString()){
-      throw new Forbidden('Not Authorized to Delete')
-    }
-    await project.remove()
     return project
   }
  
