@@ -8,9 +8,7 @@ export const ProjectSchema = new Schema(
   creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
   genreTags: { type: String, required: true},
   instrumentTags: { type: String, required: true},
-  neededInstrumentTags: { type: String, required: true},
-  // spotlight: { type: String }, TODO review spotlight
-  // followers: {} TODO we are confused about how to put this on the schema...
+  neededInstrumentTags: { type: String, required: true}
 },
 { timestamps: true, toJSON: {virtuals: true} }
 )

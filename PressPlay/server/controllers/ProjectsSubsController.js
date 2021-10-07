@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { projectsSubsService } from "../services/ProjectSubsService";
 import BaseController from "../utils/BaseController";
 
@@ -7,6 +8,7 @@ export class ProjectSubsController extends BaseController{
     this.router
     .get('/projects/:projectId/subscribers', this.getProjectSubscribers)
     .get('/profile/:profileId/projectsSubscriptions', this.getProjectSubscriptionsByProfile)
+    .use(Auth0Provider.getAuthorizedUserInfo)
     .post('/projects/:projectId/subscription', this.subscribeToProject)
     .delete('/projects/:projectId/subscription/:subscriptionId', this.unsubscribeProject)
   }

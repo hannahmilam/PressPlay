@@ -1,5 +1,5 @@
 import BaseController from "../utils/BaseController";
-import { Auth0Provider } from '@bcwdev/auth0provider'
+import { Auth0Provider } from '@bcwdev/auth0provider';
 import { projectsService } from "../services/ProjectsService";
 
 export class ProjectsController extends BaseController{
