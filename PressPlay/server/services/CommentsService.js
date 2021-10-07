@@ -3,8 +3,8 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 import { projectsService } from './ProjectsService'
 
 class CommentsService {
-  async getComments(query) {
-    const comments = await dbContext.Comments.find(query).populate('creator', 'name picture')
+  async getComments(projectId) {
+    const comments = await dbContext.Comments.find({ projectId }).populate('creator', 'name picture')
     return comments
   }
 

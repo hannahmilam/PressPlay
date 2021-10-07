@@ -14,7 +14,7 @@ export class CommentController extends BaseController {
 
   async getComments(req, res, next) {
     try {
-      const comments = await commentsService.getComments(req.query)
+      const comments = await commentsService.getComments(req.params.projectId)
       res.send(comments)
     } catch (error) {
       next(error)
@@ -33,7 +33,7 @@ export class CommentController extends BaseController {
 
   async deleteComment(req, res, next) {
     try {
-      const comment = await commentsService.deleteComment(req.params.id, req.userInfo.id)
+      const comment = await commentsService.deleteComment(req.params.commentId, req.userInfo.id)
       res.send(comment)
     } catch (error) {
       next(error)
@@ -42,8 +42,7 @@ export class CommentController extends BaseController {
 
   async editComment(req, res, next) {
     try {
-      req.body.creatorId = req.userInfo.id
-      const comment = await commentsService.editComment(req.params.id, req.userInfo.id, req.body)
+      const comment = await commentsService.editComment(req.params.commentId, req.userInfo.id, req.body)
       res.send(comment)
     } catch (error) {
       next(error)
