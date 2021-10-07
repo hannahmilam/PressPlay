@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProfileSubscriptionsService {
-  async getSubscribersByProfileId(query) {
-    const subscribers = await dbContext.ProfileSubscriptions.find(query).populate('subscriber').populate('subscribing')
+  async getSubscribersByProfileId(profileId) {
+    const subscribers = await dbContext.ProfileSubscriptions.find({ profileId }).populate('subscriber').populate('subscribing')
     if (!subscribers) {
       throw new BadRequest('No matching subscribers')
     }

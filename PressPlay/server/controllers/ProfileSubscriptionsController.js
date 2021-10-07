@@ -15,7 +15,7 @@ export class ProfileSubscriptionsController extends BaseController {
 
   async getSubscribersByProfileId(req, res, next) {
     try {
-      const subscribers = await profileSubscriptionsService.getSubscribersByProfileId(req.query)
+      const subscribers = await profileSubscriptionsService.getSubscribersByProfileId(req.params.profileId)
       res.send(subscribers)
     } catch (error) {
       next(error)
