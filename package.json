@@ -1,16 +1,14 @@
-
-  {
-    "name": "pressplay",
-    "version": "1.0.0",
-    "scripts": {
-      "build": "npm run setup:server",
-      "setup:app": "npm run setup:server && npm run setup:client",
-      "setup:client": "cd PressPlay.client && npm i",
-      "setup:server": "cd PressPlay && npm i",
-      "start": "node PressPlay/index.js"
-    },
-    "engines": {
-      "node": "^14.17.0"
-    }
+{
+  "name": "pressplay",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:server",
+    "setup:app": "npm run setup:server && npm run setup:client",
+    "setup:client": "cd PressPlay.client && npm i",
+    "setup:server": "cd PressPlay && npm i",
+    "start": "node PressPlay/index.js"
+  },
+  "engines": {
+    "node": "^14.17.0"
   }
-  
+}
