@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProfileSubscriptionsService {
   async getSubscribersByProfileId(profileId) {
-    const subscribers = await dbContext.ProfileSubscriptions.find({ subscriberId: profileId })
+    const subscribers = await dbContext.ProfileSubscriptions.find({ subscriberId: profileId }).populate('subscriber').populate('subscribing')
     if (!subscribers) {
       throw new BadRequest('No matching subscribers')
     }
@@ -11,7 +11,7 @@ class ProfileSubscriptionsService {
   }
 
   async getProfileSubscriptions(profileId) {
-    const subscriptions = await dbContext.ProfileSubscriptions.find({ subscribingId: profileId })
+    const subscriptions = await dbContext.ProfileSubscriptions.find({ subscribingId: profileId }).populate('subscriber').populate('subscribing')
     if (!subscriptions) {
       throw new BadRequest('No matching subscribers')
     }
@@ -22,6 +22,8 @@ class ProfileSubscriptionsService {
     const foundSubscription = await dbContext.ProfileSubscriptions.findOne({ subscriberId: subscriptionData.subscriberId, subscribingId: subscriptionData.subscribingId })
     if (!foundSubscription) {
       const subscription = await dbContext.ProfileSubscriptions.create(subscriptionData)
+      await subscription.populate('subscriber')
+      await subscription.populate('subscribing')
       return subscription
     }
     throw new BadRequest('already subscribed')
