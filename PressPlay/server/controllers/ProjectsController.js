@@ -9,9 +9,6 @@ export class ProjectsController extends BaseController {
       .get('/projects', this.getProjects)
       .get('/projects/:projectId', this.getProjectById)
       .get('/profile/:profileId/projects', this.getProjectsByProfileId)
-    // .get(':/projectId/comments', this.getComments) TODO needs to move to comments controller... need to make comments controller.
-    // .get(':/projectId/subs', this.getProjectSubscribers) TODO need to move to subs controller
-    // .get(':/projectId/contributions', this.getProjectContributions) TODO need to move to contributions controller
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/projects', this.createProject)
       .put('/projects/:projectId', this.editProject)
