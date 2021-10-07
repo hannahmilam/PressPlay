@@ -3,10 +3,10 @@ const Schema = mongoose.Schema
 
 export const ProjectSubscriptionsSchema = new Schema(
   {
-profileId: {type: Schema.Types.ObjectId, ref: 'Account', required: true},
-projectId: {type: Schema.Types.ObjectId, ref: 'Project', required: true}
-},
-{timestamps: true, toJSON: {virtuals: true}}
+    profileId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+    projectId: { type: Schema.Types.ObjectId, ref: 'Project', required: true }
+  },
+  { timestamps: true, toJSON: { virtuals: true } }
 )
 
 ProjectSubscriptionsSchema.virtual('profile', {
