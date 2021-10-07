@@ -23,15 +23,15 @@ class ProjectsSubsService {
     return project
   }
 
-  async subscribeToProject(userId, projectData) {
-    const users = await this.getProjectSubscribers(projectData.projectId)
-    if (users.filter(u => u.profileId === userId).length > 0) {
-      throw new BadRequest('Unable to subscribe twice')
+  async subscribeToProject(projectData) {
+    const users = await dbContext.ProjectSubscriptions.findOne({ profileId: projectData.profileId })
+    if (!users) {
+      const subscribedProject = await dbContext.ProjectSubscriptions.create(projectData)
+      await subscribedProject.populate('profile', 'name picture')
+      await subscribedProject.populate('project')
+      return subscribedProject
     }
-    const subscribedProject = await dbContext.ProjectSubscriptions.create(projectData)
-    await subscribedProject.populate('profile', 'name picture')
-    await subscribedProject.populate('project')
-    return subscribedProject
+    throw new BadRequest('Unable to subscribe twice')
   }
 
   async unsubscribeProject(projectId, userId) {
