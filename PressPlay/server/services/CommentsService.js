@@ -5,6 +5,7 @@ import { projectsService } from './ProjectsService'
 class CommentsService {
   async getComments(projectId) {
     const comments = await dbContext.Comments.find({ projectId }).populate('creator', 'name picture')
+    return comments
   }
 
   async getCommentById(commentId) {
