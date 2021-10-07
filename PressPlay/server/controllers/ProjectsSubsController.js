@@ -2,7 +2,7 @@ import { Auth0Provider } from "@bcwdev/auth0provider";
 import { projectsSubsService } from "../services/ProjectSubsService";
 import BaseController from "../utils/BaseController";
 
-export class ProjectSubsController extends BaseController{
+export class ProjectsSubsController extends BaseController{
   constructor(){
     super('api')
     this.router
