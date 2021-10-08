@@ -33,6 +33,7 @@
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { Project } from '../models/Project'
+
 export default {
   props: {
     project: {
