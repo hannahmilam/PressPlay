@@ -1,6 +1,6 @@
 <template>
   <div class="col-3">
-    <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable">
+    <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
       <div class="card p-3">
         <div class="row justify-content-between">
           <div class="col-2">
