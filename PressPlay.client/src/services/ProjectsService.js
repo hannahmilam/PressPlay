@@ -27,5 +27,12 @@ class ProjectsService {
     const res = AppState.project.find({ genreTags: 'query' })
     logger.log('this is the res query', res)
   }
+
+  async createProject(projectData) {
+    const res = await api.post('api/projects', projectData)
+    logger.log('createProject res', res.data)
+    AppState.projects.push(new Project(res.data))
+    return res.data.id
+  }
 }
 export const projectsService = new ProjectsService()

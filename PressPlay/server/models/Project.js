@@ -7,8 +7,8 @@ export const ProjectSchema = new Schema(
     description: { type: String, required: true },
     creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
     genreTags: { type: String, required: true },
-    instrumentTags: { type: String, required: true },
-    neededInstrumentTags: { type: String, required: true }
+    instrumentTags: { type: [String], required: true },
+    neededInstrumentTags: { type: [String], required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

@@ -37,20 +37,20 @@
     <div class="form-group">
       <label for="instrumentTag">Instruments on project</label>
       <input type="text" name="neededInstrumentTag" class="form-control" v-model="otherTemp">
-      <button class="btn btn-info mt-2" @click="addInstrumentTag()">
+      <button class="btn btn-info mt-2" type="button" @click="addInstrumentTag()">
         Add Tag
       </button>
     </div>
-    <div>Tags:  <small v-for="e in editable.instrumentTags" :key="e">{{ e }} </small> </div>
+    <div>Tags:  <small v-for="e in editable.instrumentTags" :key="e">{{ e }} , </small> </div>
     <div class="form-group">
       <label for="neededInstrumentTag">Needed Instruments</label>
       <input type="text" name="neededInstrumentTag" class="form-control" v-model="temp">
-      <button class="btn btn-info mt-2" @click="addNeededInstrumentTag()">
+      <button class="btn btn-info mt-2" type="button" @click="addNeededInstrumentTag()">
         Add Tag
       </button>
     </div>
-    <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }} </small> </div>
-    <button class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0" type="submit">
+    <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }}, </small> </div>
+    <button class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0 && editable.instrumentTags.length > 0" type="submit">
       Submit
     </button>
   </form>
@@ -89,7 +89,7 @@ export default {
             params: { projectId: projectId }
           })
         } catch (error) {
-          Pop.toast(error, error)
+          Pop.toast(error, 'error')
         }
       }
     }
