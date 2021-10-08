@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form @submit.prevent="searchTheNetwork()" class="bg-white rounded elevation-1">
+    <form @submit.prevent="findProjectsByQuery()" class="bg-white rounded elevation-1">
       <div class="form-group d-flex align-items-center">
         <label for="search" class="sr-only"></label>
         <input v-model="query"
@@ -27,9 +27,9 @@ export default {
     const query = ref('')
     return {
       query,
-      async searchTheNetwork() {
+      async findProjectsByQuery() {
         try {
-          await projectsService.getProjects(query.value)
+          await projectsService.findProjectsByQuery(query.value)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

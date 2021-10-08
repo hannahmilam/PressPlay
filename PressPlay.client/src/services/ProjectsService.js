@@ -23,9 +23,10 @@ class ProjectsService {
     AppState.project = res.data
   }
 
-  async searchTheNetwork(query) {
-    const res = AppState.project.find({ genreTags: 'query' })
+  async findProjectsByQuery(query) {
+    const res = await api.get('api/projects/?search=' + query)
     logger.log('this is the res query', res)
+    AppState.projects = res.data.map(p => new Project(p))
   }
 }
 export const projectsService = new ProjectsService()
