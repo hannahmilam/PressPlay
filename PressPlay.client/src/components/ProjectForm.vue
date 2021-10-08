@@ -35,13 +35,21 @@
       </select>
     </div>
     <div class="form-group">
+      <label for="instrumentTag">Instruments on project</label>
+      <input type="text" name="neededInstrumentTag" class="form-control" v-model="otherTemp">
+      <button class="btn btn-info mt-2" @click="addInstrumentTag()">
+        Add Tag
+      </button>
+    </div>
+    <div>Tags:  <small v-for="e in editable.instrumentTags" :key="e">{{ e }} </small> </div>
+    <div class="form-group">
       <label for="neededInstrumentTag">Needed Instruments</label>
       <input type="text" name="neededInstrumentTag" class="form-control" v-model="temp">
       <button class="btn btn-info mt-2" @click="addNeededInstrumentTag()">
         Add Tag
       </button>
     </div>
-    <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }}, </small> </div>
+    <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }} </small> </div>
     <button class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0" type="submit">
       Submit
     </button>
@@ -50,18 +58,40 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import Pop from '../utils/Pop'
+import { projectsService } from '../services/ProjectsService'
+import { Modal } from 'bootstrap'
+import { router } from '../router'
 export default {
   setup() {
     const temp = ref()
-    const editable = ref({ neededInstrumentTags: [] })
+    const otherTemp = ref()
+    const editable = ref({ neededInstrumentTags: [], instrumentTags: [] })
     return {
       temp,
+      otherTemp,
       editable,
       addNeededInstrumentTag() {
         editable.value.neededInstrumentTags.push(temp.value)
         temp.value = []
+      },
+      addInstrumentTag() {
+        editable.value.instrumentTags.push(otherTemp.value)
+        otherTemp.value = []
+      },
+      async createProject() {
+        try {
+          const projectId = await projectsService.createProject(editable.value)
+          const modal = Modal.getInstance(document.getElementById('project-form'))
+          modal.hide()
+          router.push({
+            name: 'Project',
+            params: { projectId: projectId }
+          })
+        } catch (error) {
+          Pop.toast(error, error)
+        }
       }
-
     }
   }
 }
