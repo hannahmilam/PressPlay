@@ -80,5 +80,6 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   background-position-y: -70rem;
+  height: 100vh;
 }
 </style>
