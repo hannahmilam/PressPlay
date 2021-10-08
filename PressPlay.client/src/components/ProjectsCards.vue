@@ -35,11 +35,11 @@ import { AppState } from '../AppState'
 import { Project } from '../models/Project'
 
 export default {
-  props: {
-    project: {
-      type: Project, required: true
-    }
-  },
+  // props: {
+  //   project: {
+  //     type: Project, required: true
+  //   }
+  // },
   setup() {
     return {
       projects: computed(() => AppState.projects)

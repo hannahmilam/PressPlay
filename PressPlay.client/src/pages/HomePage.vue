@@ -7,23 +7,23 @@
       </div>
     </div>
 
-    <div class="row mx-5">
+    <div class="row mx-5 scrollmenu">
       <p>Needs Guitar</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5">
+    <div class="row mx-5 scrollmenu">
       <p>Needs Vocals</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5">
+    <div class="row mx-5 scrollmenu">
       <p>Needs Drums</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5">
+    <div class="row mx-5 scrollmenu">
       <p>Needs Bass</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5">
+    <div class="row mx-5 scrollmenu">
       <p>Needs Piano</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
@@ -39,13 +39,13 @@ import { projectsService } from '../services/ProjectsService'
 export default {
   name: 'Home',
   setup() {
-    // onMounted(async() => {
-    //   try {
-    //     await projectsService.getProjects()
-    //   } catch (error) {
-    //     Pop.toast(error.message, 'error')
-    //   }
-    // })
+    onMounted(async() => {
+      try {
+        await projectsService.getProjects()
+      } catch (error) {
+        Pop.toast(error.message, 'error')
+      }
+    })
     return {
       projects: computed(() => AppState.projects)
     }
