@@ -132,7 +132,7 @@ a:hover {
   text-transform: uppercase;
 }
 .navbar-nav .router-link-exact-active{
-  border-bottom: 2px solid var(--bs-success);
+  border-bottom: 2px solid var(--bs-dark);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
