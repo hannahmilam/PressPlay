@@ -20,7 +20,7 @@
           <div class="card-header">
           </div>
           <div class="card-body">
-            <h1>this is where contributions</h1>
+            <h1>this is where contributions go</h1>
           </div>
         </div>
       </div>
