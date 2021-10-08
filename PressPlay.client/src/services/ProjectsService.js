@@ -10,6 +10,7 @@ class ProjectsService {
     AppState.projects = res.data.map(p => new Project(p))
   }
 
+  // Take out the query if this doesn't work
   async getProjects() {
     const res = await api.get('api/projects')
     logger.log('this is all the projects', res.data)
@@ -20,6 +21,11 @@ class ProjectsService {
     const res = await api.get('api/projects/' + projectId)
     logger.log('this is the res for a single project', res.data)
     AppState.project = res.data
+  }
+
+  async searchTheNetwork(query) {
+    const res = AppState.project.find({ genreTags: 'query' })
+    logger.log('this is the res query', res)
   }
 }
 export const projectsService = new ProjectsService()

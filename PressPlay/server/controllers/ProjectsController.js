@@ -1,6 +1,7 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { projectsService } from '../services/ProjectsService'
+import { logger } from '../utils/Logger'
 
 export class ProjectsController extends BaseController {
   constructor() {
@@ -8,8 +9,8 @@ export class ProjectsController extends BaseController {
     this.router
       .get('/projects', this.getProjects)
       .get('/projects/:projectId', this.getProjectById)
-      .get('/profile/:profileId/projects', this.getProjectsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
+      .get('/profile/:profileId/projects', this.getProjectsByProfileId)
       .post('/projects', this.createProject)
       .put('/projects/:projectId', this.editProject)
       .delete('/projects/:projectId', this.deleteProject)
@@ -17,12 +18,25 @@ export class ProjectsController extends BaseController {
 
   async getProjects(req, res, next) {
     try {
-      const projects = await projectsService.getProjects(req.query)
+      const regex = new RegExp(req.query.search, 'i')
+      logger.log(req.query)
+      const query = { $or: [{ name: { $regex: regex } }, { genreTags: { $regex: regex } }, { instrumentTags: { $regex: regex } }, { neededInstrumentTags: { $regex: regex } }] }
+      logger.log(query)
+      const projects = await projectsService.getProjects(query)
+
       res.send(projects)
     } catch (error) {
       next(error)
     }
   }
+  // async getProjects(req, res, next) {
+  //   try {
+  //     const projects = await projectsService.getProjects(req.query)
+  //     res.send(projects)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async getProjectById(req, res, next) {
     try {

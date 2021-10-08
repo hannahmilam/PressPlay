@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProjectsService {
   async getProjects(query) {
-    const projects = await dbContext.Projects.find(query).populate('creator', 'name picture')
+    const projects = await dbContext.Projects.find(query).collation({ locale: 'en_US', strength: 3 }).populate('creator', 'name picture')
     return projects
   }
 
