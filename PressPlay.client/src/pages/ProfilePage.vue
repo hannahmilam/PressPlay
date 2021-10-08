@@ -10,7 +10,7 @@
           <div class="card">
             <div class="card-body">
               <!-- TODO hannah is working on this  -->
-              <ProjectCards v-for="p in projects" :key="p.id" :project="p" />
+              <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
             </div>
           </div>
         </div>
@@ -33,6 +33,7 @@ export default {
     watchEffect(async() => {
       if (route.params.profileId) {
         AppState.currentProfile = null
+        // AppState.projects = []
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)

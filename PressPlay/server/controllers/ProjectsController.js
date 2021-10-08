@@ -36,6 +36,7 @@ export class ProjectsController extends BaseController {
   async getProjectsByProfileId(req, res, next) {
     try {
       const profileProjects = await projectsService.getProfileProjects(req.params.profileId)
+      res.send(profileProjects)
     } catch (error) {
       next(error)
     }

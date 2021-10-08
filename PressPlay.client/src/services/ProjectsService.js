@@ -6,8 +6,14 @@ import { api } from './AxiosService'
 class ProjectsService {
   async getProjectsByProfileId(profileId) {
     const res = await api.get('api/profile/' + profileId + '/projects')
-    logger.log(res.data)
+    logger.log('this is the projects for this profile', res.data)
     AppState.projects = res.data.map(p => new Project(p))
+  }
+
+  async getProjects() {
+    const res = await api.get('api/projects')
+    logger.log('this is all the projects', res.data)
+    AppState.projects = res.data
   }
 }
 export const projectsService = new ProjectsService()

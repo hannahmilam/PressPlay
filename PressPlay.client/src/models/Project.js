@@ -1,5 +1,5 @@
 export class Project {
-  constructor(projectData){
+  constructor(projectData) {
     this.id = projectData.id
     this.name = projectData.name
     this.description = projectData.description
