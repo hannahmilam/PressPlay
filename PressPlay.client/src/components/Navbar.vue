@@ -39,6 +39,8 @@
             Account
           </router-link>
         </li>
+
+        <Search />
       </ul>
       <span class="navbar-text">
         <button
