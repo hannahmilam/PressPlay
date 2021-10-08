@@ -3,11 +3,20 @@
 </template>
 
 <script>
+import { watchEffect } from '@vue/runtime-core'
+import { useRoute } from 'vue-router'
 export default {
+  name: 'Profile',
+  setup() {
+    const route = useRoute()
+    watchEffect(async() => {
 
+    })
+    return {}
+  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
 </style>

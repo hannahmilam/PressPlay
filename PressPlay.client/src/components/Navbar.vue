@@ -29,7 +29,7 @@
         </li>
 
         <li>
-          <router-link :to="{ name: 'Profile', params: {id: account.id}}" class="btn selectable text-uppercase text-light ">
+          <router-link :to="{ name: 'Profile', params: {profileId: account.id}}" class="btn selectable text-uppercase text-light ">
             My Profile
           </router-link>
         </li>
@@ -41,12 +41,10 @@
         </li>
 
         <li>
-          <router-link :to="{ name: 'Project', params: {id: project.id} }" class="btn selectable text-uppercase text-light ">
+          <router-link :to="{ name: 'Project', params: {projectId: project.id} }" class="btn selectable text-uppercase text-light ">
             Projects
           </router-link>
         </li>
-
-
       </ul>
       <span class="navbar-text">
         <button
@@ -104,8 +102,8 @@ export default {
     return {
       user: computed(() => AppState.user),
       profile: computed(() => AppState.profile),
-      account: computed(()=> AppState.account),
-      project: computed(()=> AppState.projects),
+      account: computed(() => AppState.account),
+      project: computed(() => AppState.projects),
 
       async login() {
         AuthService.loginWithPopup()
