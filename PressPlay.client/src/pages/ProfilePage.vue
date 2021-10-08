@@ -10,10 +10,8 @@
           <div class="card">
             <div class="card-body">
               <div class="row">
-                <div class="col-5 m-auto">
-                  <!-- TODO hannah is working on this  -->
-                  <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
-                </div>
+                <!-- TODO hannah is working on this  -->
+                <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
               </div>
             </div>
           </div>

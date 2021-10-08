@@ -4,31 +4,31 @@
       <p class="m-0">
         Needs Guitar
       </p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Vocals
       </p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Drums
       </p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Bass
       </p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 scrollmenu scrolling-wrapper">
       <p class="m-0">
         Needs Piano
       </p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
   </div>
 </template>

@@ -1,34 +1,36 @@
 <template>
-  <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
-    <div class="card mx-3 p-3">
-      <div class="row justify-content-between">
-        <div class="col-2">
-          <router-link :to="{name: 'Profile', params: {profileId: project.creatorId}}" class="selectable">
-            <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
-          </router-link>
-        </div>
-        <div class="col-6">
-          <div class="row">
-            <div class="col">
-              <p class="p-0 m-0">
-                <b>{{ project.name }}</b>
-              </p>
+  <div class="col-3">
+    <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
+      <div class="card mx-3 p-3">
+        <div class="row justify-content-between">
+          <div class="col-2">
+            <router-link :to="{name: 'Profile', params: {profileId: project.creatorId}}" class="selectable">
+              <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
+            </router-link>
+          </div>
+          <div class="col-6">
+            <div class="row">
+              <div class="col">
+                <p class="p-0 m-0">
+                  <b>{{ project.name }}</b>
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p class="p-0 m-0">
+                  {{ project.creator.name }}
+                </p>
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col">
-              <p class="p-0 m-0">
-                {{ project.creator.name }}
-              </p>
-            </div>
+          <div class="col-2">
+            <i class="mdi mdi-play f-20"></i>
           </div>
-        </div>
-        <div class="col-2">
-          <i class="mdi mdi-play f-20"></i>
         </div>
       </div>
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 
 <script>
