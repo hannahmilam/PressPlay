@@ -20,7 +20,7 @@
           <div class="card-header">
           </div>
           <div class="card-body">
-            <h1>this is where contributions go</h1>
+            <ContributionsCards v-for="c in contributions" :key="c.id" :contribution="p" />
           </div>
         </div>
       </div>
