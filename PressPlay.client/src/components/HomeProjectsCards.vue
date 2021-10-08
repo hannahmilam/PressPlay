@@ -54,9 +54,10 @@ export default {
 
 <style scoped lang="scss">
 .card {
-  border: 1px solid rgba(0, 0, 0, 0.041);
+  // border: 1px solid rgba(0, 0, 0, 0.041);
   border-radius: 15px;
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 6px #c027b856;
+  // box-shadow: 0px 0px 6px #c027b8c4;
   background-color: rgba(255, 251, 251, 0.3);
   backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   display: inline-block;
