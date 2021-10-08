@@ -7,9 +7,9 @@
         </div>
 
         <div class="col-10 bg-img">
-          <div class="row">
-            <div class="col-2 offset-8">
-              <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#project-form">
+          <div class="row mt-4">
+            <div class="col-2 offset-10">
+              <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
                 <b class="text-light">New Project</b>
               </button>
             </div>
@@ -80,5 +80,13 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+}
+.btn-project{
+background: linear-gradient(90deg, #CB369E, #1D2EF7);
+transition: .5;
+}
+:hover.btn-project{
+background: linear-gradient(90deg, #1D2EF7, #CB369E);
+transition: .5;
 }
 </style>
