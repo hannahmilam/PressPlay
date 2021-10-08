@@ -44,7 +44,7 @@ export class ProjectsSubsController extends BaseController {
 
   async unsubscribeProject(req, res, next) {
     try {
-      const project = await projectsSubsService.unsubscribeProject(req.params.projectId, req.userInfo.id)
+      const project = await projectsSubsService.unsubscribeProject(req.params.subscriptionId, req.userInfo.id)
       res.send(project)
     } catch (error) {
       next(error)

@@ -34,13 +34,13 @@ class ProjectsSubsService {
     throw new BadRequest('Unable to subscribe twice')
   }
 
-  async unsubscribeProject(projectId, userId) {
-    const project = await this.getSubscribedProjectById(projectId)
-    if (userId !== project.profileId.toString()) {
+  async unsubscribeProject(projectSubId, userId) {
+    const projectSub = await dbContext.ProjectSubscriptions.findById(projectSubId)
+    if (userId !== projectSub.profileId.toString()) {
       throw new Forbidden('Not Authorized')
     }
-    await project.remove()
-    return project
+    await projectSub.remove()
+    return projectSub
   }
 }
 export const projectsSubsService = new ProjectsSubsService()
