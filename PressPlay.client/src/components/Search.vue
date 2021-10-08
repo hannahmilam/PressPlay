@@ -29,7 +29,7 @@ export default {
       query,
       async searchTheNetwork() {
         try {
-          await projectsService.searchTheNetwork(query.value)
+          await projectsService.getProjects(query.value)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

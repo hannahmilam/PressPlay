@@ -3,14 +3,14 @@ const Schema = mongoose.Schema
 
 export const ProjectSchema = new Schema(
   {
-  name: { type: String, required: true },
-  description: { type: String, required: true},
-  creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true},
-  genreTags: { type: String, required: true},
-  instrumentTags: { type: String, required: true},
-  neededInstrumentTags: { type: String, required: true}
-},
-{ timestamps: true, toJSON: {virtuals: true} }
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    creatorId: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+    genreTags: { type: String, required: true },
+    instrumentTags: { type: String, required: true },
+    neededInstrumentTags: { type: String, required: true }
+  },
+  { timestamps: true, toJSON: { virtuals: true } }
 )
 
 ProjectSchema.virtual('creator', {
