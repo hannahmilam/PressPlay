@@ -8,6 +8,13 @@
 
         <div class="col-10 bg-img">
           <div class="row">
+            <div class="col-2 offset-8">
+              <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#project-form">
+                <b class="text-light">New Project</b>
+              </button>
+            </div>
+          </div>
+          <div class="row">
             <div class="card bg-transparent">
               <div class="card-body">
                 <div class="row">
@@ -21,6 +28,15 @@
       </div>
     </div>
   </div>
+
+  <Modal id="project-form">
+    <template #modal-title>
+      <h4>New Project</h4>
+    </template>
+    <template #modal-body>
+      <ProjectForm />
+    </template>
+  </Modal>
 </template>
 
 <script>

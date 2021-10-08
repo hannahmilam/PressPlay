@@ -35,18 +35,16 @@
       </select>
     </div>
     <div class="form-group">
-      <label for="name">Project Name</label>
-      <input type="text"
-             class="form-control"
-             id="exampleFormControlInput1"
-             placeholder=""
-             v-model="editable.neededInstrumentTags"
-             required
-      >
-      <!-- run add neededInstrumentTags method with this button -->
-      {{ editable.neededInstrumentTags }}
-      <button>Add Tag</button>
+      <label for="neededInstrumentTag">Needed Instruments</label>
+      <input type="text" name="neededInstrumentTag" class="form-control" v-model="temp">
+      <button class="btn btn-info mt-2" @click="addNeededInstrumentTag()">
+        Add Tag
+      </button>
     </div>
+    <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }}, </small> </div>
+    <button class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0" type="submit">
+      Submit
+    </button>
   </form>
 </template>
 
@@ -54,8 +52,17 @@
 import { ref } from '@vue/reactivity'
 export default {
   setup() {
+    const temp = ref()
     const editable = ref({ neededInstrumentTags: [] })
-    return { editable }
+    return {
+      temp,
+      editable,
+      addNeededInstrumentTag() {
+        editable.value.neededInstrumentTags.push(temp.value)
+        temp.value = []
+      }
+
+    }
   }
 }
 </script>
