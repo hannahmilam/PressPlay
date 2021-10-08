@@ -4,31 +4,31 @@
       <p class="m-0">
         Needs Guitar
       </p>
-      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in needsGuitarProjects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Vocals
       </p>
-      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in needsVocalsProjects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Drums
       </p>
-      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in needsDrumsProjects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 pb-5 scrolling-wrapper">
       <p class="m-0">
         Needs Bass
       </p>
-      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in needsBassProjects" :key="p.id" :project="p" />
     </div>
     <div class="mx-5 scrollmenu scrolling-wrapper">
       <p class="m-0">
         Needs Piano
       </p>
-      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      <HomeProjectsCards v-for="p in needsPianoProjects" :key="p.id" :project="p" />
     </div>
   </div>
 </template>
@@ -50,7 +50,11 @@ export default {
       }
     })
     return {
-      projects: computed(() => AppState.projects)
+      needsGuitarProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'guitar')),
+      needsVocalsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'vocals')),
+      needsDrumsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'drums')),
+      needsPianoProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'piano')),
+      needsBassProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'bass'))
     }
   }
 }
