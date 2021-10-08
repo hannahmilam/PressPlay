@@ -52,9 +52,9 @@ export default {
     return {
       needsGuitarProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'guitar')),
       needsVocalsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'vocals')),
-      needsDrumsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'drums')),
-      needsPianoProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'piano')),
-      needsBassProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentsTags === 'bass'))
+      needsDrumsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'drums')),
+      needsPianoProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'piano')),
+      needsBassProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'bass'))
     }
   }
 }
