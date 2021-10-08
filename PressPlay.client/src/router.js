@@ -27,7 +27,8 @@ const routes = [
   {
     path: '/project/:projectId',
     name: 'Project',
-    component: loadPage('ProjectPage')
+    component: loadPage('ProjectPage'),
+    beforeEnter: authSettled
   },
   {
     path: '/account',
