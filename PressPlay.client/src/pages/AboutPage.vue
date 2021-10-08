@@ -1,7 +1,7 @@
 <template>
   <div class="about bg-white">
     <div class="row">
-      <div class="overlay">
+      <div class="overlay hidden-mobile">
         <div class="text">
           <div class="wrapper">
             <div id="L" class="letter">
@@ -45,11 +45,11 @@
     </div>
 
     <div class="row justify-content-between m-5">
-      <div class="col-3">
-        <h3>Hannah Milam</h3>
+      <div class="col-md-3 my-3">
+        <h3>Jeremy Fowler</h3>
         <div class="card">
           <div class="card-header p-0 m-0">
-            <img src="https://avatars.githubusercontent.com/u/87681889?v=4" class="rounded-top img-fluid" alt="">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFuabiEJOCi1w/profile-displayphoto-shrink_800_800/0/1633578363008?e=1639008000&v=beta&t=ReJCaXUjRMvdiouFx-YqQ1NQqv8mmRdMBRcfq8-dS8U" class="rounded-top img-fluid" alt="">
           </div>
           <div class="card-body">
             <p>
@@ -59,7 +59,7 @@
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-md-3 mb-3">
         <h3>Cam Olson</h3>
         <div class="card">
           <div class="card-header p-0 m-0">
@@ -73,11 +73,11 @@
         </div>
       </div>
 
-      <div class="col-3">
-        <h3>Jeremy Fowler</h3>
+      <div class="col-md-3">
+        <h3>Hannah Milam</h3>
         <div class="card">
           <div class="card-header p-0 m-0">
-            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFuabiEJOCi1w/profile-displayphoto-shrink_800_800/0/1633578363008?e=1639008000&v=beta&t=ReJCaXUjRMvdiouFx-YqQ1NQqv8mmRdMBRcfq8-dS8U" class="rounded-top img-fluid" alt="">
+            <img src="https://avatars.githubusercontent.com/u/87681889?v=4" class="rounded-top img-fluid" alt="">
           </div>
           <div class="card-body">
             <p>
@@ -142,5 +142,11 @@ transform: translateY(-30%);
 }
 }
 }
+
+   @media only screen and (max-width: 768px) {
+     .hidden-mobile {
+       display: none;
+     }
+ }
 
 </style>
