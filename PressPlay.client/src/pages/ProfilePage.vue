@@ -1,15 +1,17 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>{{ profile.name }}</h1>
-        <img :src="profile.picture" alt="">
-      </div>
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <!-- TODO hannah is working on this  -->
-            <Projects v-for="p in projects" :key="p.id" :project="p" />
+  <div v-if="profile">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1>{{ profile.name }}</h1>
+          <img :src="profile.picture" alt="">
+        </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <!-- TODO hannah is working on this  -->
+              <ProjectCards v-for="p in projects" :key="p.id" :project="p" />
+            </div>
           </div>
         </div>
       </div>
@@ -40,8 +42,8 @@ export default {
       }
     })
     return {
-      profile: computed(() => AppState.currentProfile)
-
+      profile: computed(() => AppState.currentProfile),
+      projects: computed(() => AppState.projects)
     }
   }
 }
