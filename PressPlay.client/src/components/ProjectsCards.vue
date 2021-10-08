@@ -3,20 +3,20 @@
     <div class="card p-3">
       <div class="row justify-content-between">
         <div class="col-2">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB0Q7C35IjUnEFF1XDxd0hb6MHNNmRb3N3Ig&usqp=CAU" height="50" class="rounded-start" alt="">
+          <img :src="project.creator.picture" height="50" class="rounded" alt="">
         </div>
         <div class="col-4">
           <div class="row">
             <div class="col">
               <p class="p-0 m-0">
-                <b>Artist Title</b>
+                <b>{{ project.name }}</b>
               </p>
             </div>
           </div>
           <div class="row">
             <div class="col">
               <p class="p-0 m-0">
-                Artist Name
+                {{ project.creator.name }}
               </p>
             </div>
           </div>
@@ -30,19 +30,17 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
-import { AppState } from '../AppState'
 import { Project } from '../models/Project'
 
 export default {
-  // props: {
-  //   project: {
-  //     type: Project, required: true
-  //   }
-  // },
+  props: {
+    project: {
+      type: Project, default: () => new Project()
+    }
+  },
   setup() {
     return {
-      projects: computed(() => AppState.projects)
+      // projects: computed(() => AppState.projects)
     }
   }
 }
