@@ -17,12 +17,12 @@ const routes = [
     component: loadPage('AboutPage')
   },
   {
-    path: '/profile/:id',
+    path: '/profile/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage')
   },
   {
-    path: '/project/:id',
+    path: '/project/:projectId',
     name: 'Project',
     component: loadPage('ProjectPage')
   },
