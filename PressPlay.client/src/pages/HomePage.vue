@@ -1,24 +1,34 @@
 <template>
   <div class="container-fluid bg-img px-0 text-light">
-    <div class="row mx-5 scrollmenu">
-      <p>Needs Guitar</p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="mx-5 py-5 scrolling-wrapper">
+      <p class="m-0">
+        Needs Guitar
+      </p>
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5 scrollmenu">
-      <p>Needs Vocals</p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="mx-5 pb-5 scrolling-wrapper">
+      <p class="m-0">
+        Needs Vocals
+      </p>
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5 scrollmenu">
-      <p>Needs Drums</p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="mx-5 pb-5 scrolling-wrapper">
+      <p class="m-0">
+        Needs Drums
+      </p>
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5 scrollmenu">
-      <p>Needs Bass</p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="mx-5 pb-5 scrolling-wrapper">
+      <p class="m-0">
+        Needs Bass
+      </p>
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
-    <div class="row mx-5 scrollmenu">
-      <p>Needs Piano</p>
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="mx-5 scrollmenu scrolling-wrapper">
+      <p class="m-0">
+        Needs Piano
+      </p>
+      <HomeProjectsCards v-for="p in projects" :key="p.id" :project="p" />
     </div>
   </div>
 </template>
@@ -53,8 +63,11 @@ background-size: cover;
 background-repeat: no-repeat;
 height: 100vh;
 }
-.scrollmenu{
-  overflow: auto;
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+
 }
 
 </style>
