@@ -4,20 +4,20 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   user: {},
   account: {},
-    /** @type {import('.model/Project.js').Project[]} */
+  /** @type {import('.model/Project.js').Project[]} */
   projects: [],
   currentProject: {},
-    /** @type {import('.model/ProjectSubscriptions.js').ProjectSubscriptions[]} */
+  /** @type {import('.model/ProjectSubscriptions.js').ProjectSubscriptions[]} */
   projectSubscriptions: [],
   projectSubscribers: [],
-    /** @type {import('.model/Profile.js').Profile[]} */
+  /** @type {import('.model/Profile.js').Profile[]} */
   profile: [],
   currentProfile: {},
-    /** @type {import('.model/ProfileSubscriptions.js').ProfileSubscriptions[]} */
+  /** @type {import('.model/ProfileSubscriptions.js').ProfileSubscriptions[]} */
   profileSubscriptions: [],
   profileSubscribers: [],
   /** @type {import('.model/Comments.js').Comments[]} */
   comments: [],
-    /** @type {import('.model/Contribution.js').Contribution[]} */
+  /** @type {import('.model/Contribution.js').Contribution[]} */
   contributions: []
 })

@@ -5,8 +5,9 @@ import { api } from './AxiosService'
 
 class ProjectsService {
   async getProjectsByProfileId(profileId) {
+    debugger
     const res = await api.get('api/profile/' + profileId + '/projects')
-    logger.log(res.data)
+    logger.log('this is the projects for this profile', res.data)
     AppState.projects = res.data.map(p => new Project(p))
   }
 }
