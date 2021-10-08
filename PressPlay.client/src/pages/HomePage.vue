@@ -1,12 +1,5 @@
 <template>
   <div class="container-fluid bg-img px-0 text-light">
-    <div class="row">
-      <div class="col-6 offset-5">
-        <div class="card">
-        </div>
-      </div>
-    </div>
-
     <div class="row mx-5 scrollmenu">
       <p>Needs Guitar</p>
       <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
@@ -59,6 +52,9 @@ background-image: url('https://images.unsplash.com/photo-1621367507503-1b5816c75
 background-size: cover;
 background-repeat: no-repeat;
 height: 100vh;
+}
+.scrollmenu{
+  overflow: auto;
 }
 
 </style>
