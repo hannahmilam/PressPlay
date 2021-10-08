@@ -27,6 +27,10 @@
           <i class="mdi mdi-play f-20"></i>
         </div>
       </div>
+
+      <div class="row">
+        <p>Spotlight</p>
+      </div>
     </div>
   </router-link>
 </template>

@@ -39,12 +39,6 @@
             Account
           </router-link>
         </li>
-
-        <li>
-          <router-link :to="{ name: 'Project', params: {projectId: project.id} }" class="btn selectable text-uppercase text-light ">
-            Projects
-          </router-link>
-        </li>
       </ul>
       <span class="navbar-text">
         <button
