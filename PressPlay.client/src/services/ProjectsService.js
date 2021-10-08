@@ -15,5 +15,11 @@ class ProjectsService {
     logger.log('this is all the projects', res.data)
     AppState.projects = res.data.map(p => new Project(p))
   }
+
+  async getProjectById(projectId) {
+    const res = await api.get('api/projects/' + projectId)
+    logger.log('this is the res for a single project', res.data)
+    AppState.project = res.data
+  }
 }
 export const projectsService = new ProjectsService()
