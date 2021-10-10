@@ -36,6 +36,7 @@
 </template>
 
 <script>
+
 import { Project } from '../models/Project'
 
 export default {

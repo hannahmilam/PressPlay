@@ -34,7 +34,9 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { Project } from '../models/Project'
+import { AppState } from '../AppState'
 
 export default {
   props: {

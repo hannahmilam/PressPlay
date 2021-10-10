@@ -19,7 +19,6 @@ export class ProjectsController extends BaseController {
   async getProjects(req, res, next) {
     try {
       const regex = new RegExp(req.query.search, 'i')
-      logger.log(req.query)
       const query = { $or: [{ name: { $regex: regex } }, { genreTags: { $regex: regex } }, { instrumentTags: { $regex: regex } }, { neededInstrumentTags: { $regex: regex } }] }
       logger.log(query)
       const projects = await projectsService.getProjects(query)

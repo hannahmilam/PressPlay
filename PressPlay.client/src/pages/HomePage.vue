@@ -49,12 +49,13 @@ export default {
         Pop.toast(error.message, 'error')
       }
     })
+    // REVIEW I put this on the end becasue neededInstrumentTags is an array within our object   VVVVVVVV
     return {
-      needsGuitarProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'guitar')),
-      needsVocalsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'vocals')),
-      needsDrumsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'drums')),
-      needsPianoProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'piano')),
-      needsBassProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags === 'bass'))
+      needsGuitarProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('guitar') === true)),
+      needsVocalsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('vocals') === true)),
+      needsDrumsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('drums') === true)),
+      needsPianoProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('piano') === true)),
+      needsBassProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('bass') === true))
     }
   }
 }

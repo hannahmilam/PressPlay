@@ -18,7 +18,6 @@
             <div class="card bg-transparent">
               <div class="card-body">
                 <div class="row">
-                  <!-- TODO hannah is working on this  -->
                   <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
                 </div>
               </div>

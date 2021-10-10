@@ -2,7 +2,7 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProjectsService {
-  async getProjects(query) {
+  async getProjects(query = {}) {
     const projects = await dbContext.Projects.find(query).collation({ locale: 'en_US', strength: 3 }).populate('creator', 'name picture')
     return projects
   }

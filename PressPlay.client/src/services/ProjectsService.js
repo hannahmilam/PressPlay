@@ -10,7 +10,6 @@ class ProjectsService {
     AppState.projects = res.data.map(p => new Project(p))
   }
 
-  // Take out the query if this doesn't work
   async getProjects() {
     const res = await api.get('api/projects')
     logger.log('this is all the projects', res.data)
