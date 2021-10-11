@@ -9,9 +9,19 @@ export class ContributionsController extends BaseController {
       .get('/contributions', this.getContributions)
       .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
       .get('/contributions/:contributionId', this.getContributionById)
+      .get('/profile/:profileId/constribtuions', this.getContributionsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/contributions', this.createContribution)
       .delete('/contributions/:contributionId', this.removeContribution)
+  }
+
+  async getContributionsByProfileId(req, res, next) {
+    try {
+      const contributions = await contributionsService.getContributionsByProfileId(req.params.profileId)
+      res.send(contributions)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getContributions(req, res, next) {

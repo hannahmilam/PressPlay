@@ -2,6 +2,11 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ContributionsService {
+  async getContributionsByProfileId(profileId) {
+    const contributions = await dbContext.Contributions.find({ accountId: profileId })
+    return contributions
+  }
+
   async getContributions(query) {
     const contributions = await dbContext.Contributions.find(query)
     return contributions
