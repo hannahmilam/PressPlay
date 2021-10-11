@@ -45,7 +45,7 @@ function sanitizeBody(body) {
 
 class AccountService {
   async editAccount(userId, body) {
-    const account = await dbContext.Account.findById(userId)
+    const account = await dbContext.Profiles.findById(userId)
     if (userId !== account.id.toString()) {
       throw new Forbidden('You are not authorized')
     }
