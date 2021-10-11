@@ -27,5 +27,11 @@ class ContributionsService {
     logger.log('getContributions res', res.data)
     AppState.contributions = res.data.map(c => new Contribution(c))
   }
+
+  async getContributionsByProfileId(profileId) {
+    const res = await api.get('api/profile/' + profileId + '/constribtuions')
+    logger.log('getContributionsByProfileId res', res.data)
+    AppState.contributions = res.data.map(c => new Contribution(c))
+  }
 }
 export const contributionsService = new ContributionsService()
