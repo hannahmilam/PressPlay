@@ -3,7 +3,37 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-2 bg-pink">
-          <Sidebar />
+          <div class="row">
+            <div class="text-center">
+              <router-link :to="{name: 'Profile', params: {profileId: profile.id}}" class="btn selectable">
+                <img :src="profile.picture" height="100" class="rounded-circle" alt="">
+              </router-link>
+            </div>
+            <div>
+              <h5>
+                {{ profile.name }}
+              </h5>
+            </div>
+
+            <div>
+              <p>Instruments</p>
+              <p>{{ profile.instrumentTags }}</p>
+            </div>
+            <div>
+              <p>
+                Genres
+              </p>
+              <p>
+                {{ profile.genreTags }}
+              </p>
+            </div>
+            <div>
+              <h5>
+                About Me:
+              </h5>
+              <p>{{ profile.bio }} </p>
+            </div>
+          </div>
         </div>
 
         <div class="col-10 bg-img">
