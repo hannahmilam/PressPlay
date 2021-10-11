@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import { Forbidden } from '../utils/Errors'
 
 // Private Methods
 
@@ -43,6 +44,19 @@ function sanitizeBody(body) {
 }
 
 class AccountService {
+  async editAccount(userId, body) {
+    const account = await dbContext.Account.findById(userId)
+    if (userId !== account.id.toString()) {
+      throw new Forbidden('You are not authorized')
+    }
+    account.name = body.name || account.name
+    account.picture = body.picture || account.picture
+    account.bio = body.bio || account.bio
+    account.genreTags = body.genreTags || account.genreTags
+    account.instrumentTags = body.instrumentTags || account.instrumentTags
+    account.coverImg = body.coverImg || account.coverImg
+  }
+
   /**
    * Returns a user account from the Auth0 user object
    *
