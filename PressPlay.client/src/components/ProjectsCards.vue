@@ -29,6 +29,9 @@
             <audio :src="project.originalMp3" controls style="width: 100px"></audio>
           </div>
         </div>
+        <small>
+          <p>{{ contributions.length }}</p>
+        </small>
       </div>
     </router-link>
   </div>
@@ -45,9 +48,9 @@ export default {
       type: Project, default: () => new Project()
     }
   },
-  setup() {
+  setup(props) {
     return {
-      // projects: computed(() => AppState.projects)
+      contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id))
     }
   }
 }
