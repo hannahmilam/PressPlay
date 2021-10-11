@@ -13,8 +13,7 @@ class ContributionsService {
   async createContribution(contributionData) {
     const res = await api.post('api/contributions', contributionData)
     logger.log('createContribution res', res.data)
-    AppState.projects.push(new Contribution(res.data))
-    return res.data.id
+    AppState.contributions.unshift(new Contribution(res.data))
   }
 
   async removeContribution(contributionId) {

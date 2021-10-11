@@ -77,7 +77,6 @@ export default {
       editable,
       async updateAccount() {
         try {
-          editable.value.id
           await accountService.editAccount(editable.value)
           Pop.toast('Profile Updated!', 'success')
         } catch (error) {
