@@ -37,11 +37,25 @@
         </div>
 
         <div class="col-10 bg-img">
-          <div class="row mt-4">
-            <div class="col-2 offset-10">
-              <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
-                <b class="text-light">New Project</b>
-              </button>
+          <div class="top-bar bg-black mt-4">
+            <div class="col-12">
+              <nav class="navbar navbar-expand-lg navbar-light bg-transparent justify-content-around">
+                <router-link :to="{ name: 'Profile.Originals' }">
+                  <li class="nav-link selectable text-uppercase text-light">
+                    Originals
+                  </li>
+                </router-link>
+
+                <router-link :to="{ name: 'Profile.Contributions', }">
+                  <li class="nav-link selectable text-uppercase text-light">
+                    Contributions
+                  </li>
+                </router-link>
+
+                <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
+                  <b class="text-light">New Project</b>
+                </button>
+              </nav>
             </div>
           </div>
           <div class="row">
@@ -119,5 +133,13 @@ transition: .5;
 :hover.btn-project{
 background: linear-gradient(90deg, #1D2EF7, #CB369E);
 transition: .5;
+}
+.top-bar{
+   box-shadow: 0 4px 2px -2px rgba(243, 233, 233, 0.438);
+}
+
+.nav-link:hover{
+  transform: translateY(-10%);
+  font-weight: 500;
 }
 </style>

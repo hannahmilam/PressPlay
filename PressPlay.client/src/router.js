@@ -21,8 +21,19 @@ const routes = [
     path: '/profile/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage'),
-    beforeEnter: authSettled
-
+    beforeEnter: authSettled,
+    children: [
+      {
+        path: 'originals',
+        name: 'Profile.Originals',
+        component: loadPage('ProfileOriginalsPage')
+      },
+      {
+        path: 'contributions',
+        name: 'Profile.Contributions',
+        component: loadPage('ProfileContributionsPage')
+      }
+    ]
   },
   {
     path: '/project/:projectId',
