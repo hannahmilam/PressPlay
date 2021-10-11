@@ -9,7 +9,7 @@ export class ContributionsController extends BaseController {
       .get('/contributions', this.getContributions)
       .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
       .get('/contributions/:contributionId', this.getContributionById)
-      .get('/profile/:profileId/constribtuions', this.getContributionsByProfileId)
+      .get('/profile/:profileId/contributions', this.getContributionsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/contributions', this.createContribution)
       .delete('/contributions/:contributionId', this.removeContribution)
