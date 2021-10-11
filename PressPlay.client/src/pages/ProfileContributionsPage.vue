@@ -51,19 +51,6 @@ import { contributionsService } from '../services/ContributionsService'
 export default {
   name: 'Profile',
   setup() {
-    const route = useRoute()
-    watchEffect(async() => {
-      if (route.params.profileId) {
-        AppState.currentProfile = null
-        AppState.projects = []
-        try {
-          await projectsService.getProjectsByProfileId(route.params.profileId)
-          await contributionsService.getContributionsByProfileId(route.params.profileId)
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
-      }
-    })
     return {
       profile: computed(() => AppState.currentProfile),
       projects: computed(() => AppState.projects),
