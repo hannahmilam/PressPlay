@@ -9,5 +9,6 @@ export class Project {
     this.instrumentTags = projectData.instrumentTags
     this.neededInstrumentTags = projectData.neededInstrumentTags
     this.originalMp3 = projectData.originalMp3
+    this.spotlightMp3 = projectData.spotlightMp3
   }
 }
