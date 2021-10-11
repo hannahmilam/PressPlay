@@ -3,8 +3,6 @@ import { dbContext } from '../db/DbContext.js'
 // IMPORTANT profiles should not be updated or modified in any way here. Use the AccountService
 
 class ProfileService {
-  
-
   /**
     * Returns a user profile from its id
     * @param {string} id
@@ -29,6 +27,11 @@ class ProfileService {
       .skip(Number(offset))
       .limit(20)
       .exec()
+  }
+
+  async getProfiles(query = {}) {
+    const profiles = await dbContext.Profiles.find(query)
+    return profiles
   }
 }
 

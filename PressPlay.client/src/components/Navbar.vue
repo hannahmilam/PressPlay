@@ -40,7 +40,9 @@
           </router-link>
         </li>
 
-        <Search />
+        <router-link :to="{ name: 'Search'} " class="btn selectable text-uppercase text-light ">
+          Search
+        </router-link>
       </ul>
       <span class="navbar-text">
         <button

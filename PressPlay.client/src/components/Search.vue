@@ -22,6 +22,7 @@
 import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop.js'
 import { projectsService } from '../services/ProjectsService.js'
+import { profilesService } from '../services/ProfilesService.js'
 export default {
   setup() {
     const query = ref('')
@@ -30,6 +31,7 @@ export default {
       async findProjectsByQuery() {
         try {
           await projectsService.findProjectsByQuery(query.value)
+          await profilesService.findProfileByQuery(query.value)
         } catch (error) {
           Pop.toast(error.message, 'error')
         }
