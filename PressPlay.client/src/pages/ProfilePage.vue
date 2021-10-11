@@ -38,6 +38,7 @@ import { profilesService } from '../services/ProfilesService'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
+import { profileSubscriptionsService } from '../services/ProfileSubscriptionsService'
 export default {
   name: 'Profile',
   setup() {
@@ -46,10 +47,12 @@ export default {
       if (route.params.profileId) {
         AppState.currentProfile = null
         AppState.projects = []
+        AppState.profileSubscribers = []
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)
           await contributionsService.getContributionsByProfileId(route.params.profileId)
+          await profileSubscriptionsService.getSubscribersByProfileId(route.params.profileId)
         } catch (error) {
           Pop.toast(error, 'error')
         }

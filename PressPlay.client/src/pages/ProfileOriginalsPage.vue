@@ -11,7 +11,17 @@
               {{ profile?.name }}
             </h5>
           </div>
-
+          <div>
+            {{ subscribers?.length }}
+          </div>
+          <div v-if="profile?.id !== account?.id">
+            <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-primary">
+              Unfollow
+            </button>
+            <button @click="subscribeToUser()" v-else class="btn btn-danger">
+              Follow
+            </button>
+          </div>
           <div>
             <p>Instruments</p>
             <p>{{ profile?.instrumentTags }}</p>
@@ -47,13 +57,28 @@ import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
-import { contributionsService } from '../services/ContributionsService'
+import { profileSubscriptionsService } from '../services/ProfileSubscriptionsService'
 export default {
   name: 'Profile',
   setup() {
+    const route = useRoute()
     return {
       profile: computed(() => AppState.currentProfile),
-      projects: computed(() => AppState.projects)
+      projects: computed(() => AppState.projects),
+      account: computed(() => AppState.account),
+      subscribers: computed(() => AppState.profileSubscribers),
+      myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
+      async subscribeToUser() {
+        try {
+          if (this.myUserSubscribe.length > 0) {
+            await profileSubscriptionsService.unsubscribeToUser(route.params.profileId, this.myUserSubscribe[0].id)
+          } else {
+            await profileSubscriptionsService.subscribeToUser(route.params.profileId)
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }

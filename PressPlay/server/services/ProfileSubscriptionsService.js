@@ -3,7 +3,7 @@ import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProfileSubscriptionsService {
   async getSubscribersByProfileId(profileId) {
-    const subscribers = await dbContext.ProfileSubscriptions.find({ profileId }).populate('subscriber').populate('subscribing')
+    const subscribers = await dbContext.ProfileSubscriptions.find({ subscribingId: profileId }).populate('subscriber').populate('subscribing')
     if (!subscribers) {
       throw new BadRequest('No matching subscribers')
     }
@@ -11,7 +11,7 @@ class ProfileSubscriptionsService {
   }
 
   async getProfileSubscriptions(profileId) {
-    const subscriptions = await dbContext.ProfileSubscriptions.find({ subscribingId: profileId }).populate('subscriber').populate('subscribing')
+    const subscriptions = await dbContext.ProfileSubscriptions.find({ subscriberId: profileId }).populate('subscriber').populate('subscribing')
     if (!subscriptions) {
       throw new BadRequest('No matching subscribers')
     }
