@@ -3,7 +3,7 @@
     <div class="card mx-3 p-3">
       <div class="row justify-content-between">
         <div class="col-2">
-          <router-link :to="{name: 'Profile', params: {profileId: project.creatorId}}" class="selectable">
+          <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creatorId}}" class="selectable">
             <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
           </router-link>
         </div>
