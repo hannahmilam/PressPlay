@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-3 my-3">
+  <div class="col-md-4 my-3">
     <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
       <div class="card mx-3 p-3">
         <div class="row justify-content-between">
@@ -24,8 +24,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md-2">
-            <i class="mdi mdi-play f-20"></i>
+          <div class="col-md-4">
+            <!-- <i class="mdi mdi-play f-20"></i> -->
+            <audio :src="project.originalMp3" controls style="width: 100px"></audio>
           </div>
         </div>
       </div>
