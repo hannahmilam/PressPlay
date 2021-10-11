@@ -1,5 +1,5 @@
 export class Contribution {
-  constructor(contributionData) {
+  constructor(contributionData = {}) {
     this.id = contributionData.id
     this.title = contributionData.title
     this.contributionMp3 = contributionData.contributionMp3
