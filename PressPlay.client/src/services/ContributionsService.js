@@ -25,6 +25,7 @@ class ContributionsService {
   async getContributions() {
     const res = await api.get('api/contributions')
     logger.log('getContributions res', res.data)
+    AppState.contributions = res.data.map(c => new Contribution(c))
   }
 }
 export const contributionsService = new ContributionsService()
