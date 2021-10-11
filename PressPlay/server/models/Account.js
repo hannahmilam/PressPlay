@@ -17,12 +17,13 @@ export const ProfileSchema = new Schema(
   {
     name: { type: String, required: true },
     picture: { type: String, required: true },
-    email: {type: String, required: true },
-    bio: {type: String},
-    genreTags: {type: String},
-    instrumentTags: {type: String},
-    originals: {type: String},
-    collaborations: {type: String}
+    email: { type: String, required: true },
+    bio: { type: String },
+    genreTags: { type: String },
+    instrumentTags: { type: String },
+    originals: { type: String },
+    collaborations: { type: String },
+    coverImg: { type: String }
 
     // NOTE if you want to make properties from the account public put them here
   },
