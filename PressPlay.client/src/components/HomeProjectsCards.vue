@@ -7,7 +7,7 @@
             <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
           </router-link>
         </div>
-        <div class="col-8">
+        <div class="col-6">
           <div class="row">
             <div class="col">
               <p class="p-0 m-0">
@@ -23,8 +23,9 @@
             </div>
           </div>
         </div>
-        <div class="col-2">
-          <i class="mdi mdi-play f-20"></i>
+        <div class="col-4">
+          <!-- <i class="mdi mdi-play f-20"></i> -->
+          <audio :src="project.originalMp3" controls style="width: 100px"></audio>
         </div>
       </div>
 
