@@ -49,7 +49,6 @@ export default {
         Pop.toast(error.message, 'error')
       }
     })
-    // REVIEW I put this on the end becasue neededInstrumentTags is an array within our object   VVVVVVVV
     return {
       needsGuitarProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('guitar') === true)),
       needsVocalsProjects: computed(() => AppState.projects.filter(p => p.neededInstrumentTags.includes('vocals') === true)),

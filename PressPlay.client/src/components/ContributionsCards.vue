@@ -7,13 +7,14 @@
 
 <script>
 import { useRoute } from 'vue-router'
+import { Contribution } from '../models/Contribution'
 import { contributionsService } from '../services/ContributionsService'
 import Pop from '../utils/Pop'
 
 export default {
   props: {
     contribution: {
-      type: Object,
+      type: Contribution,
       required: true
     }
   },

@@ -13,6 +13,12 @@ const routes = [
     beforeEnter: authSettled
   },
   {
+    path: '/',
+    name: 'Search',
+    component: loadPage('SearchPage'),
+    beforeEnter: authSettled
+  },
+  {
     path: '/about',
     name: 'About',
     component: loadPage('AboutPage')

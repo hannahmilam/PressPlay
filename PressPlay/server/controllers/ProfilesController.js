@@ -1,5 +1,6 @@
 import { profileService } from '../services/ProfileService.js'
 import BaseController from '../utils/BaseController'
+import { logger } from '../utils/Logger.js'
 
 export class ProfilesController extends BaseController {
   constructor() {
@@ -11,8 +12,14 @@ export class ProfilesController extends BaseController {
 
   async getProfiles(req, res, next) {
     try {
-      const profiles = await profileService.findProfiles(req.query.name, req.query.offset)
+      const regex = new RegExp(req.query.search, 'i')
+      const query = { name: { $regex: regex } }
+      logger.log(query)
+      const profiles = await profileService.getProfiles(query)
       res.send(profiles)
+
+      // const profiles = await profileService.findProfiles(req.query.name, req.query.offset)
+      // res.send(profiles)
     } catch (error) {
       next(error)
     }
