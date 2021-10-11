@@ -1,7 +1,7 @@
 <template>
   <div class="row" v-if="account.id">
     <div>
-      <router-link :to="{name: 'Profile', params: {profileId: account.id}}" class="btn selectable">
+      <router-link :to="{name: 'Profile.Originals', params: {profileId: account.id}}" class="btn selectable">
         <img :src="account.picture" height="150" class="rounded-circle" alt="">
       </router-link>
     </div>

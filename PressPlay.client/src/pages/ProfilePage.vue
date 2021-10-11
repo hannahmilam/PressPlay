@@ -5,7 +5,7 @@
         <div class="col-2 bg-pink">
           <div class="row">
             <div class="text-center">
-              <router-link :to="{name: 'Profile', params: {profileId: profile.id}}" class="btn selectable">
+              <router-link :to="{name: 'Profile.Originals', params: {profileId: profile.id}}" class="btn selectable">
                 <img :src="profile.picture" height="100" class="rounded-circle" alt="">
               </router-link>
             </div>
@@ -56,15 +56,6 @@
                   <b class="text-light">New Project</b>
                 </button>
               </nav>
-            </div>
-          </div>
-          <div class="row">
-            <div class="card bg-transparent">
-              <div class="card-body">
-                <div class="row">
-                  <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -141,5 +132,10 @@ transition: .5;
 .nav-link:hover{
   transform: translateY(-10%);
   font-weight: 500;
+}
+.navbar .router-link-exact-active{
+  border-bottom: 2px solid var(--bs-light);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 </style>
