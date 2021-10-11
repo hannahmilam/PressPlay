@@ -34,9 +34,6 @@
       </div>
       <div class="col-10">
         <div class="row">
-          <h1 class="text-dark">
-            HELLO
-          </h1>
           <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
         </div>
       </div>

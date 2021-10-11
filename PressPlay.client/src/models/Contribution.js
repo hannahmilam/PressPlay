@@ -5,8 +5,7 @@ export class Contribution {
     this.contributionMp3 = contributionData.contributionMp3
     this.projectId = contributionData.projectId
     this.project = contributionData.project
-    this.accountId = contributionData.accountId
-    this.account = contributionData.account
-    this.creator = contributionData.creator
+    this.acccountId = contributionData.accountId
+    this.collaborator = contributionData.collaborator
   }
 }
