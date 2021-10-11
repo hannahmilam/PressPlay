@@ -21,5 +21,10 @@ class ContributionsService {
     logger.log('remove contribution res', res.data)
     AppState.contributions = AppState.contributions.filter(c => c.id !== contributionId)
   }
+
+  async getContributions() {
+    const res = await api.get('api/contributions')
+    logger.log('getContributions res', res.data)
+  }
 }
 export const contributionsService = new ContributionsService()
