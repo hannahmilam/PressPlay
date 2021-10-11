@@ -6,11 +6,21 @@ export class ContributionsController extends BaseController {
   constructor() {
     super('api')
     this.router
+      .get('/contributions', this.getContributions)
       .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
       .get('/contributions/:contributionId', this.getContributionById)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/contributions', this.createContribution)
       .delete('/contributions/:contributionId', this.removeContribution)
+  }
+
+  async getContributions(req, res, next) {
+    try {
+      const contributions = await contributionsService.getContributions(req.query)
+      res.send(contributions)
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getContributionById(req, res, next) {

@@ -75,6 +75,7 @@ import { AppState } from '../AppState'
 import { profilesService } from '../services/ProfilesService'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
+import { contributionsService } from '../services/ContributionsService'
 export default {
   name: 'Profile',
   setup() {
@@ -86,6 +87,7 @@ export default {
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)
+          await contributionsService.getContributions()
         } catch (error) {
           Pop.toast(error, 'error')
         }

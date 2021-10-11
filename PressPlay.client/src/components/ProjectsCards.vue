@@ -30,7 +30,7 @@
           </div>
         </div>
         <small>
-          <p>{{ contributions.length }}</p>
+          <p>Contributions: {{ contributions.length }}</p>
         </small>
       </div>
     </router-link>
@@ -38,9 +38,11 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { Project } from '../models/Project'
 import { AppState } from '../AppState'
+import Pop from '../utils/Pop'
+import { contributionsService } from '../services/ContributionsService'
 
 export default {
   props: {
@@ -49,6 +51,15 @@ export default {
     }
   },
   setup(props) {
+    // watchEffect(async() => {
+    //   if (props.project) {
+    //     try {
+    //       await contributionsService.getContributionsByProjectId
+    //     } catch (error) {
+    //       Pop.toast(error, 'error')
+    //     }
+    //   }
+    // })
     return {
       contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id))
     }
