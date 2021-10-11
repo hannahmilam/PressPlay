@@ -49,7 +49,7 @@ export default {
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)
-          await contributionsService.getContributions()
+          await contributionsService.getContributionsByProfileId(route.params.profileId)
         } catch (error) {
           Pop.toast(error, 'error')
         }
