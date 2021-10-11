@@ -55,6 +55,9 @@ class AccountService {
     account.genreTags = body.genreTags || account.genreTags
     account.instrumentTags = body.instrumentTags || account.instrumentTags
     account.coverImg = body.coverImg || account.coverImg
+
+    account.save()
+    return account
   }
 
   /**

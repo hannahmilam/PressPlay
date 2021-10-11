@@ -23,6 +23,11 @@
           <input type="text" v-model="editable.picture" placeholder="Profile Picture">
           <br />
           <p class="m-0 p-0">
+            <small><em>Add/Edit Your Cover Image</em></small>
+          </p>
+          <input type="text" v-model="editable.coverImg" placeholder="Cover Image">
+          <br />
+          <p class="m-0 p-0">
             <small><em>Add/Edit Your Instruments You Play</em></small>
           </p>
           <input type="text" v-model="editable.instrumentTags" placeholder="instrumentTags">

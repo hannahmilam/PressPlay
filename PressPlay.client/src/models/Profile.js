@@ -7,7 +7,6 @@ export class Profile {
     this.bio = profileData.bio
     this.genreTags = profileData.genreTags
     this.instrumentTags = profileData.instrumentTags
-    this.originals = profileData.originals
-    this.collaboration = profileData.collaboration
+    this.coverImg = profileData.coverImg
   }
 }
