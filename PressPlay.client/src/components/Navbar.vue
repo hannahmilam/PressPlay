@@ -29,7 +29,7 @@
         </li>
 
         <li>
-          <router-link :to="{ name: 'Profile', params: {profileId: account.id}}" class="btn selectable text-uppercase text-light ">
+          <router-link :to="{ name: 'Profile.Originals', params: {profileId: account.id}}" class="btn selectable text-uppercase text-light ">
             My Profile
           </router-link>
         </li>

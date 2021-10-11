@@ -5,7 +5,7 @@ import { api } from './AxiosService'
 
 class ContributionsService {
   async getContributionsByProjectId(projectId) {
-    const res = await api.get('api/projects/' + projectId + '/contributions')
+    const res = await api.get(`api/projects/${projectId}contributions`)
     logger.log('these are the contributions', res.data)
     AppState.contributions = res.data.map(c => new Contribution(c))
   }
@@ -17,7 +17,7 @@ class ContributionsService {
   }
 
   async removeContribution(contributionId) {
-    const res = await api.delete('api/contributions/' + contributionId)
+    const res = await api.delete(`api/contributions/${contributionId}`)
     logger.log('remove contribution res', res.data)
     AppState.contributions = AppState.contributions.filter(c => c.id !== contributionId)
   }
@@ -25,6 +25,12 @@ class ContributionsService {
   async getContributions() {
     const res = await api.get('api/contributions')
     logger.log('getContributions res', res.data)
+    AppState.contributions = res.data.map(c => new Contribution(c))
+  }
+
+  async getContributionsByProfileId(profileId) {
+    const res = await api.get(`api/profile/${profileId}/contributions`)
+    logger.log('profile contributions res', res.data)
     AppState.contributions = res.data.map(c => new Contribution(c))
   }
 }
