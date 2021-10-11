@@ -9,8 +9,8 @@ export class ProjectsController extends BaseController {
     this.router
       .get('/projects', this.getProjects)
       .get('/projects/:projectId', this.getProjectById)
-      .use(Auth0Provider.getAuthorizedUserInfo)
       .get('/profile/:profileId/projects', this.getProjectsByProfileId)
+      .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/projects', this.createProject)
       .put('/projects/:projectId', this.editProject)
       .delete('/projects/:projectId', this.deleteProject)

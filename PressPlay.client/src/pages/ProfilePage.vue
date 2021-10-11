@@ -52,7 +52,7 @@ export default {
     watchEffect(async() => {
       if (route.params.profileId) {
         AppState.currentProfile = null
-        // AppState.projects = []
+        AppState.projects = []
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)
