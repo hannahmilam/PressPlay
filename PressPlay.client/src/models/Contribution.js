@@ -7,5 +7,6 @@ export class Contribution {
     this.project = contributionData.project
     this.accountId = contributionData.accountId
     this.account = contributionData.account
+    this.creator = contributionData.creator
   }
 }
