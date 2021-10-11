@@ -9,5 +9,18 @@ class ContributionsService {
     logger.log('these are the contributions', res.data)
     AppState.contributions = res.data.map(c => new Contribution(c))
   }
+
+  async createContribution(contributionData) {
+    const res = await api.post('api/contributions', contributionData)
+    logger.log('createContribution res', res.data)
+    AppState.projects.push(new Contribution(res.data))
+    return res.data.id
+  }
+
+  async removeContribution(contributionId) {
+    const res = await api.delete('api/contributions/' + contributionId)
+    logger.log('remove contribution res', res.data)
+    AppState.contributions = AppState.contributions.filter(c => c.id !== contributionId)
+  }
 }
 export const contributionsService = new ContributionsService()

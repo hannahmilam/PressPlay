@@ -18,6 +18,9 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
+            <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#contribution-form">
+              <b class="text-light">New Contribution</b>
+            </button>
           </div>
           <div class="card-body">
             <div v-if="contributions.length > 0">
@@ -33,6 +36,16 @@
       </div>
     </div>
   </div>
+  <footer>
+    <Modal id="contribution-form">
+      <template #modal-title>
+        <h4>New Contribution</h4>
+      </template>
+      <template #modal-body>
+        <ContributionForm />
+      </template>
+    </Modal>
+  </footer>
 </template>
 
 <script>
