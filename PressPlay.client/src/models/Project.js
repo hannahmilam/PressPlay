@@ -8,5 +8,6 @@ export class Project {
     this.genreTags = projectData.genreTags
     this.instrumentTags = projectData.instrumentTags
     this.neededInstrumentTags = projectData.neededInstrumentTags
+    this.originalMp3 = projectData.originalMp3
   }
 }

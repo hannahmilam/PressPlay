@@ -20,6 +20,16 @@
       ></textarea>
     </div>
     <div class="form-group">
+      <label for="originalMp3">MP3 link</label>
+      <input type="text"
+             class="form-control"
+             id="exampleFormControlInput1"
+             placeholder=""
+             v-model="editable.originalMp3"
+             required
+      >
+    </div>
+    <div class="form-group">
       <label for="genreTags">Select Genre</label>
       <select class="form-control"
               id="exampleFormControlSelect1"
