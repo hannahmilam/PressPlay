@@ -1,7 +1,11 @@
 <template>
   <div class="card m-1">
+    <div>
+      <router-link :to="{name: 'Profile.Originals', params: {profileId: profile.id}}" class="selectable">
+        <img :src="profile.picture" class="small-picture" alt="">
+      </router-link>
+    </div>
     <div class="card-body small-row">
-      <img class="small-picture" :src="profile.picture" alt="">
       <p>{{ profile.name }}</p>
     </div>
   </div>

@@ -30,7 +30,14 @@
       </div>
 
       <div class="row">
-        <p>Spotlight</p>
+        <div class="col-2 m-auto">
+          <button @click="toggleSpotlight()" class="spotlight-button btn-project pb-0 mb-0">
+            <p class="">
+              Spotlight
+              <i class="mdi mdi-play f-20 m-0 p-0" title="Play Spotlight" />
+            </p>
+          </button>
+        </div>
       </div>
     </div>
   </router-link>
@@ -48,6 +55,9 @@ export default {
   },
   setup() {
     return {
+      async toggleSpotlight() {
+
+      }
       // projects: computed(() => AppState.projects)
     }
   }
@@ -64,6 +74,37 @@ export default {
   backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   display: inline-block;
   width: 25rem;
+}
+.spotlight-button {
+position: absolute;
+transform: translateX(-20px);
+border-radius: 40%;
+
+}
+.btn-project{
+background: linear-gradient(90deg, #CB369E, #1D2EF7);
+transition: .5;
+}
+:hover.btn-project{
+background: linear-gradient(90deg, #1D2EF7, #CB369E);
+transition: .5;
+}
+.top-bar{
+   box-shadow: 0 4px 2px -2px rgba(243, 233, 233, 0.438);
+}
+
+.nav-link:hover{
+  transform: translateY(-10%);
+  font-weight: 500;
+}
+.navbar .router-link-exact-active{
+  border-bottom: 2px solid var(--bs-light);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.icon-down{
+  position: absolute;
+  transform: translateY(1px);
 }
 
 </style>
