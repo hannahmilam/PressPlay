@@ -3,8 +3,8 @@
     <span v-if="currentProject.spotlightMp3 === contribution.contributionMp3" class="text-success">{{ contribution.title }}</span>
     <span v-else>{{ contribution.title }}</span>
     <span @click="setSpotlight()" v-if="currentProject.creatorId === account.id" class="">
-      <i v-if="currentProject.spotlightMp3 === contribution.contributionMp3" class="selectable mdi text-success mdi-star-circle-outline"></i>
-      <i v-else class="selectable mdi mdi-star-circle-outline"></i>
+      <i v-if="currentProject.spotlightMp3 === contribution.contributionMp3" title="Set to Spotlight" class="selectable mdi text-success mdi-star-circle-outline"></i>
+      <i v-else title="Set to Spotlight" class="selectable mdi mdi-star-circle-outline"></i>
     </span>
   </h1>
   <button @click="removeContribution">
