@@ -1,7 +1,7 @@
 <template>
   <div class="selectable" @click="goToProfile">
-    {{ projectSub.name }}
-    <img :src="projectSub.picture" alt="">
+    {{ projectSub?.name }}
+    <img :src="projectSub?.picture" alt="">
   </div>
 </template>
 
