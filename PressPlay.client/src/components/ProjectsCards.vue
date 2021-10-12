@@ -56,22 +56,12 @@ export default {
     }
   },
   setup(props) {
-    // watchEffect(async() => {
-    //   if (props.project) {
-    //     try {
-    //       await contributionsService.getContributionsByProjectId
-    //     } catch (error) {
-    //       Pop.toast(error, 'error')
-    //     }
-    //   }
-    // })
     return {
       contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
       async setSource() {
         try {
           const foundAudioTag = document.getElementById(props.project.id)
           foundAudioTag.src = props.project.spotlightMp3
-          // await projectsService.setSource(props.project.spotlightMp3, props.project.id)
         } catch (error) {
           Pop.toast(error, 'error')
         }
