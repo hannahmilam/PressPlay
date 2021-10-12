@@ -27,9 +27,9 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div @click="setSource()" class="col-md-4">
             <!-- <i class="mdi mdi-play f-20"></i> -->
-            <audio :src="project.originalMp3" controls style="width: 100px"></audio>
+            <audio :id="project.id" src="" controls style="width: 100px"></audio>
           </div>
         </div>
         <small>
@@ -46,6 +46,7 @@ import { Project } from '../models/Project'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
+import { projectsService } from '../services/ProjectsService'
 
 export default {
   props: {
@@ -64,7 +65,14 @@ export default {
     //   }
     // })
     return {
-      contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id))
+      contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
+      async setSource() {
+        try {
+          await projectsService.setSource(props.project.spotlightMp3, props.project.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
