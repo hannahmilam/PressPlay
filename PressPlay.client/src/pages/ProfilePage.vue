@@ -3,13 +3,13 @@
     <nav class="navbar top-bar bg-black navbar-expand-lg navbar-light bg-black justify-content-around">
       <router-link :to="{ name: 'Profile.Originals' }">
         <li class="nav-link selectable text-uppercase text-light">
-          Originals
+          Originals {{ projects.length }}
         </li>
       </router-link>
 
       <router-link :to="{ name: 'Profile.Contributions', }">
         <li class="nav-link selectable text-uppercase text-light">
-          Contributions
+          Contributions {{ contributions.length }}
         </li>
       </router-link>
 
@@ -61,7 +61,8 @@ export default {
     })
     return {
       profile: computed(() => AppState.currentProfile),
-      projects: computed(() => AppState.projects)
+      projects: computed(() => AppState.projects),
+      contributions: computed(() => AppState.contributions)
     }
   }
 }
