@@ -24,7 +24,7 @@ class ProjectsSubsService {
   }
 
   async subscribeToProject(projectData) {
-    const users = await dbContext.ProjectSubscriptions.findOne({ profileId: projectData.profileId })
+    const users = await dbContext.ProjectSubscriptions.findOne({ profileId: projectData.profileId, projectId: projectData.projectId })
     if (!users) {
       const subscribedProject = await dbContext.ProjectSubscriptions.create(projectData)
       await subscribedProject.populate('profile', 'name picture')
