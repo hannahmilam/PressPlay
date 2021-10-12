@@ -53,6 +53,7 @@ export default {
           await projectsService.getProjectsByProfileId(route.params.profileId)
           await contributionsService.getContributionsByProfileId(route.params.profileId)
           await profileSubscriptionsService.getSubscribersByProfileId(route.params.profileId)
+          await profileSubscriptionsService.getSubscriptionsByProfileId(route.params.profileId)
         } catch (error) {
           Pop.toast(error, 'error')
         }

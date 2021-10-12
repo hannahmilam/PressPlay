@@ -20,5 +20,11 @@ class ProfileSubscriptionsService {
     logger.log('unsub res', res.data)
     AppState.profileSubscribers.filter(s => s.id !== subId)
   }
+
+  async getSubscriptionsByProfileId(profileId) {
+    const res = await api.get(`api/profile/${profileId}/subscriptions`)
+    logger.log('get profile subscriptions res', res.data)
+    AppState.profileSubscriptions = res.data
+  }
 }
 export const profileSubscriptionsService = new ProfileSubscriptionsService()

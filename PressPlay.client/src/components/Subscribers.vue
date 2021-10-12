@@ -7,7 +7,7 @@
       class="rounded-circle"
       alt=""
     >
-    <p>
+    <p class="overflow-hidden">
       {{ subscriber.subscriber?.name }}
     </p>
   <!-- </router-link> -->

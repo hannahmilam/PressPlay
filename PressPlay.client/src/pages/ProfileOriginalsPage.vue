@@ -16,7 +16,7 @@
               Followers: {{ subscribers?.length }}
             </p>
             <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
-              Following: {{}}
+              Following: {{ subscribing?.length }}
             </p>
             <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
               Projects Following:
@@ -74,18 +74,20 @@
       <h4>Following</h4>
     </template>
     <template #modal-body>
-      <Subscribing v-for="s in subscribers" :key="s.id" :subscriber="s" />
+      <div class="row">
+        <Subscribing v-for="s in subscribing" :key="s.id" :subscribing="s.subscribing" />
+      </div>
     </template>
   </Modal>
 
-  <Modal id="projects-following-modal">
+  <!-- <Modal id="projects-following-modal">
     <template #modal-title>
       <h4>Followed Projects</h4>
     </template>
     <template #modal-body>
       <ProjectsFollowing v-for="s in subscribers" :key="s.id" :subscriber="s.subscriber" />
     </template>
-  </Modal>
+  </Modal> -->
 </template>
 
 <script>
@@ -104,6 +106,7 @@ export default {
       projects: computed(() => AppState.projects),
       account: computed(() => AppState.account),
       subscribers: computed(() => AppState.profileSubscribers),
+      subscribing: computed(() => AppState.profileSubscriptions),
       myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
       async subscribeToUser() {
         try {
