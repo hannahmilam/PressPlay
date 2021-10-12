@@ -64,5 +64,11 @@ class ProjectsService {
     logger.log('get subs for project', res.data)
     AppState.projectSubscriptions = res.data
   }
+
+  async getFollowedProjectsByProfileId(profileId) {
+    const res = await api.get(`api/profile/${profileId}/projectsSubscriptions`)
+    logger.log('get followed projects', res.data)
+    AppState.projectSubscriptions = res.data
+  }
 }
 export const projectsService = new ProjectsService()

@@ -19,7 +19,7 @@
               Following: {{ subscribing?.length }}
             </p>
             <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
-              Projects Following:
+              Projects Following:{{ usersProjectsSubscriptions?.length }}
             </p>
           </div>
           <div v-if="profile?.id !== account?.id">
@@ -80,14 +80,14 @@
     </template>
   </Modal>
 
-  <!-- <Modal id="projects-following-modal">
+  <Modal id="projects-following-modal">
     <template #modal-title>
       <h4>Followed Projects</h4>
     </template>
     <template #modal-body>
       <ProjectsFollowing v-for="s in subscribers" :key="s.id" :subscriber="s.subscriber" />
     </template>
-  </Modal> -->
+  </Modal>
 </template>
 
 <script>
@@ -107,6 +107,7 @@ export default {
       account: computed(() => AppState.account),
       subscribers: computed(() => AppState.profileSubscribers),
       subscribing: computed(() => AppState.profileSubscriptions),
+      usersProjectsSubscriptions: computed(() => AppState.projectSubscriptions),
       myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
       async subscribeToUser() {
         try {
