@@ -18,7 +18,7 @@ class ProfileSubscriptionsService {
   async unsubscribeToUser(profileId, subId) {
     const res = await api.delete('api/profile/' + profileId + '/subscription/' + subId)
     logger.log('unsub res', res.data)
-    AppState.profileSubscribers.filter(s => s.id !== subId)
+    AppState.profileSubscribers = AppState.profileSubscribers.filter(s => s.id !== subId)
   }
 
   async getSubscriptionsByProfileId(profileId) {
