@@ -12,6 +12,9 @@
               <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
                 Followers: {{ projectSubs.length }}
               </div>
+              <div v-if="project.spotlightName !== null">
+                {{ project.spotlightName }}
+              </div>
             </div>
           </div>
         </div>

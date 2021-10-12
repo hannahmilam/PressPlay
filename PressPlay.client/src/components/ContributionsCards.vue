@@ -29,7 +29,7 @@ export default {
     }
   },
   setup(props) {
-    const editable = ref({ spotlightMp3: props.contribution.contributionMp3 })
+    const editable = ref({ spotlightMp3: props.contribution.contributionMp3, spotlightName: props.contribution.title })
     return {
       editable,
       currentProject: computed(() => AppState.project),
