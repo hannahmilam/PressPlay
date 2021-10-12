@@ -10,5 +10,8 @@
   },
   "engines": {
     "node": "^14.17.0"
+  },
+  "dependencies": {
+    "vueperslides": "^3.3.2"
   }
 }
