@@ -12,7 +12,7 @@
             </h5>
           </div>
           <div>
-            {{ subscribers?.length }}
+            Followers: {{ subscribers?.length }}
           </div>
           <div v-if="profile?.id !== account?.id">
             <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-primary">
