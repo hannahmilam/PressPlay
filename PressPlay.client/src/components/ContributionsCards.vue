@@ -1,15 +1,21 @@
 <template>
-  <h1>{{ contribution.title }}</h1>
+  <h1>
+    <span>{{ contribution.title }}</span>
+    <span @click="setSpotlight()" v-if="currentProject.creatorId === account.id" class="selectable mdi mdi-star-circle-outline"></span>
+  </h1>
   <button @click="removeContribution">
     Delete Contribution
   </button>
 </template>
 
 <script>
+import { computed, ref } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { Contribution } from '../models/Contribution'
 import { contributionsService } from '../services/ContributionsService'
 import Pop from '../utils/Pop'
+import { AppState } from '../AppState'
+import { projectsService } from '../services/ProjectsService'
 
 export default {
   props: {
@@ -19,7 +25,11 @@ export default {
     }
   },
   setup(props) {
+    const editable = ref({ spotlightMp3: props.contribution.contributionMp3 })
     return {
+      editable,
+      currentProject: computed(() => AppState.project),
+      account: computed(() => AppState.account),
       async removeContribution() {
         if (await Pop.confirm()) {
           try {
@@ -28,6 +38,13 @@ export default {
           } catch (error) {
             Pop.toast(error, 'error')
           }
+        }
+      },
+      async setSpotlight() {
+        try {
+          await projectsService.setSpotlight(editable.value, this.currentProject.id)
+        } catch (error) {
+          Pop.toast(error, 'error')
         }
       }
     }

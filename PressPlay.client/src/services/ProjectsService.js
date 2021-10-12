@@ -70,5 +70,10 @@ class ProjectsService {
     logger.log('get followed projects', res.data)
     AppState.projectSubscriptions = res.data
   }
+
+  async setSpotlight(spotlightData, projectId) {
+    const res = await api.put('api/projects/' + projectId, spotlightData)
+    logger.log('set spotlight res', res.data)
+  }
 }
 export const projectsService = new ProjectsService()
