@@ -1,42 +1,42 @@
 <template>
   <div class="col-md-4 my-3">
-    <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
-      <div class="card mx-3 p-3">
-        <div class="row justify-content-between">
-          <div class="col-2">
-            <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creatorId}}" class="selectable">
-              <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
-            </router-link>
-          </div>
-          <div>
+    <div class="card mx-3 p-3">
+      <div class="row justify-content-between">
+        <div class="col-2">
+          <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creatorId}}" class="selectable">
+            <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
+          </router-link>
+        </div>
+        <div>
+          <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
             <img class="small" :src="project.albumArt" alt="">
-          </div>
-          <div class="col-md-6">
-            <div class="row">
-              <div class="col">
-                <p class="p-0 m-0">
-                  <b>{{ project.name }}</b>
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <p class="p-0 m-0">
-                  {{ project.creator.name }}
-                </p>
-              </div>
+          </router-link>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col">
+              <p class="p-0 m-0">
+                <b>{{ project.name }}</b>
+              </p>
             </div>
           </div>
-          <div @click="setSource()" class="col-md-4">
-            <!-- <i class="mdi mdi-play f-20"></i> -->
-            <audio :id="project.id" src="" controls style="width: 100px"></audio>
+          <div class="row">
+            <div class="col">
+              <p class="p-0 m-0">
+                {{ project.creator.name }}
+              </p>
+            </div>
           </div>
         </div>
-        <small>
-          <p>Contributions: {{ contributions.length }}</p>
-        </small>
+        <div class="selectable" @click.stop="setSource()">
+          <!-- <i class="mdi mdi-play f-20"></i> -->
+          <audio :id="project.id" controls style="width: 100px"></audio>
+        </div>
       </div>
-    </router-link>
+      <small>
+        <p>Contributions: {{ contributions.length }}</p>
+      </small>
+    </div>
   </div>
 </template>
 
@@ -47,6 +47,7 @@ import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
 import { projectsService } from '../services/ProjectsService'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -55,20 +56,12 @@ export default {
     }
   },
   setup(props) {
-    // watchEffect(async() => {
-    //   if (props.project) {
-    //     try {
-    //       await contributionsService.getContributionsByProjectId
-    //     } catch (error) {
-    //       Pop.toast(error, 'error')
-    //     }
-    //   }
-    // })
     return {
       contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
       async setSource() {
         try {
-          await projectsService.setSource(props.project.spotlightMp3, props.project.id)
+          const foundAudioTag = document.getElementById(props.project.id)
+          foundAudioTag.src = props.project.spotlightMp3
         } catch (error) {
           Pop.toast(error, 'error')
         }

@@ -76,9 +76,5 @@ class ProjectsService {
     logger.log('set spotlight res', res.data)
     AppState.project = res.data
   }
-
-  async setSource(spotlightMp3, projectId) {
-    document.getElementById(projectId).innerHTML.src = spotlightMp3
-  }
 }
 export const projectsService = new ProjectsService()
