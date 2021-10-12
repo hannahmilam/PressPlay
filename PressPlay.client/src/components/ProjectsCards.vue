@@ -8,6 +8,9 @@
               <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
             </router-link>
           </div>
+          <div>
+            <img class="small" :src="project.albumArt" alt="">
+          </div>
           <div class="col-md-6">
             <div class="row">
               <div class="col">
@@ -75,6 +78,10 @@ export default {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   display: inline-block;
+}
+.small {
+  height: 100px;
+  width: 100px;
 }
 
 </style>

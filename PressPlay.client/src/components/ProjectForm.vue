@@ -30,6 +30,15 @@
       >
     </div>
     <div class="form-group">
+      <label for="albumArt">Album Art</label>
+      <input type="text"
+             class="form-control"
+             id="exampleFormControlInput1"
+             placeholder=""
+             v-model="editable.albumArt"
+      >
+    </div>
+    <div class="form-group">
       <label for="genreTags">Select Genre</label>
       <select class="form-control"
               id="exampleFormControlSelect1"
