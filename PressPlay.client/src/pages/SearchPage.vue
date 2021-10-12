@@ -73,8 +73,7 @@ export default {
         await profilesService.sortProfileByQuery(query.value)
       },
       async toggleProjects() {
-        AppState.profiles = []
-
+        AppState.profile = []
         await projectsService.findProjectsByQuery(query.value)
       },
 

@@ -37,12 +37,13 @@ class ProjectsService {
 
   async findProjectsByNeeds(query) {
     const res = await api.get('api/projects/?search=' + query)
-    logger.log('this is the genre query', res.data)
-    AppState.projects = AppState.projects.filter(p => p.neededInstrumentTags.includes('query') === true)
-    logger.log(AppState.projects)
+    AppState.projects = res.data.map(p => new Project(p))
+    AppState.projects = AppState.projects.filter(p => p.neededInstrumentTags.includes(query) === true)
   }
 
   async findProjectsByHas(query) {
+    const res = await api.get('api/projects/?search=' + query)
+    AppState.projects = res.data.map(p => new Project(p))
     AppState.projects = AppState.projects.filter(p => p.instrumentTags.includes(query) === true)
   }
 }
