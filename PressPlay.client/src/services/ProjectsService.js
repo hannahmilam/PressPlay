@@ -50,12 +50,12 @@ class ProjectsService {
   async subscribeToProject(projectId) {
     const res = await api.post(`api/projects/${projectId}/subscription`)
     logger.log('subscribe to project', res.data)
-    AppState.projectSubscribers = res.data
+    AppState.projectSubscriptions.push(res.data)
   }
 
   async unSubscribeToProject(projectId, subId) {
     const res = await api.delete(`api/projects/${projectId}/subscription/${subId}`)
-    AppState.profileSubscribers.filter(s => s.id !== subId)
+    AppState.projectSubscriptions = AppState.projectSubscriptions.filter(s => s.id !== subId)
     logger.log('unsubscribe to project', res.data)
   }
 
