@@ -74,6 +74,7 @@ class ProjectsService {
   async setSpotlight(spotlightData, projectId) {
     const res = await api.put('api/projects/' + projectId, spotlightData)
     logger.log('set spotlight res', res.data)
+    AppState.project = res.data
   }
 }
 export const projectsService = new ProjectsService()

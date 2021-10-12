@@ -45,7 +45,7 @@ class ProjectsService {
     project.genreTags = projectData.genreTags || project.genreTags
     project.instrumentTags = projectData.instrumentTags || project.instrumentTags
     project.neededInstrumentTags = projectData.neededInstrumentTags || project.neededInstrumentTags
-    project.spotlight = projectData.spotlight || project.spotlight
+    project.spotlightMp3 = projectData.spotlightMp3 || project.spotlightMp3
     project.albumArt = projectData.albumArt || project.albumArt
 
     await project.save()
