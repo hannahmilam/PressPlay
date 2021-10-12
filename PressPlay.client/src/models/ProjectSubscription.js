@@ -1,5 +1,5 @@
-export class ProjectSubscription{
-  constructor(projectSubData){
+export class ProjectSubscription {
+  constructor(projectSubData) {
     this.id = projectSubData.id
     this.profile = projectSubData.profile
     this.profileId = projectSubData.profileId

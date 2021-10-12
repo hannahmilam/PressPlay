@@ -53,7 +53,7 @@ class ProjectsService {
     AppState.projectSubscribers = res.data
   }
 
-  async unsubscribeToProject(projectId, subId) {
+  async unSubscribeToProject(projectId, subId) {
     const res = await api.delete(`api/projects/${projectId}/subscription/${subId}`)
     AppState.profileSubscribers.filter(s => s.id !== subId)
     logger.log('unsubscribe to project', res.data)

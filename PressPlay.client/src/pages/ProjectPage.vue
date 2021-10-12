@@ -73,6 +73,7 @@ export default {
       if (route.params.projectId) {
         AppState.project = {}
         AppState.contributions = []
+        // AppState.projectSubscriptions = []
         try {
           await projectsService.getProjectById(route.params.projectId)
           await contributionsService.getContributionsByProjectId(route.params.projectId)
@@ -86,7 +87,8 @@ export default {
       project: computed(() => AppState.project),
       contributions: computed(() => AppState.contributions),
       account: computed(() => AppState.account),
-      myProjectSubscriptions: computed(() => AppState.projectSubscribers.filter(s => s.subscriberId === AppState.account.id)),
+
+      myProjectSubscriptions: computed(() => AppState.projectSubscriptions.filter(s => s.profileId === AppState.account.id)),
       async subscribeToProject() {
         try {
           if (this.myProjectSubscriptions.length > 0) {
