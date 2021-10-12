@@ -2,8 +2,8 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ProjectsSubsService {
-  async getProjectSubscribers(query) {
-    const users = await dbContext.ProjectSubscriptions.find(query).populate('profile', 'name picture')
+  async getProjectSubscribers(projectId) {
+    const users = await dbContext.ProjectSubscriptions.find({ projectId: projectId }).populate('profile', 'name picture')
     if (!users) {
       throw new BadRequest('Invalid ProjectId')
     }
