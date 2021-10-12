@@ -34,5 +34,16 @@ class ProjectsService {
     AppState.projects.push(new Project(res.data))
     return res.data.id
   }
+
+  async findProjectsByNeeds(query) {
+    const res = await api.get('api/projects/?search=' + query)
+    logger.log('this is the genre query', res.data)
+    AppState.projects = AppState.projects.filter(p => p.neededInstrumentTags.includes('query') === true)
+    logger.log(AppState.projects)
+  }
+
+  async findProjectsByHas(query) {
+    AppState.projects = AppState.projects.filter(p => p.instrumentTags.includes(query) === true)
+  }
 }
 export const projectsService = new ProjectsService()

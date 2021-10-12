@@ -21,5 +21,11 @@ class ProfilesService {
     logger.log('this is the res query', res)
     AppState.profile = res.data.map(p => new Profile(p))
   }
+
+  async sortProfileByQuery(query) {
+    const res = await api.get('api/profiles/?search=' + query)
+    logger.log('this is the res query', res)
+    AppState.profile = res.data.map(p => new Profile(p))
+  }
 }
 export const profilesService = new ProfilesService()

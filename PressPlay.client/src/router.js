@@ -16,7 +16,34 @@ const routes = [
     path: '/',
     name: 'Search',
     component: loadPage('SearchPage'),
-    beforeEnter: authSettled
+    beforeEnter: authSettled,
+    children: [
+      {
+        path: 'genre',
+        name: 'Search.Genre',
+        component: loadPage('SearchByGenrePage')
+      },
+      {
+        path: 'has',
+        name: 'Search.Has',
+        component: loadPage('SearchByHasPage')
+      },
+      {
+        path: 'needs',
+        name: 'Search.Needs',
+        component: loadPage('SearchByNeedsPage')
+      },
+      {
+        path: 'projects',
+        name: 'Search.Projects',
+        component: loadPage('SearchByProjectsPage')
+      },
+      {
+        path: 'users',
+        name: 'Search.Users',
+        component: loadPage('SearchByUserPage')
+      }
+    ]
   },
   {
     path: '/about',
