@@ -2,13 +2,13 @@
   <div class="container-fluid bg-dark text-white px-0">
     <div class="needs-guitar">
       <div class="row p-3">
-        <h3 class="my-0 ms-3">
+        <h3 class="my-0 ms-5">
           Needs Guitar
         </h3>
       </div>
 
-      <div class="row ms-5">
-        <div class="col-1">
+      <div class="row justify-content-center">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('left', 'guitarScroll')" v-if="true">
             <i class="mdi mdi-chevron-left"></i>
           </button>
@@ -18,7 +18,7 @@
             <HomeProjectsCards v-for="p in needsGuitarProjects" :key="p.id" :project="p" />
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('right', 'guitarScroll')" v-if="true">
             <i class="mdi mdi-chevron-right"></i>
           </button>
@@ -28,12 +28,12 @@
 
     <div class="needs-vocals">
       <div class="row p-3">
-        <h3 class="my-0 ms-3">
+        <h3 class="my-0 ms-5">
           Needs Vocals
         </h3>
       </div>
-      <div class="row ms-5">
-        <div class="col-1">
+      <div class="row justify-content-center">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('left', 'vocalsScroll')" v-if="true">
             <i class="mdi mdi-chevron-left"></i>
           </button>
@@ -43,7 +43,7 @@
             <HomeProjectsCards v-for="p in needsVocalsProjects" :key="p.id" :project="p" />
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('right', 'vocalsScroll')" v-if="true">
             <i class="mdi mdi-chevron-right"></i>
           </button>
@@ -53,12 +53,12 @@
 
     <div class="needs-drums">
       <div class="row p-3">
-        <h3 class="my-0 ms-3">
+        <h3 class="my-0 ms-5">
           Needs Drums
         </h3>
       </div>
-      <div class="row ms-5">
-        <div class="col-1">
+      <div class="row justify-content-center">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('left', 'drumsScroll')" v-if="true">
             <i class="mdi mdi-chevron-left"></i>
           </button>
@@ -68,7 +68,7 @@
             <HomeProjectsCards v-for="p in needsDrumsProjects" :key="p.id" :project="p" />
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('right', 'drumsScroll')" v-if="true">
             <i class="mdi mdi-chevron-right"></i>
           </button>
@@ -78,12 +78,12 @@
 
     <div class="needs-bass">
       <div class="row p-3">
-        <h3 class="my-0 ms-3">
+        <h3 class="my-0 ms-5">
           Needs Bass
         </h3>
       </div>
-      <div class="row ms-5">
-        <div class="col-1">
+      <div class="row justify-content-center">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('left', 'bassScroll')" v-if="true">
             <i class="mdi mdi-chevron-left"></i>
           </button>
@@ -93,7 +93,7 @@
             <HomeProjectsCards v-for="p in needsBassProjects" :key="p.id" :project="p" />
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('right', 'bassScroll')" v-if="true">
             <i class="mdi mdi-chevron-right"></i>
           </button>
@@ -103,13 +103,13 @@
 
     <div class="needs-piano">
       <div class="row p-3">
-        <h3 class="my-0 ms-3">
+        <h3 class="my-0 ms-5">
           Needs Piano
         </h3>
       </div>
 
-      <div class="row ms-5 pb-5">
-        <div class="col-1">
+      <div class="row justify-content-center pb-5">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('left', 'pianoScroll')" v-if="true">
             <i class="mdi mdi-chevron-left"></i>
           </button>
@@ -119,7 +119,7 @@
             <HomeProjectsCards v-for="p in needsPianoProjects" :key="p.id" :project="p" />
           </div>
         </div>
-        <div class="col-1">
+        <div class="col-1 text-center on-hover">
           <button class="btn btn-prev-next" @click="scroll('right', 'pianoScroll')" v-if="true">
             <i class="mdi mdi-chevron-right"></i>
           </button>
