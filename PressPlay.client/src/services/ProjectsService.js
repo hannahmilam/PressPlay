@@ -46,5 +46,23 @@ class ProjectsService {
     AppState.projects = res.data.map(p => new Project(p))
     AppState.projects = AppState.projects.filter(p => p.instrumentTags.includes(query) === true)
   }
+
+  async subscribeToProject(projectId) {
+    const res = await api.post(`api/projects/${projectId}/subscription`)
+    logger.log('subscribe to project', res.data)
+    AppState.projectSubscribers = res.data
+  }
+
+  async unsubscribeToProject(projectId, subId) {
+    const res = await api.delete(`api/projects/${projectId}/subscription/${subId}`)
+    AppState.profileSubscribers.filter(s => s.id !== subId)
+    logger.log('unsubscribe to project', res.data)
+  }
+
+  async getSubscribers(projectId) {
+    const res = await api.get(`api/projects/${projectId}/subscribers`)
+    logger.log('get subs for project', res.data)
+    AppState.projectSubscriptions = res.data
+  }
 }
 export const projectsService = new ProjectsService()

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-12">
+      <div class="col-10">
         <div class="card">
           <div class="card-body">
             <div class="card-header">
@@ -11,6 +11,16 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="col-2">
+        <div v-if="project.creatorId !== account?.id">
+          <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
+            Unfollow
+          </button>
+          <button @click="subscribeToProject()" v-else class="btn btn-danger">
+            Follow
+          </button>
         </div>
       </div>
     </div>
@@ -66,6 +76,7 @@ export default {
         try {
           await projectsService.getProjectById(route.params.projectId)
           await contributionsService.getContributionsByProjectId(route.params.projectId)
+          await projectsService.getSubscribers(route.params.projectId)
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -73,7 +84,20 @@ export default {
     })
     return {
       project: computed(() => AppState.project),
-      contributions: computed(() => AppState.contributions)
+      contributions: computed(() => AppState.contributions),
+      account: computed(() => AppState.account),
+      myProjectSubscriptions: computed(() => AppState.projectSubscribers.filter(s => s.subscriberId === AppState.account.id)),
+      async subscribeToProject() {
+        try {
+          if (this.myProjectSubscriptions.length > 0) {
+            await projectsService.unSubscribeToProject(route.params.projectId, this.myProjectSubscriptions[0].id)
+          } else {
+            await projectsService.subscribeToProject(route.params.projectId)
+          }
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      }
     }
   }
 }
