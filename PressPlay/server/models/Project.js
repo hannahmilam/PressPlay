@@ -10,7 +10,7 @@ export const ProjectSchema = new Schema(
     instrumentTags: { type: [String], required: true },
     neededInstrumentTags: { type: [String], required: true },
     originalMp3: { type: String, required: true },
-    spotlightMp3: { type: String, required: false, default: null },
+    spotlightMp3: { type: String, required: false },
     albumArt: { type: String, required: true, default: 'https://m.media-amazon.com/images/I/91mDSM+8EGL._SL1500_.jpg' },
     spotlightName: { type: String, required: false, default: null }
   },
