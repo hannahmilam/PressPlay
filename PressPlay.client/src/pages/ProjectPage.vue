@@ -9,6 +9,9 @@
               <div class="card-body">
                 {{ project.description }}
               </div>
+              <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
+                Followers: {{ projectSubs.length }}
+              </div>
             </div>
           </div>
         </div>
@@ -55,6 +58,14 @@
         <ContributionForm />
       </template>
     </Modal>
+    <Modal id="followers-form">
+      <template #modal-title>
+        <h4>Followers</h4>
+      </template>
+      <template #modal-body>
+        <ProjectFollowers v-for="s in projectSubs" :key="s.id" :project-sub="s.profile" />
+      </template>
+    </Modal>
   </footer>
 </template>
 
@@ -87,6 +98,7 @@ export default {
       project: computed(() => AppState.project),
       contributions: computed(() => AppState.contributions),
       account: computed(() => AppState.account),
+      projectSubs: computed(() => AppState.projectSubscriptions),
 
       myProjectSubscriptions: computed(() => AppState.projectSubscriptions.filter(s => s.profileId === AppState.account.id)),
       async subscribeToProject() {
@@ -106,5 +118,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.small {
+  width: 85px;
+}
 
 </style>

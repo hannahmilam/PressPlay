@@ -85,7 +85,7 @@
       <h4>Followed Projects</h4>
     </template>
     <template #modal-body>
-      <ProjectsFollowing v-for="s in subscribers" :key="s.id" :subscriber="s.subscriber" />
+      <ProjectsFollowing v-for="p in usersProjectsSubscriptions" :key="p.id" :project="p.project" />
     </template>
   </Modal>
 </template>
