@@ -47,6 +47,7 @@ class ProjectsService {
     project.neededInstrumentTags = projectData.neededInstrumentTags || project.neededInstrumentTags
     project.spotlightMp3 = projectData.spotlightMp3 || project.spotlightMp3
     project.albumArt = projectData.albumArt || project.albumArt
+    project.spotlightName = projectData.spotlightName || project.spotlightName
 
     await project.save()
     return project

@@ -11,5 +11,6 @@ export class Project {
     this.originalMp3 = projectData.originalMp3
     this.spotlightMp3 = projectData.spotlightMp3
     this.albumArt = projectData.albumArt
+    this.spotlightName = projectData.spotlightName
   }
 }

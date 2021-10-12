@@ -58,6 +58,7 @@ export class ProjectsController extends BaseController {
   async createProject(req, res, next) {
     try {
       req.body.creatorId = req.userInfo.id
+      req.body.spotlightMp3 = req.body.originalMp3
       const project = await projectsService.createProject(req.body)
       res.send(project)
     } catch (error) {
