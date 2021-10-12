@@ -12,7 +12,15 @@
             </h5>
           </div>
           <div>
-            Followers: {{ subscribers?.length }}
+            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
+              Followers: {{ subscribers?.length }}
+            </p>
+            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
+              Following: {{}}
+            </p>
+            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
+              Projects Following:
+            </p>
           </div>
           <div v-if="profile?.id !== account?.id">
             <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-primary">
@@ -49,6 +57,35 @@
       </div>
     </div>
   </div>
+
+  <Modal id="subscribers-modal">
+    <template #modal-title>
+      <h4>Followers</h4>
+    </template>
+    <template #modal-body>
+      <div class="row">
+        <Subscribers v-for="s in subscribers" :key="s.id" :subscriber="s" />
+      </div>
+    </template>
+  </Modal>
+
+  <Modal id="subscribing-modal">
+    <template #modal-title>
+      <h4>Following</h4>
+    </template>
+    <template #modal-body>
+      <Subscribing v-for="s in subscribers" :key="s.id" :subscriber="s" />
+    </template>
+  </Modal>
+
+  <Modal id="projects-following-modal">
+    <template #modal-title>
+      <h4>Followed Projects</h4>
+    </template>
+    <template #modal-body>
+      <ProjectsFollowing v-for="s in subscribers" :key="s.id" :subscriber="s.subscriber" />
+    </template>
+  </Modal>
 </template>
 
 <script>
