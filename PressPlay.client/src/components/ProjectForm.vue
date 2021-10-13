@@ -24,7 +24,7 @@
       <input type="file"
 
              accept="audio/*"
-             @change="setFiles()"
+             @change="setFiles"
              class="form-control"
              id="exampleFormControlInput1"
              placeholder=""
@@ -44,7 +44,7 @@
       <label for="albumArt">Album Art</label>
       <input type="file"
              accept="image/*"
-             @change="setFiles()"
+             @change="setFiles"
              class="form-control"
              id="exampleFormControlInput1"
              placeholder=""
@@ -140,7 +140,7 @@ export default {
 
         //   document.getElementById('audio').src = reader.result
         // }
-        files.value?.type.includes('image') ? editable.value.type = 'Images' : editable.value.type = 'Audio'
+        files.value[0]?.type.includes('image') ? editable.value.type = 'Images' : editable.value.type = 'Audio'
       }
     }
   }
