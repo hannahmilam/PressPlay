@@ -1,5 +1,7 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
+import { contributionsService } from '../services/ContributionsService'
 import { profileSubscriptionsService } from '../services/ProfileSubscriptionsService'
+import { projectsService } from '../services/ProjectsService'
 import BaseController from '../utils/BaseController'
 
 export class ProfileSubscriptionsController extends BaseController {
@@ -8,6 +10,8 @@ export class ProfileSubscriptionsController extends BaseController {
     this.router
       .get('/:profileId/subscribers', this.getSubscribersByProfileId)
       .get('/:profileId/subscriptions', this.getProfileSubscriptions)
+      .get('/:profileId/projects', this.getProjectsByProfileId)
+      .get('/profile/:profileId/contributions', this.getContributionsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/:profileId/subscription', this.subscribeToProfile)
       .delete('/:profileId/subscription/:subscriptionId', this.unsubscribeProfile)
@@ -26,6 +30,24 @@ export class ProfileSubscriptionsController extends BaseController {
     try {
       const subscriptions = await profileSubscriptionsService.getProfileSubscriptions(req.params.profileId)
       res.send(subscriptions)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getProjectsByProfileId(req, res, next) {
+    try {
+      const profileProjects = await projectsService.getProfileProjects(req.params.profileId)
+      res.send(profileProjects)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getContributionsByProfileId(req, res, next) {
+    try {
+      const contributions = await contributionsService.getContributionsByProfileId(req.params.profileId)
+      res.send(contributions)
     } catch (error) {
       next(error)
     }

@@ -2,18 +2,22 @@ import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { projectsService } from '../services/ProjectsService'
 import { logger } from '../utils/Logger'
+import { contributionsService } from '../services/ContributionsService'
+import { commentsService } from '../services/CommentsService'
 
 export class ProjectsController extends BaseController {
   constructor() {
-    super('api')
+    super('api/projects')
     this.router
-      .get('/projects', this.getProjects)
-      .get('/projects/:projectId', this.getProjectById)
-      .get('/profile/:profileId/projects', this.getProjectsByProfileId)
+      .get('', this.getProjects)
+      .get('/:projectId', this.getProjectById)
+      // .get('/profile/:profileId/projects', this.getProjectsByProfileId)
+      .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
+      .get('/projects/:projectId/comments', this.getComments)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post('/projects', this.createProject)
-      .put('/projects/:projectId', this.editProject)
-      .delete('/projects/:projectId', this.deleteProject)
+      .post('', this.createProject)
+      .put('/:projectId', this.editProject)
+      .delete('/:projectId', this.deleteProject)
   }
 
   async getProjects(req, res, next) {
@@ -46,10 +50,28 @@ export class ProjectsController extends BaseController {
     }
   }
 
-  async getProjectsByProfileId(req, res, next) {
+  // async getProjectsByProfileId(req, res, next) {
+  //   try {
+  //     const profileProjects = await projectsService.getProfileProjects(req.params.profileId)
+  //     res.send(profileProjects)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
+
+  async getContributionsByProjectId(req, res, next) {
     try {
-      const profileProjects = await projectsService.getProfileProjects(req.params.profileId)
-      res.send(profileProjects)
+      const contribution = await contributionsService.getContributionsByProjectId(req.params.projectId)
+      res.send(contribution)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getComments(req, res, next) {
+    try {
+      const comments = await commentsService.getComments(req.params.projectId)
+      res.send(comments)
     } catch (error) {
       next(error)
     }

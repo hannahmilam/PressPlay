@@ -4,25 +4,25 @@ import BaseController from '../utils/BaseController'
 
 export class ContributionsController extends BaseController {
   constructor() {
-    super('api')
+    super('api/contributions')
     this.router
-      .get('/contributions', this.getContributions)
-      .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
-      .get('/contributions/:contributionId', this.getContributionById)
-      .get('/profile/:profileId/contributions', this.getContributionsByProfileId)
+      .get('', this.getContributions)
+      // .get('/projects/:projectId/contributions', this.getContributionsByProjectId)
+      .get('/:contributionId', this.getContributionById)
+      // .get('/profile/:profileId/contributions', this.getContributionsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
-      .post('/contributions', this.createContribution)
-      .delete('/contributions/:contributionId', this.removeContribution)
+      .post('', this.createContribution)
+      .delete('/:contributionId', this.removeContribution)
   }
 
-  async getContributionsByProfileId(req, res, next) {
-    try {
-      const contributions = await contributionsService.getContributionsByProfileId(req.params.profileId)
-      res.send(contributions)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async getContributionsByProfileId(req, res, next) {
+  //   try {
+  //     const contributions = await contributionsService.getContributionsByProfileId(req.params.profileId)
+  //     res.send(contributions)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async getContributions(req, res, next) {
     try {
@@ -61,12 +61,12 @@ export class ContributionsController extends BaseController {
     }
   }
 
-  async getContributionsByProjectId(req, res, next) {
-    try {
-      const contribution = await contributionsService.getContributionsByProjectId(req.params.projectId)
-      res.send(contribution)
-    } catch (error) {
-      next(error)
-    }
-  }
+  // async getContributionsByProjectId(req, res, next) {
+  //   try {
+  //     const contribution = await contributionsService.getContributionsByProjectId(req.params.projectId)
+  //     res.send(contribution)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 }
