@@ -127,7 +127,7 @@ export default {
     return {
       query,
       profile: computed(() => AppState.currentProfile),
-      projects: computed(() => AppState.projects),
+      projects: computed(() => AppState.projects.filter(p => p.password === null)),
       account: computed(() => AppState.account),
       hiddenProject: computed(() => AppState.projects.filter(p => p.password === query.value)),
       subscribers: computed(() => AppState.profileSubscribers),
