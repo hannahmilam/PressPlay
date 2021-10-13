@@ -1,10 +1,11 @@
 <template>
   <div class="col-3 text-center">
-    <!-- <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark"> -->
     <div class="card my-3 selectable" style="width: 200px;">
-      <div class="card-header p-0" style="height: 200px;">
-        <img :src="project.creator.picture" class="rounded-top" height="198" alt="">
-      </div>
+      <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
+        <div class="card-header p-0" style="height: 200px;">
+          <img :src="project.creator.picture" class="rounded-top" height="198" alt="">
+        </div>
+      </router-link>
       <div class="card-body">
         <div class="row justify-content-between me-2 text-black">
           <div class="col-10">
@@ -16,14 +17,13 @@
             </p>
           </div>
           <div class="col-2">
-            <i id="play" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
-            <i id="pause" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio"></i>
+            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
+            <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio"></i>
             <audio :id="project.id" controls class="visually-hidden" style="width: 100px"></audio>
           </div>
         </div>
       </div>
     </div>
-    <!-- </router-link> -->
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default {
         try {
           const foundAudioTag = document.getElementById(props.project.id)
           if (foundAudioTag.currentTime > 0) {
-            foundAudioTag.play()
+            this.toggleAudio()
           } else {
             foundAudioTag.src = props.project.spotlightMp3
             this.toggleAudio()
@@ -62,24 +62,13 @@ export default {
 
         if (foundAudio.paused) {
           foundAudio.play()
-          document.getElementById('pause').classList.remove('visually-hidden')
-          document.getElementById('play').classList.add('visually-hidden')
+          document.getElementById(`pause-${props.project.id}`).classList.remove('visually-hidden')
+          document.getElementById(`play-${props.project.id}`).classList.add('visually-hidden')
         } else {
           foundAudio.pause()
-          document.getElementById('pause').classList.add('visually-hidden')
-          document.getElementById('play').classList.remove('visually-hidden')
+          document.getElementById(`pause-${props.project.id}`).classList.add('visually-hidden')
+          document.getElementById(`play-${props.project.id}`).classList.remove('visually-hidden')
         }
-        // return foundAudio.paused ? foundAudio.play() : foundAudio.paused()
-
-        // if (!foundAudio.paused && !foundAudio.ended) {
-        //   foundAudio.pause()
-        //   document.getElementById('pause').classList.add('visually-hidden')
-        //   document.getElementById('play').classList.remove('visually-hidden')
-        // } else if (foundAudio.paused) {
-        //   foundAudio.play()
-        //   document.getElementById('pause').classList.remove('visually-hidden')
-        //   document.getElementById('play').classList.add('visually-hidden')
-        // }
       }
     }
   }
