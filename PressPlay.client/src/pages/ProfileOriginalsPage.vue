@@ -123,14 +123,11 @@ export default {
   setup() {
     const query = ref('')
     const route = useRoute()
-    onMounted(async() => {
-      AppState.projects = []
-    })
 
     return {
       query,
       profile: computed(() => AppState.currentProfile),
-      projects: computed(() => AppState.projects.filter(p => p.password === null)),
+      projects: computed(() => AppState.projects),
       account: computed(() => AppState.account),
       hiddenProject: computed(() => AppState.projects.filter(p => p.password === query.value)),
       subscribers: computed(() => AppState.profileSubscribers),
