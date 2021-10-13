@@ -51,6 +51,9 @@
         </div>
       </div>
     </div>
+    <div class="comments">
+      <Comments />
+    </div>
   </div>
   <footer>
     <Modal id="contribution-form">

@@ -11,7 +11,7 @@ export class ProfileSubscriptionsController extends BaseController {
       .get('/:profileId/subscribers', this.getSubscribersByProfileId)
       .get('/:profileId/subscriptions', this.getProfileSubscriptions)
       .get('/:profileId/projects', this.getProjectsByProfileId)
-      .get('/profile/:profileId/contributions', this.getContributionsByProfileId)
+      .get('/:profileId/contributions', this.getContributionsByProfileId)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('/:profileId/subscription', this.subscribeToProfile)
       .delete('/:profileId/subscription/:subscriptionId', this.unsubscribeProfile)
