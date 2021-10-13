@@ -21,11 +21,13 @@
     </div>
     <div class="form-group">
       <label for="originalMp3">MP3 link</label>
-      <input type="text"
+      <input type="file"
+
+             accept="audio/*"
+             @change="setFiles()"
              class="form-control"
              id="exampleFormControlInput1"
              placeholder=""
-             v-model="editable.originalMp3"
              required
       >
     </div>
@@ -40,11 +42,12 @@
     </div>
     <div class="form-group">
       <label for="albumArt">Album Art</label>
-      <input type="text"
+      <input type="file"
+             accept="image/*"
+             @change="setFiles()"
              class="form-control"
              id="exampleFormControlInput1"
              placeholder=""
-             v-model="editable.albumArt"
       >
     </div>
     <div class="form-group">
@@ -90,15 +93,18 @@ import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
 import { Modal } from 'bootstrap'
 import { router } from '../router'
+import { logger } from '../utils/Logger'
 export default {
   setup() {
     const temp = ref()
     const otherTemp = ref()
     const editable = ref({ neededInstrumentTags: [], instrumentTags: [] })
+    const files = ref([])
     return {
       temp,
       otherTemp,
       editable,
+      files,
       addNeededInstrumentTag() {
         editable.value.neededInstrumentTags.push(temp.value)
         temp.value = []
@@ -110,6 +116,9 @@ export default {
       async createProject() {
         try {
           const projectId = await projectsService.createProject(editable.value)
+          files.value = []
+          document.getElementById('image').src = ''
+          document.getElementById('audio').src = ''
           const modal = Modal.getInstance(document.getElementById('project-form'))
           modal.hide()
           router.push({
@@ -119,6 +128,19 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
+      },
+      setFiles(e) {
+        files.value = e.target.files
+        logger.log('files ref value', files.value)
+
+        // const reader = new filesReader()
+        // reader.readAsDataURL(files.value)
+        // reader.onload = () => {
+        //   document.getElementById('image').src = reader.result
+
+        //   document.getElementById('audio').src = reader.result
+        // }
+        files.value?.type.includes('image') ? editable.value.type = 'Images' : editable.value.type = 'Audio'
       }
     }
   }
