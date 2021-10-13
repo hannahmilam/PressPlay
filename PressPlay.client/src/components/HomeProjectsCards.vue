@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3">
+  <div class="col-3 text-center">
     <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
       <div class="card my-3" style="width: 200px;">
         <div class="card-header p-0" style="height: 200px;">
@@ -8,10 +8,10 @@
         <div class="card-body">
           <div class="row justify-content-between me-2">
             <div class="col-10">
-              <h5 class="card-text p-0 m-0 clip-text">
+              <h5 class="card-text p-0 m-0 clip-text" :title="project.name">
                 <b>{{ project.name }}</b>
               </h5>
-              <p class="card-text">
+              <p class="card-text" :title="project.creator.name">
                 {{ project.creator.name }}
               </p>
             </div>
