@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="createProject()">
+  <form>
     <div class="form-group">
       <label for="name">Project Name</label>
       <input type="text"
@@ -20,7 +20,7 @@
       <label for="originalMp3">MP3 link</label>
       <input type="file"
              accept="audio/*"
-             @change="setFiles"
+             @change="setMp3File"
              class="form-control"
              required
       >
@@ -36,7 +36,7 @@
       <label for="albumArt">Album Art</label>
       <input type="file"
              accept="image/*"
-             @change="setFiles"
+             @change="setAlbumArtFile"
              class="form-control"
       >
     </div>
@@ -80,21 +80,23 @@
 import { ref } from '@vue/reactivity'
 import Pop from '../utils/Pop'
 import { projectsService } from '../services/ProjectsService'
-import { firebaseService } from '../services/FirebaseService'
 import { Modal } from 'bootstrap'
 import { router } from '../router'
 import { logger } from '../utils/Logger'
+import { firebaseService } from '../services/FirebaseService'
 export default {
   setup() {
     const temp = ref()
     const otherTemp = ref()
     const editable = ref({ neededInstrumentTags: [], instrumentTags: [] })
-    const files = ref([])
+    const mp3File = ref([])
+    const albumArtFile = ref([])
     return {
       temp,
       otherTemp,
       editable,
-      files,
+      mp3File,
+      albumArtFile,
       addNeededInstrumentTag() {
         editable.value.neededInstrumentTags.push(temp.value)
         temp.value = []
@@ -106,7 +108,8 @@ export default {
       async createProject() {
         try {
           const projectId = await projectsService.createProject(editable.value)
-          files.value = []
+          mp3File.value = []
+          albumArtFile.value = []
           document.getElementById('image').src = ''
           document.getElementById('audio').src = ''
           const modal = Modal.getInstance(document.getElementById('project-form'))
@@ -119,24 +122,21 @@ export default {
           Pop.toast(error, 'error')
         }
       },
-      setFiles(e) {
-        files.value = e.target.files
-        logger.log('files ref value', files.value)
-
-        // const reader = new filesReader()
-        // reader.readAsDataURL(files.value)
-        // reader.onload = () => {
-        //   document.getElementById('image').src = reader.result
-
-        //   document.getElementById('audio').src = reader.result
-        // }
-        files.value[0]?.type.includes('image') ? editable.value.type = 'Images' : editable.value.type = 'Audio'
+      setMp3File(e) {
+        mp3File.value = e.target.files
+        logger.log('Mp3 files ref value', mp3File.value)
+      },
+      setAlbumArtFile(e) {
+        albumArtFile.value = e.target.files
+        logger.log('AlbumArt files ref value', albumArtFile.value)
       },
       async upload() {
-        const url = await firebaseService.upload(files.value[0], editable.value.type)
-        editable.value.originalMp3 = url
+        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio')
+        editable.value.originalMp3 = mp3Url
+        const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image')
+        editable.value.albumArt = albumArtUrl
         // editable.value.albumArt = url
-        logger.log(url)
+        logger.log(albumArtUrl, mp3Url)
         await this.createProject()
       }
     }

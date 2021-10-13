@@ -9,8 +9,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage'),
-    beforeEnter: authSettled
+    component: loadPage('HomePage')
+    // beforeEnter: authSettled
   },
   {
     path: '/',
