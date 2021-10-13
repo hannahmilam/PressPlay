@@ -29,7 +29,6 @@ class ProjectsService {
   }
 
   async createProject(projectData) {
-    debugger
     const res = await api.post('api/projects', projectData)
     logger.log('createProject res', res.data)
     AppState.projects.push(new Project(res.data))
