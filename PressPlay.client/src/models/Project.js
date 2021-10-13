@@ -12,5 +12,6 @@ export class Project {
     this.spotlightMp3 = projectData.spotlightMp3
     this.albumArt = projectData.albumArt
     this.spotlightName = projectData.spotlightName
+    this.password = projectData.password
   }
 }

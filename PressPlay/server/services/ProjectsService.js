@@ -48,6 +48,7 @@ class ProjectsService {
     project.spotlightMp3 = projectData.spotlightMp3 || project.spotlightMp3
     project.albumArt = projectData.albumArt || project.albumArt
     project.spotlightName = projectData.spotlightName || project.spotlightName
+    project.password = projectData.password || project.password
 
     await project.save()
     return project

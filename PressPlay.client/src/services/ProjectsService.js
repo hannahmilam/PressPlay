@@ -43,6 +43,7 @@ class ProjectsService {
 
   async findProjectsByHas(query) {
     const res = await api.get('api/projects/?search=' + query)
+    logger.log(res.data)
     AppState.projects = res.data.map(p => new Project(p))
     AppState.projects = AppState.projects.filter(p => p.instrumentTags.includes(query) === true)
   }
@@ -75,6 +76,14 @@ class ProjectsService {
     const res = await api.put('api/projects/' + projectId, spotlightData)
     logger.log('set spotlight res', res.data)
     AppState.project = res.data
+  }
+
+  async showHiddenProject(profileId, query) {
+    debugger
+    const res = await api.get('api/profile/' + profileId + '/projects/?search=' + query)
+    logger.log('show hidden Project', res.data)
+    AppState.projects = res.data.map(p => new Project(p))
+    AppState.projects = AppState.projects.filter(p => p.password === query)
   }
 }
 export const projectsService = new ProjectsService()

@@ -52,6 +52,25 @@
       </div>
       <div class="col-10">
         <div class="row">
+          <div class="col-6 m-auto">
+            <form @submit.prevent="showHiddenProject()">
+              <div class="form-group">
+                <label for="name">Project Code</label>
+                <input type="text"
+                       class="form-control"
+                       id="exampleFormControlInput1"
+                       placeholder=""
+                       v-model="query"
+                       required
+                >
+              </div>
+              <button class="btn btn-success mt-2" type="submit">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
           <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
         </div>
       </div>
@@ -91,24 +110,44 @@
 </template>
 
 <script>
-import { computed, onMounted, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, ref, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
 import { profileSubscriptionsService } from '../services/ProfileSubscriptionsService'
+import { profilesService } from '../services/ProfilesService'
+import { router } from '../router'
 export default {
   name: 'Profile',
   setup() {
+    const query = ref('')
     const route = useRoute()
+    onMounted(async() => {
+      AppState.projects = []
+    })
+
     return {
+      query,
       profile: computed(() => AppState.currentProfile),
-      projects: computed(() => AppState.projects),
+      projects: computed(() => AppState.projects.filter(p => p.password === null)),
       account: computed(() => AppState.account),
+      hiddenProject: computed(() => AppState.projects.filter(p => p.password === query.value)),
       subscribers: computed(() => AppState.profileSubscribers),
       subscribing: computed(() => AppState.profileSubscriptions),
       usersProjectsSubscriptions: computed(() => AppState.projectSubscriptions),
       myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
+      async showHiddenProject() {
+        try {
+          debugger
+          router.push({
+            name: 'Project',
+            params: { projectId: this.hiddenProject[0].id }
+          })
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
       async subscribeToUser() {
         try {
           if (this.myUserSubscribe.length > 0) {

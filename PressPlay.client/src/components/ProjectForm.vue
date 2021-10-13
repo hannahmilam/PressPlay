@@ -30,6 +30,15 @@
       >
     </div>
     <div class="form-group">
+      <label for="originalMp3">Password</label>
+      <input type="text"
+             class="form-control"
+             id="exampleFormControlInput1"
+             placeholder=""
+             v-model="editable.password"
+      >
+    </div>
+    <div class="form-group">
       <label for="albumArt">Album Art</label>
       <input type="text"
              class="form-control"
