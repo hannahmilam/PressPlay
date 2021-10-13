@@ -23,10 +23,10 @@
             </p>
           </div>
           <div v-if="profile?.id !== account?.id">
-            <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-primary">
+            <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-danger">
               Unfollow
             </button>
-            <button @click="subscribeToUser()" v-else class="btn btn-danger">
+            <button @click="subscribeToUser()" v-else class="btn btn-primary">
               Follow
             </button>
           </div>
