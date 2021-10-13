@@ -187,6 +187,7 @@ export default {
 .snappy-scroll{
   flex-wrap: nowrap !important;
   overflow-x: scroll;
+  overflow: hidden;
   scroll-snap-type: x mandatory;
   &::-webkit-scrollbar{ }
   &::-webkit-scrollbar-button{ /* 2 */ }
