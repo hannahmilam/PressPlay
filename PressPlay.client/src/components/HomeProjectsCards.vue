@@ -18,7 +18,7 @@
           </div>
           <div class="col-2">
             <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
-            <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio"></i>
+            <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
             <audio :id="project.id" controls class="visually-hidden" style="width: 100px"></audio>
           </div>
         </div>
