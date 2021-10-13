@@ -41,13 +41,10 @@
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { Project } from '../models/Project'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
-import { contributionsService } from '../services/ContributionsService'
-import { projectsService } from '../services/ProjectsService'
-import { logger } from '../utils/Logger'
 
 export default {
   props: {
