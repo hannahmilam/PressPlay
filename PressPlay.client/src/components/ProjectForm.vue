@@ -110,8 +110,6 @@ export default {
           const projectId = await projectsService.createProject(editable.value)
           mp3File.value = []
           albumArtFile.value = []
-          document.getElementById('image').src = ''
-          document.getElementById('audio').src = ''
           const modal = Modal.getInstance(document.getElementById('project-form'))
           modal.hide()
           router.push({
