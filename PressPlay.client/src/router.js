@@ -16,34 +16,7 @@ const routes = [
     path: '/',
     name: 'Search',
     component: loadPage('SearchPage'),
-    beforeEnter: authSettled,
-    children: [
-      {
-        path: 'genre',
-        name: 'Search.Genre',
-        component: loadPage('SearchByGenrePage')
-      },
-      {
-        path: 'has',
-        name: 'Search.Has',
-        component: loadPage('SearchByHasPage')
-      },
-      {
-        path: 'needs',
-        name: 'Search.Needs',
-        component: loadPage('SearchByNeedsPage')
-      },
-      {
-        path: 'projects',
-        name: 'Search.Projects',
-        component: loadPage('SearchByProjectsPage')
-      },
-      {
-        path: 'users',
-        name: 'Search.Users',
-        component: loadPage('SearchByUserPage')
-      }
-    ]
+    beforeEnter: authSettled
   },
   {
     path: '/about',
@@ -72,7 +45,19 @@ const routes = [
     path: '/project/:projectId',
     name: 'Project',
     component: loadPage('ProjectPage'),
-    beforeEnter: authSettled
+    beforeEnter: authSettled,
+    children: [
+      {
+        path: 'contributions',
+        name: 'Project.Contributions',
+        component: loadPage('ProjectContributionsPage')
+      },
+      {
+        path: 'comments',
+        name: 'Project.Comments',
+        component: loadPage('ProjectCommentsPage')
+      }
+    ]
   },
   {
     path: '/account',

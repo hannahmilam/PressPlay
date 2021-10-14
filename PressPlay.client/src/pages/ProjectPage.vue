@@ -1,60 +1,54 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-10">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-header">
-              <h1>{{ project.name }}</h1>
-              <div class="card-body">
-                {{ project.description }}
-              </div>
-              <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
-                Followers: {{ projectSubs.length }}
-              </div>
-              <div v-if="project.spotlightName !== null">
-                {{ project.spotlightName }}
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-10">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-header">
+                <h1>{{ project.name }} This is the Project Name</h1>
+                <div class="card-body">
+                  {{ project.description }}
+                </div>
+                <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
+                  Followers: {{ projectSubs.length }}
+                </div>
+                <div v-if="project.spotlightName !== null">
+                  {{ project.spotlightName }}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-2">
-        <div v-if="project.creatorId !== account?.id">
-          <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
-            Unfollow
-          </button>
-          <button @click="subscribeToProject()" v-else class="btn btn-danger">
-            Follow
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-header">
-            <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#contribution-form">
-              <b class="text-light">New Contribution</b>
+        <div class="col-2">
+          <div v-if="project.creatorId !== account?.id">
+            <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
+              Unfollow
+            </button>
+            <button @click="subscribeToProject()" v-else class="btn btn-danger">
+              Follow
             </button>
           </div>
-          <div class="card-body">
-            <div v-if="contributions.length > 0">
-              <ContributionsCards v-for="c in contributions" :key="c.id" :contribution="c" />
-            </div>
-            <div v-else>
-              <p>
-                Be The first contribution
-              </p>
-            </div>
-          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <router-link :to="{name: 'Project.Contributions'}">
+            <button class="btn btn-primary">
+              Contributions
+            </button>
+          </router-link>
+          <router-link :to="{name: 'Project.Comments'}">
+            <button class="btn btn-danger">
+              Comments
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
-    <div class="comments">
-      <Comments />
-    </div>
-  </div>
+  </header>
+
+  <router-view />
   <footer>
     <Modal id="contribution-form">
       <template #modal-title>
@@ -76,25 +70,30 @@
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
+import { commentsService } from '../services/CommentsService'
 export default {
   name: 'Project',
   setup() {
     const route = useRoute()
+    onMounted(() => {
+      AppState.project = {}
+      AppState.contributions = []
+      AppState.projectSubscriptions = []
+      AppState.comments = []
+    })
     watchEffect(async() => {
       if (route.params.projectId) {
-        AppState.project = {}
-        AppState.contributions = []
-        // AppState.projectSubscriptions = []
         try {
           await projectsService.getProjectById(route.params.projectId)
           await contributionsService.getContributionsByProjectId(route.params.projectId)
           await projectsService.getSubscribers(route.params.projectId)
+          await commentsService.getCommentsByProjectId(route.params.projectId)
         } catch (error) {
           Pop.toast(error, 'error')
         }
@@ -105,6 +104,7 @@ export default {
       contributions: computed(() => AppState.contributions),
       account: computed(() => AppState.account),
       projectSubs: computed(() => AppState.projectSubscriptions),
+      comments: computed(() => AppState.comments),
 
       myProjectSubscriptions: computed(() => AppState.projectSubscriptions.filter(s => s.profileId === AppState.account.id)),
       async subscribeToProject() {
