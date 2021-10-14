@@ -134,9 +134,10 @@ export default {
       async upload() {
         const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio')
         editable.value.originalMp3 = mp3Url
+        editable.value.mp3Name = mp3File.value[0].name
         const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image')
         editable.value.albumArt = albumArtUrl
-        // editable.value.albumArt = url
+        editable.value.artName = albumArtFile.value[0].name
         logger.log(albumArtUrl, mp3Url)
         await this.createProject()
       }

@@ -36,13 +36,11 @@ export default {
       currentProject: computed(() => AppState.project),
       account: computed(() => AppState.account),
       async removeContribution() {
-        if (await Pop.confirm()) {
-          try {
-            await contributionsService.removeContribution(props.contribution.id)
-            Pop.toast('this has been removed')
-          } catch (error) {
-            Pop.toast(error, 'error')
-          }
+        try {
+          await contributionsService.removeContribution(props.contribution.id)
+          Pop.toast('this has been removed')
+        } catch (error) {
+          Pop.toast(error, 'error')
         }
       },
       async setSpotlight() {

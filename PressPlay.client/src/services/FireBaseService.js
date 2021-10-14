@@ -27,7 +27,6 @@ class FirebaseService {
   }
 
   async delete(fileName, type) {
-    // const fileName = firebaseUrl.slice(firebaseUrl.indexOf('%2F') + 3, firebaseUrl.indexOf('?alt'))
     logger.log('this is the firebase file name', fileName)
     const collection = storage.ref(type)
     const fileRef = collection.child(fileName)

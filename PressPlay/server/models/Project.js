@@ -13,7 +13,9 @@ export const ProjectSchema = new Schema(
     spotlightMp3: { type: String, required: false },
     albumArt: { type: String, required: true },
     spotlightName: { type: String, required: false, default: null },
-    password: { type: String, required: false, default: null }
+    password: { type: String, required: false, default: null },
+    mp3Name: { type: String, required: true },
+    artName: { type: String, required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
