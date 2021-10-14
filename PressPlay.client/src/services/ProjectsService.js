@@ -79,7 +79,6 @@ class ProjectsService {
   }
 
   async showHiddenProject(profileId, query) {
-    debugger
     const res = await api.get('api/profile/' + profileId + '/projects/?search=' + query)
     logger.log('show hidden Project', res.data)
     AppState.projects = res.data.map(p => new Project(p))
