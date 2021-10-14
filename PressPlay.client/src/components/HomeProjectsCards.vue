@@ -19,7 +19,7 @@
           <div class="col-2">
             <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
             <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
-            <audio :id="project.id" controls class="visually-hidden" style="width: 100px"></audio>
+            <!-- <audio :id="project.id" controls class="visually-hidden" style="width: 100px"></audio> -->
           </div>
         </div>
       </div>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { AppState } from '../AppState'
 
 import { Project } from '../models/Project'
 import { logger } from '../utils/Logger'
@@ -41,13 +42,20 @@ export default {
   },
   setup(props) {
     return {
-      async setSource() {
+      setSource() {
         try {
-          const foundAudioTag = document.getElementById(props.project.id)
-          if (foundAudioTag.currentTime > 0) {
-            this.toggleAudio()
+          if (AppState.currentSong.src) {
+            document.getElementById(`pause-${AppState.currentSong.id}`).classList.add('visually-hidden')
+            document.getElementById(`play-${AppState.currentSong.id}`).classList.remove('visually-hidden')
+          }
+          AppState.currentSong.src = props.project.spotlightMp3
+          AppState.currentSong.id = props.project.id
+          const currentSong = document.getElementById(props.project.id)
+          logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
           } else {
-            foundAudioTag.src = props.project.spotlightMp3
+            currentSong.src = props.project.spotlightMp3
             this.toggleAudio()
           }
         } catch (error) {
@@ -55,17 +63,17 @@ export default {
         }
       },
       toggleAudio() {
-        const foundAudio = document.getElementById(props.project.id)
-        if (!foundAudio) {
+        const currentSong = document.getElementById(props.project.id)
+        if (!currentSong) {
           return logger.log('no audio element found')
         }
 
-        if (foundAudio.paused) {
-          foundAudio.play()
+        if (currentSong.paused) {
+          currentSong.play()
           document.getElementById(`pause-${props.project.id}`).classList.remove('visually-hidden')
           document.getElementById(`play-${props.project.id}`).classList.add('visually-hidden')
         } else {
-          foundAudio.pause()
+          currentSong.pause()
           document.getElementById(`pause-${props.project.id}`).classList.add('visually-hidden')
           document.getElementById(`play-${props.project.id}`).classList.remove('visually-hidden')
         }

@@ -200,7 +200,7 @@ export default {
   scroll-snap-align: start;
 }
 .container-fluid{
-  height: 100%;
+  height: 60%;
   font-family: 'Source Sans Pro', sans-serif;
 }
 .btn-prev-next{

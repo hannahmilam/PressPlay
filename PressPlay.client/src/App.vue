@@ -5,7 +5,8 @@
   <main class="bg-white">
     <router-view />
   </main>
-  <footer>
+  <footer class="bg-white">
+    <AudioPlayer />
   </footer>
 </template>
 
@@ -23,5 +24,8 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-
+footer{
+  height: 100px;
+  background-color: white;
+}
 </style>

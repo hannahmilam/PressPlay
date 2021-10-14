@@ -19,5 +19,6 @@ export const AppState = reactive({
   /** @type {import('.model/Comments.js').Comments[]} */
   comments: [],
   /** @type {import('.model/Contribution.js').Contribution[]} */
-  contributions: []
+  contributions: [],
+  currentSong: {}
 })
