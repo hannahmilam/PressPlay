@@ -1,41 +1,37 @@
 <template>
   <div class="col-md-4 my-3">
-    <div class="card mx-3 p-3">
-      <div class="row justify-content-between">
-        <div class="col-2">
-          <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creatorId}}" class="selectable">
-            <img :src="project.creator.picture" height="50" class="rounded img-f" alt="">
-          </router-link>
+    <div class="card">
+      <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
+        <div class="card-header m-0 p-0">
+          <img class="img-fluid rounded-top" :src="project.albumArt" alt="">
         </div>
-        <div>
-          <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
-            <img class="small" :src="project.albumArt" alt="">
-          </router-link>
-        </div>
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col">
-              <p class="p-0 m-0">
-                <b>{{ project.name }}</b>
-              </p>
-            </div>
+      </router-link>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-10 pt-2">
+            <p><b>{{ project.name }}</b></p>
           </div>
-          <div class="row">
-            <div class="col">
-              <p class="p-0 m-0">
-                {{ project.creator.name }}
-              </p>
-            </div>
+          <div class="col-2">
+            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
+            <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
           </div>
         </div>
-        <div class="selectable" @click.stop="setSource()">
-          <!-- <i class="mdi mdi-play f-20"></i> -->
-          <audio :id="project.id" controls style="width: 100px"></audio>
+        <div class="row">
+          <div class="col-2 text-center">
+            <img :src="project.creator.picture" height="40" class="rounded-circle" alt="">
+          </div>
+          <div class="col-10 pt-2">
+            <p>
+              {{ project.creator.name }}
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <small>
+            <p>Contributions: {{ contributions.length }}</p>
+          </small>
         </div>
       </div>
-      <small>
-        <p>Contributions: {{ contributions.length }}</p>
-      </small>
     </div>
   </div>
 </template>
@@ -45,6 +41,7 @@ import { computed } from '@vue/runtime-core'
 import { Project } from '../models/Project'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -55,12 +52,40 @@ export default {
   setup(props) {
     return {
       contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
-      async setSource() {
+      setSource() {
         try {
-          const foundAudioTag = document.getElementById(props.project.id)
-          foundAudioTag.src = props.project.spotlightMp3
+          if (AppState.currentSong.src) {
+            document.getElementById(`pause-${AppState.currentSong.id}`).classList.add('visually-hidden')
+            document.getElementById(`play-${AppState.currentSong.id}`).classList.remove('visually-hidden')
+          }
+          AppState.currentSong.src = props.project.spotlightMp3
+          AppState.currentSong.id = props.project.id
+          const currentSong = document.getElementById(props.project.id)
+          logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
+          } else {
+            currentSong.src = props.project.spotlightMp3
+            this.toggleAudio()
+          }
         } catch (error) {
           Pop.toast(error, 'error')
+        }
+      },
+      toggleAudio() {
+        const currentSong = document.getElementById(props.project.id)
+        if (!currentSong) {
+          return logger.log('no audio element found')
+        }
+
+        if (currentSong.paused) {
+          currentSong.play()
+          document.getElementById(`pause-${props.project.id}`).classList.remove('visually-hidden')
+          document.getElementById(`play-${props.project.id}`).classList.add('visually-hidden')
+        } else {
+          currentSong.pause()
+          document.getElementById(`pause-${props.project.id}`).classList.add('visually-hidden')
+          document.getElementById(`play-${props.project.id}`).classList.remove('visually-hidden')
         }
       }
     }
