@@ -59,18 +59,18 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
-      },
-      async subscribeToUser() {
-        try {
-          if (this.myUserSubscribe.length > 0) {
-            await profileSubscriptionsService.unsubscribeToUser(route.params.profileId, this.myUserSubscribe[0].id)
-          } else {
-            await profileSubscriptionsService.subscribeToUser(route.params.profileId)
-          }
-        } catch (error) {
-          Pop.toast(error, 'error')
-        }
       }
+      // async subscribeToUser() {
+      //   try {
+      //     if (this.myUserSubscribe.length > 0) {
+      //       await profileSubscriptionsService.unsubscribeToUser(route.params.profileId, this.myUserSubscribe[0].id)
+      //     } else {
+      //       await profileSubscriptionsService.subscribeToUser(route.params.profileId)
+      //     }
+      //   } catch (error) {
+      //     Pop.toast(error, 'error')
+      //   }
+      // }
     }
   }
 }
