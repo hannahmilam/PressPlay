@@ -1,6 +1,49 @@
 <template>
   <div v-if="currentSong.src">
-    <audio :id="currentSong.id" controls :src="currentSong.src"> </audio>
+    <audio :id="currentSong.id" class="visually-hidden" controls :src="currentSong.src"> </audio>
+    <div id="app-cover">
+      <div id="player">
+        <div id="player-track">
+          <div id="album-name"></div>
+          <div id="track-name"></div>
+          <div id="track-time">
+            <div id="current-time"></div>
+            <div id="track-length"></div>
+          </div>
+          <div id="s-area">
+            <div id="ins-time"></div>
+            <div id="s-hover"></div>
+            <div id="seek-bar"></div>
+          </div>
+        </div>
+        <div id="player-content">
+          <div id="album-art">
+            <img :src="currentSong.albumArt" class="active" id="_1">
+            <div id="buffer-box">
+              Buffering ...
+            </div>
+          </div>
+          <div id="player-controls">
+            <div class="control">
+              <div class="button selectable" id="play-previous">
+                <i class="fas fa-backward"></i>
+              </div>
+            </div>
+            <div class="control">
+              <div class="button selectable" id="play-pause-button" @click="toggleAudio">
+                <i :id="'play-'+currentSong.id" class="fas fa-play"></i>
+                <i :id="'play-'+currentSong.id" class="fas fa-pause visually-hidden"></i>
+              </div>
+            </div>
+            <div class="control">
+              <div class="button selectable" id="play-next">
+                <i class="fas fa-forward"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -16,12 +59,205 @@ export default {
       }
     })
     return {
-      currentSong: computed(() => AppState.currentSong)
+      currentSong: computed(() => AppState.currentSong),
+      toggleAudio() {
+        const currentSong = document.getElementById(this.currentSong.id)
+        if (!currentSong) {
+          return logger.log('no audio element found')
+        }
+
+        if (currentSong.paused) {
+          currentSong.play()
+          document.getElementById(`pause-${currentSong.id}`).classList.remove('visually-hidden')
+          document.getElementById(`play-${currentSong.id}`).classList.add('visually-hidden')
+        } else {
+          currentSong.pause()
+          document.getElementById(`pause-${currentSong.id}`).classList.add('visually-hidden')
+          document.getElementById(`play-${currentSong.id}`).classList.remove('visually-hidden')
+        }
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
+*:focus {
+  outline: none;
+}
+
+body {
+  font-family: Helvetica, Arial;
+  margin: 0;
+  background-color: #ffeff5;
+}
+
+#app-cover {
+  right: 0;
+  left: 0;
+  width: 430px;
+  height: 100px;
+  margin: -4px auto;
+}
+
+#bg-artwork {
+  position: fixed;
+  top: -30px;
+  right: -30px;
+  bottom: -30px;
+  left: -30px;
+  background-image: url("https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  filter: blur(40px);
+  -webkit-filter: blur(40px);
+  z-index: 1;
+}
+
+#player {
+  position: relative;
+  height: 100%;
+  z-index: 3;
+}
+
+#player-content {
+  position: relative;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 0 30px 80px #656565;
+  border-radius: 15px;
+  z-index: 2;
+}
+
+#album-art {
+  position: absolute;
+  top: -40px;
+  width: 115px;
+  height: 115px;
+  margin-left: 40px;
+  transform: rotateZ(0);
+  transition: 0.3s ease all;
+  box-shadow: 0 0 0 10px #fff;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+#album-art.active {
+  top: -60px;
+  box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
+}
+
+#album-art:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: -10px auto 0 auto;
+  background-color: #d6dee7;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 2px #fff;
+  z-index: 2;
+}
+
+#album-art img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1;
+}
+
+#album-art img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+#album-art.active img.active {
+  z-index: 1;
+  animation: rotateAlbumArt 3s linear 0s infinite forwards;
+}
+
+@keyframes rotateAlbumArt {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+#buffer-box {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 13px;
+  color: #1f1f1f;
+  font-size: 13px;
+  font-family: Helvetica;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1;
+  padding: 6px;
+  margin: -12px auto 0 auto;
+  background-color: rgba(255, 255, 255, 0.19);
+  opacity: 0;
+  z-index: 2;
+}
+
+#album-art img,
+#buffer-box {
+  transition: 0.1s linear all;
+}
+
+#album-art.buffering img {
+  opacity: 0.25;
+}
+
+#album-art.buffering img.active {
+  opacity: 0.8;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+#album-art.buffering #buffer-box {
+  opacity: 1;
+}
+
+#player-controls {
+  width: 250px;
+  height: 100%;
+  margin: 0 5px 0 141px;
+  float: right;
+  overflow: hidden;
+}
+
+.control {
+  width: 33.333%;
+  float: left;
+  padding: 12px 0;
+}
+
+.button {
+
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button i {
+  display: block;
+  color: #3f4144;
+  font-size: 26px;
+  text-align: center;
+}
 
 </style>
