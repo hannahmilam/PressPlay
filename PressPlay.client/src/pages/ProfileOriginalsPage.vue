@@ -1,112 +1,28 @@
 <template>
-  <div class="container-fluid">
-    <div class="row mt-4">
-      <div class="col-2 sidebar ps-4">
-        <div class="row">
-          <div class="text-center">
-            <img :src="profile?.picture" height="100" class="rounded-circle" alt="">
+  <div class="col-10">
+    <div class="row">
+      <div class="col-6 m-auto">
+        <form @submit.prevent="showHiddenProject()">
+          <div class="form-group">
+            <label for="name">Project Code</label>
+            <input type="text"
+                   class="form-control"
+                   id="exampleFormControlInput1"
+                   placeholder=""
+                   v-model="query"
+                   required
+            >
           </div>
-          <div>
-            <h5>
-              {{ profile?.name }}
-            </h5>
-          </div>
-          <div>
-            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
-              Followers: {{ subscribers?.length }}
-            </p>
-            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
-              Following: {{ subscribing?.length }}
-            </p>
-            <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
-              Projects Following:{{ usersProjectsSubscriptions?.length }}
-            </p>
-          </div>
-          <div v-if="profile?.id !== account?.id">
-            <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-danger">
-              Unfollow
-            </button>
-            <button @click="subscribeToUser()" v-else class="btn btn-primary">
-              Follow
-            </button>
-          </div>
-          <div>
-            <p>Instruments</p>
-            <p>{{ profile?.instrumentTags }}</p>
-          </div>
-          <div>
-            <p>
-              Genres
-            </p>
-            <p>
-              {{ profile?.genreTags }}
-            </p>
-          </div>
-          <div>
-            <h5>
-              About Me:
-            </h5>
-            <p>{{ profile?.bio }} </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-10">
-        <div class="row">
-          <div class="col-6 m-auto">
-            <form @submit.prevent="showHiddenProject()">
-              <div class="form-group">
-                <label for="name">Project Code</label>
-                <input type="text"
-                       class="form-control"
-                       id="exampleFormControlInput1"
-                       placeholder=""
-                       v-model="query"
-                       required
-                >
-              </div>
-              <button class="btn btn-success mt-2" type="submit">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div>
-        <div class="row">
-          <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
-        </div>
+          <button class="btn btn-success mt-2" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
     </div>
+    <div class="row">
+      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    </div>
   </div>
-
-  <Modal id="subscribers-modal">
-    <template #modal-title>
-      <h4>Followers</h4>
-    </template>
-    <template #modal-body>
-      <div class="row">
-        <Subscribers v-for="s in subscribers" :key="s.id" :subscriber="s" />
-      </div>
-    </template>
-  </Modal>
-
-  <Modal id="subscribing-modal">
-    <template #modal-title>
-      <h4>Following</h4>
-    </template>
-    <template #modal-body>
-      <div class="row">
-        <Subscribing v-for="s in subscribing" :key="s.id" :subscribing="s.subscribing" />
-      </div>
-    </template>
-  </Modal>
-
-  <Modal id="projects-following-modal">
-    <template #modal-title>
-      <h4>Followed Projects</h4>
-    </template>
-    <template #modal-body>
-      <ProjectsFollowing v-for="p in usersProjectsSubscriptions" :key="p.id" :project="p.project" />
-    </template>
-  </Modal>
 </template>
 
 <script>
@@ -136,7 +52,6 @@ export default {
       myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
       async showHiddenProject() {
         try {
-          debugger
           router.push({
             name: 'Project',
             params: { projectId: this.hiddenProject[0].id }
