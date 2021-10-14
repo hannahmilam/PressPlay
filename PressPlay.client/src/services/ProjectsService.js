@@ -84,5 +84,11 @@ class ProjectsService {
     AppState.projects = res.data.map(p => new Project(p))
     AppState.projects = AppState.projects.filter(p => p.password === query)
   }
+
+  async removeProject(projectId) {
+    const res = await api.delete('api/projects/' + projectId)
+    logger.log('remove project', res.data)
+    AppState.projects = AppState.projects.filter(p => p.id !== projectId)
+  }
 }
 export const projectsService = new ProjectsService()

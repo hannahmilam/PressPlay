@@ -6,7 +6,10 @@
           <div class="card">
             <div class="card-body">
               <div class="card-header">
-                <h1>{{ project.name }} This is the Project Name</h1>
+                <button @click="removeProject(account.id)" v-if="account.id === project.creatorId" class="btn btn-dark">
+                  Delete Project
+                </button>
+                <h1>{{ project.name }}</h1>
                 <div class="card-body">
                   {{ project.description }}
                 </div>
@@ -76,6 +79,7 @@ import { projectsService } from '../services/ProjectsService'
 import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
 import { commentsService } from '../services/CommentsService'
+import { router } from '../router'
 export default {
   name: 'Project',
   setup() {
@@ -104,6 +108,7 @@ export default {
       account: computed(() => AppState.account),
       projectSubs: computed(() => AppState.projectSubscriptions),
       comments: computed(() => AppState.comments),
+      profile: computed(() => AppState.profile),
 
       myProjectSubscriptions: computed(() => AppState.projectSubscriptions.filter(s => s.profileId === AppState.account.id)),
       async subscribeToProject() {
@@ -113,6 +118,17 @@ export default {
           } else {
             await projectsService.subscribeToProject(route.params.projectId)
           }
+        } catch (error) {
+          Pop.toast(error.message, 'error')
+        }
+      },
+      async removeProject(accountId) {
+        try {
+          await projectsService.removeProject(route.params.projectId)
+          router.push({
+            name: 'Profile',
+            params: { profileId: accountId }
+          })
         } catch (error) {
           Pop.toast(error.message, 'error')
         }

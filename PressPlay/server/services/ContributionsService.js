@@ -2,6 +2,14 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
 
 class ContributionsService {
+  // async removeContributionsByProjectId(projectId, userId) {
+  //   const contributions = await dbContext.Contributions.find({ projectId: projectId }).populate('project')
+  //   if (userId !== contributions[0].project.creatorId) {
+  //     throw new Forbidden('you cant do that')
+  //   }
+  //   await contributions.remove()
+  // }
+
   async getContributionsByProfileId(profileId) {
     const contributions = await dbContext.Contributions.find({ accountId: profileId })
     return contributions

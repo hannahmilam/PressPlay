@@ -18,7 +18,17 @@ export class ProjectsController extends BaseController {
       .post('', this.createProject)
       .put('/:projectId', this.editProject)
       .delete('/:projectId', this.deleteProject)
+      // .delete('/:projectId/contributions', this.removeContributionsByProjectId)
   }
+
+  // async removeContributionsByProjectId(req, res, next) {
+  //   try {
+  //     const contribution = await contributionsService.removeContributionsByProjectId(req.params.projectId, req.userInfo.id)
+  //     res.send(contribution)
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  // }
 
   async getProjects(req, res, next) {
     try {

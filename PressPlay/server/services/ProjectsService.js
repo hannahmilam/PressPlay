@@ -31,6 +31,8 @@ class ProjectsService {
     if (userId !== project.creatorId.toString()) {
       throw new Forbidden('Not Authorized to Delete')
     }
+    await dbContext.Comments.deleteMany({ projectId: projectId })
+    await dbContext.Contributions.deleteMany({ projectId: projectId })
     await project.remove()
     return project
   }
