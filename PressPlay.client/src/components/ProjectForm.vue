@@ -85,6 +85,8 @@ import { Modal } from 'bootstrap'
 import { router } from '../router'
 import { logger } from '../utils/Logger'
 import { firebaseService } from '../services/FirebaseService'
+import { computed } from '@vue/runtime-core'
+import { AppState } from '../AppState'
 export default {
   setup() {
     const temp = ref()
@@ -92,12 +94,14 @@ export default {
     const editable = ref({ neededInstrumentTags: [], instrumentTags: [] })
     const mp3File = ref([])
     const albumArtFile = ref([])
+
     return {
       temp,
       otherTemp,
       editable,
       mp3File,
       albumArtFile,
+      account: computed(() => AppState.account),
       addNeededInstrumentTag() {
         editable.value.neededInstrumentTags.push(temp.value)
         temp.value = []
@@ -132,10 +136,10 @@ export default {
         logger.log('AlbumArt files ref value', albumArtFile.value)
       },
       async upload() {
-        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio')
+        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio', AppState.account.id)
         editable.value.originalMp3 = mp3Url
         editable.value.mp3Name = mp3File.value[0].name
-        const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image')
+        const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image', AppState.account.id)
         editable.value.albumArt = albumArtUrl
         editable.value.artName = albumArtFile.value[0].name
         logger.log(albumArtUrl, mp3Url)

@@ -57,7 +57,7 @@
         <h4>New Contribution</h4>
       </template>
       <template #modal-body>
-        <ContributionForm />
+        <ContributionForm :project="project" />
       </template>
     </Modal>
     <Modal id="followers-form">

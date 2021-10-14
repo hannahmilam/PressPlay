@@ -31,9 +31,14 @@ import { useRoute } from 'vue-router'
 import { Modal } from 'bootstrap'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
-import { firebaseService } from '../services/FirebaseService'
+import { firebaseService } from '../services/FireBaseService'
 export default {
-  setup() {
+  props: {
+    project: {
+      type: Object, required: true
+    }
+  },
+  setup(props) {
     const route = useRoute()
     const editable = ref({ projectId: route.params.projectId })
     const mp3File = ref([])
@@ -55,7 +60,7 @@ export default {
         logger.log('Mp3 files ref value', mp3File.value[0])
       },
       async upload() {
-        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio')
+        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio', props.project.creatorId)
         editable.value.contributionMp3 = mp3Url
         editable.value.fileName = mp3File.value[0].name
         logger.log(mp3Url)
