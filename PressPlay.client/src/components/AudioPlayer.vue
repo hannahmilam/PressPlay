@@ -31,8 +31,8 @@
             </div>
             <div class="control">
               <div class="button selectable" id="play-pause-button" @click="toggleAudio">
-                <i :id="'play-'+currentSong.id" class="fas fa-play"></i>
-                <i :id="'play-'+currentSong.id" class="fas fa-pause visually-hidden"></i>
+                <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
+                <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
               </div>
             </div>
             <div class="control">
@@ -65,15 +65,14 @@ export default {
         if (!currentSong) {
           return logger.log('no audio element found')
         }
-
         if (currentSong.paused) {
           currentSong.play()
-          document.getElementById(`pause-${currentSong.id}`).classList.remove('visually-hidden')
-          document.getElementById(`play-${currentSong.id}`).classList.add('visually-hidden')
+          document.getElementById(`audio-pause-${currentSong.id}`).classList.remove('visually-hidden')
+          document.getElementById(`audio-play-${currentSong.id}`).classList.add('visually-hidden')
         } else {
           currentSong.pause()
-          document.getElementById(`pause-${currentSong.id}`).classList.add('visually-hidden')
-          document.getElementById(`play-${currentSong.id}`).classList.remove('visually-hidden')
+          document.getElementById(`audio-pause-${currentSong.id}`).classList.add('visually-hidden')
+          document.getElementById(`audio-play-${currentSong.id}`).classList.remove('visually-hidden')
         }
       }
     }
