@@ -7,7 +7,7 @@
       <i v-else title="Set to Spotlight" class="selectable mdi mdi-star-circle-outline"></i>
     </span>
   </h1>
-  <button v-if="contribution.acccountId === account.id" @click="removeContribution">
+  <button v-if="contribution.acccountId === account.id" @click="deleteFirebaseContribution">
     Delete Contribution
   </button>
 </template>
@@ -38,7 +38,6 @@ export default {
       async removeContribution() {
         if (await Pop.confirm()) {
           try {
-            await firebaseService.delete(props.contribution.fileName, 'Audio')
             await contributionsService.removeContribution(props.contribution.id)
             Pop.toast('this has been removed')
           } catch (error) {
@@ -52,6 +51,19 @@ export default {
         } catch (error) {
           Pop.toast(error, 'error')
         }
+      },
+      async deleteFirebaseContribution() {
+        if (await Pop.confirm()) {
+          try {
+            await firebaseService.delete(props.contribution.fileName, 'Audio')
+            await this.removeContribution()
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
+        }
+      },
+      async downloadContribution() {
+
       }
     }
   }

@@ -27,13 +27,11 @@ class FirebaseService {
   }
 
   async delete(fileName, type) {
-    try {
-      const collection = storage.ref(type)
-      const fileRef = collection.child(fileName)
-      await fileRef.delete()
-    } catch (error) {
-      logger.log('Delete', error)
-    }
+    // const fileName = firebaseUrl.slice(firebaseUrl.indexOf('%2F') + 3, firebaseUrl.indexOf('?alt'))
+    logger.log('this is the firebase file name', fileName)
+    const collection = storage.ref(type)
+    const fileRef = collection.child(fileName)
+    await fileRef.delete()
   }
 }
 

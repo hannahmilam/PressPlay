@@ -38,6 +38,7 @@
              accept="image/*"
              @change="setAlbumArtFile"
              class="form-control"
+             required
       >
     </div>
     <div class="form-group">
