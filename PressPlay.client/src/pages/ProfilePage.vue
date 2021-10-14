@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed, onMounted, watchEffect } from '@vue/runtime-core'
 import { useRoute } from 'vue-router'
 import { AppState } from '../AppState'
 import { profilesService } from '../services/ProfilesService'
@@ -43,11 +43,13 @@ export default {
   name: 'Profile',
   setup() {
     const route = useRoute()
+    onMounted(() => {
+      AppState.currentProfile = null
+      AppState.projects = []
+      AppState.profileSubscribers = []
+    })
     watchEffect(async() => {
       if (route.params.profileId) {
-        AppState.currentProfile = null
-        AppState.projects = []
-        AppState.profileSubscribers = []
         try {
           await profilesService.getProfileById(route.params.profileId)
           await projectsService.getProjectsByProfileId(route.params.profileId)
