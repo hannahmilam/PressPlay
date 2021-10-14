@@ -20,6 +20,7 @@ import { contributionsService } from '../services/ContributionsService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
+import { firebaseService } from '../services/FirebaseService'
 
 export default {
   props: {
@@ -37,6 +38,7 @@ export default {
       async removeContribution() {
         if (await Pop.confirm()) {
           try {
+            await firebaseService.delete(props.contribution.fileName, 'Audio')
             await contributionsService.removeContribution(props.contribution.id)
             Pop.toast('this has been removed')
           } catch (error) {

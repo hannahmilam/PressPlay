@@ -25,6 +25,16 @@ class FirebaseService {
       logger.log('there is an error with the firebase token', error)
     }
   }
+
+  async delete(fileName, type) {
+    try {
+      const collection = storage.ref(type)
+      const fileRef = collection.child(fileName)
+      await fileRef.delete()
+    } catch (error) {
+      logger.log('Delete', error)
+    }
+  }
 }
 
 export const firebaseService = new FirebaseService()

@@ -52,11 +52,12 @@ export default {
       },
       setMp3File(e) {
         mp3File.value = e.target.files
-        logger.log('Mp3 files ref value', mp3File.value)
+        logger.log('Mp3 files ref value', mp3File.value[0])
       },
       async upload() {
         const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio')
         editable.value.contributionMp3 = mp3Url
+        editable.value.fileName = mp3File.value[0].name
         logger.log(mp3Url)
         await this.createContribution()
       }

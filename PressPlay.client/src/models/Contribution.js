@@ -7,5 +7,6 @@ export class Contribution {
     this.project = contributionData.project
     this.acccountId = contributionData.accountId
     this.collaborator = contributionData.collaborator
+    this.fileName = contributionData.fileName
   }
 }

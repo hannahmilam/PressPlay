@@ -7,8 +7,8 @@ export const ContributionSchema = new Schema(
     title: { type: String, required: true },
     projectId: { type: Schema.Types.ObjectId, required: true, ref: 'Project' },
     accountId: { type: Schema.Types.ObjectId, required: true, ref: 'Account' },
-    contributionMp3: { type: String, required: true }
-
+    contributionMp3: { type: String, required: true },
+    fileName: { type: String, required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
