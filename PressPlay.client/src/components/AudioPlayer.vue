@@ -1,6 +1,5 @@
 <template>
   <div v-if="currentSong.src">
-    <audio :id="currentSong.id" class="visually-hidden" controls :src="currentSong.src"> </audio>
     <div id="app-cover">
       <div id="player">
         <div id="player-track">
@@ -25,20 +24,13 @@
           </div>
           <div id="player-controls">
             <div class="control">
-              <div class="button selectable" id="play-previous">
-                <i class="fas fa-backward"></i>
-              </div>
-            </div>
-            <div class="control">
               <div class="button selectable" id="play-pause-button" @click="toggleAudio">
-                <i :id="'play-'+currentSong.id" class="fas fa-play"></i>
-                <i :id="'play-'+currentSong.id" class="fas fa-pause visually-hidden"></i>
+                <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
+                <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
               </div>
             </div>
-            <div class="control">
-              <div class="button selectable" id="play-next">
-                <i class="fas fa-forward"></i>
-              </div>
+            <div class="pt-4">
+              <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
             </div>
           </div>
         </div>
@@ -65,15 +57,20 @@ export default {
         if (!currentSong) {
           return logger.log('no audio element found')
         }
-
         if (currentSong.paused) {
           currentSong.play()
-          document.getElementById(`pause-${currentSong.id}`).classList.remove('visually-hidden')
-          document.getElementById(`play-${currentSong.id}`).classList.add('visually-hidden')
+          document.getElementById(`audio-pause-${currentSong.id}`).classList.remove('visually-hidden')
+          document.getElementById(`audio-play-${currentSong.id}`).classList.add('visually-hidden')
         } else {
           currentSong.pause()
-          document.getElementById(`pause-${currentSong.id}`).classList.add('visually-hidden')
-          document.getElementById(`play-${currentSong.id}`).classList.remove('visually-hidden')
+          document.getElementById(`audio-pause-${currentSong.id}`).classList.add('visually-hidden')
+          document.getElementById(`audio-play-${currentSong.id}`).classList.remove('visually-hidden')
+        }
+      },
+      downloadMp3() {
+        const currentSong = document.getElementById(this.currentSong.id)
+        if (!currentSong) {
+          return logger.log('no audio available for download')
         }
       }
     }
@@ -259,5 +256,7 @@ body {
   font-size: 26px;
   text-align: center;
 }
-
+audio{
+  background: transparent;
+}
 </style>

@@ -60,6 +60,7 @@ export default {
           }
           AppState.currentSong.src = props.project.spotlightMp3
           AppState.currentSong.id = props.project.id
+          AppState.currentSong.albumArt = props.project.albumArt
           const currentSong = document.getElementById(props.project.id)
           logger.log('current song, set source', AppState.currentSong)
           if (AppState.currentSong.src) {
