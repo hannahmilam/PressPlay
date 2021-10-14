@@ -2,8 +2,8 @@
   <div class="col-3 text-center">
     <div class="card my-3 selectable" style="width: 200px;">
       <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
-        <div class="card-header p-0" style="height: 200px;">
-          <img :src="project.creator.picture" class="rounded-top" height="198" alt="">
+        <div class="card-header p-0">
+          <img :src="project.albumArt" class="rounded-top img-fluid" height="198" alt="">
         </div>
       </router-link>
       <div class="card-body">
@@ -100,9 +100,6 @@ div.card {
   border-bottom: 2px solid var(--bs-light);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-}
-.card{
-  height: 280px;
 }
 .card:hover{
    transform: scale(1.1);
