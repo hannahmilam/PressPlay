@@ -1,15 +1,15 @@
 <template>
   <div class="row">
-    <div class="col-12">
+    <div class="col-8 m-auto">
       <div class="card">
-        <div class="card-body">
+        <div class="card-body  scroll-box">
           <CommentCard v-for="c in comments" :key="c.id" :comment="c" />
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-8 m-auto">
       <div class="card-footer">
         <form @submit.prevent="postComment()">
           <div class="form-group">
@@ -56,5 +56,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.scroll-box{
+  height: 20rem;
+  overflow-y: scroll;
+}
 
 </style>

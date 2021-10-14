@@ -2,7 +2,7 @@
   <header>
     <div class="container">
       <div class="row">
-        <div class="col-10">
+        <div class="col-10 m-auto">
           <div class="card">
             <div class="card-body">
               <div class="card-header">
@@ -20,19 +20,18 @@
             </div>
           </div>
         </div>
-        <div class="col-2">
-          <div v-if="project.creatorId !== account?.id">
-            <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
-              Unfollow
-            </button>
-            <button @click="subscribeToProject()" v-else class="btn btn-danger">
-              Follow
-            </button>
-          </div>
+
+        <div v-if="project.creatorId !== account?.id">
+          <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
+            Unfollow
+          </button>
+          <button @click="subscribeToProject()" v-else class="btn btn-danger">
+            Follow
+          </button>
         </div>
       </div>
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 button-stuff">
           <router-link :to="{name: 'Project.Contributions'}">
             <button class="btn btn-primary">
               Contributions
@@ -126,6 +125,10 @@ export default {
 <style lang="scss" scoped>
 .small {
   width: 85px;
+}
+.button-stuff{
+  display: flex;
+  justify-content: space-around;
 }
 
 </style>

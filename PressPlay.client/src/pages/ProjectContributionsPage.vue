@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12">
+    <div class="col-10 m-auto">
       <div class="card">
         <div class="card-header">
           <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#contribution-form">
