@@ -158,7 +158,18 @@ export default {
       subscribing: computed(() => AppState.profileSubscriptions),
       contributions: computed(() => AppState.contributions),
       usersProjectsSubscriptions: computed(() => AppState.projectSubscriptions),
-      myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id))
+      myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
+      async subscribeToUser() {
+        try {
+          if (this.myUserSubscribe.length > 0) {
+            await profileSubscriptionsService.unsubscribeToUser(route.params.profileId, this.myUserSubscribe[0].id)
+          } else {
+            await profileSubscriptionsService.subscribeToUser(route.params.profileId)
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      }
     }
   }
 }
