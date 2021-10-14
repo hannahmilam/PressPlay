@@ -25,7 +25,7 @@ export default {
 <style lang="scss">
 @import "./assets/scss/main.scss";
 footer{
-  height: 100px;
-  background-color: white;
+  height: 10rem;
+  background: radial-gradient(circle, #F963EA, #493240);
 }
 </style>
