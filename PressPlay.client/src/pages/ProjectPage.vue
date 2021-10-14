@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-body">
               <div class="card-header">
-                <button @click="removeProject(account.id)" v-if="account.id === project.creatorId" class="btn btn-dark">
+                <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
                   Delete Project
                 </button>
                 <h1>{{ project.name }}</h1>
@@ -80,6 +80,7 @@ import Pop from '../utils/Pop'
 import { contributionsService } from '../services/ContributionsService'
 import { commentsService } from '../services/CommentsService'
 import { router } from '../router'
+import { firebaseService } from '../services/FirebaseService'
 export default {
   name: 'Project',
   setup() {
@@ -131,6 +132,17 @@ export default {
           })
         } catch (error) {
           Pop.toast(error.message, 'error')
+        }
+      },
+      async removeProjectFromFirebase(accountId, project) {
+        if (await Pop.confirm()) {
+          try {
+            await firebaseService.delete(project.mp3Name, 'Audio')
+            await firebaseService.delete(project.artName, 'Image')
+            await this.removeProject(accountId)
+          } catch (error) {
+            Pop.toast(error, 'error')
+          }
         }
       }
     }
