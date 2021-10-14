@@ -7,7 +7,7 @@
       <i v-else title="Set to Spotlight" class="selectable mdi mdi-star-circle-outline"></i>
     </span>
   </h1>
-  <button @click="removeContribution">
+  <button v-if="contribution.acccountId === account.id" @click="removeContribution">
     Delete Contribution
   </button>
 </template>
