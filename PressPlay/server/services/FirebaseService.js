@@ -4,7 +4,8 @@ class FirebaseService {
   constructor() {
     firebaseAdmin.initializeApp({
       // @ts-ignore
-      credential: firebaseAdmin.credential.cert(firebaseAccountKey)
+      credential: firebaseAdmin.credential.cert(firebaseAccountKey),
+      storageBucket: 'pressplay-e3d1c.appspot.com'
     })
   }
 
@@ -14,9 +15,10 @@ class FirebaseService {
   }
 
   async deleteAll(projectId, type) {
-    const collection = storage.ref(type)
-    const folderRef = collection.child(projectId)
-    await folderRef.delete()
+    const bucket = firebaseAdmin.storage().bucket()
+    await bucket.deleteFiles({
+      prefix: `${type}/${projectId}/`
+    })
   }
 }
 export const firebaseService = new FirebaseService()
