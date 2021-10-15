@@ -130,7 +130,7 @@ export default {
           const modal = Modal.getInstance(document.getElementById('project-form'))
           modal.hide()
           router.push({
-            name: 'Project',
+            name: 'Project.Contributions',
             params: { projectId: projectId }
           })
         } catch (error) {
