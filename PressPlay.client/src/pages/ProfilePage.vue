@@ -1,79 +1,81 @@
 <template>
   <header>
-    <div class="container-fluid p-0" v-if="profile">
-      <nav class="navbar top-bar bg-black navbar-expand-lg navbar-light bg-black justify-content-around">
-        <router-link :to="{ name: 'Profile.Originals' }">
-          <li class="nav-link selectable text-uppercase text-light">
-            Originals {{ projects.length }}
-          </li>
-        </router-link>
-
-        <router-link :to="{ name: 'Profile.Contributions', }">
-          <li class="nav-link selectable text-uppercase text-light">
-            Contributions {{ contributions.length }}
-          </li>
-        </router-link>
-
-        <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
-          <b class="text-light">New Project</b>
-        </button>
-      </nav>
-    </div>
-  </header>
-  <body>
-    <div class="container-fluid">
-      <div class="row mt-4">
-        <div class="col-2 sidebar ps-4">
-          <div class="row">
-            <div class="text-center">
-              <img :src="profile?.picture" height="100" class="rounded-circle" alt="">
-            </div>
-            <div>
-              <h5>
-                {{ profile?.name }}
-              </h5>
-            </div>
-            <div>
-              <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
-                Followers: {{ subscribers?.length }}
-              </p>
-              <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
-                Following: {{ subscribing?.length }}
-              </p>
-              <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
-                Projects Following:{{ usersProjectsSubscriptions?.length }}
-              </p>
-            </div>
-            <div v-if="profile?.id !== account?.id">
-              <button @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="btn btn-danger">
-                Unfollow
-              </button>
-              <button @click="subscribeToUser()" v-else class="btn btn-primary">
-                Follow
-              </button>
-            </div>
-            <div>
-              <p>Instruments</p>
-              <p>{{ profile?.instrumentTags }}</p>
-            </div>
-            <div>
-              <p>
-                Genres
-              </p>
-              <p>
-                {{ profile?.genreTags }}
-              </p>
-            </div>
-            <div>
-              <h5>
-                About Me:
-              </h5>
-              <p>{{ profile?.bio }} </p>
-            </div>
+    <div class="container-fluid p-0 m-0 bg-dark text-light text-center">
+      <div class="row tall img-fill" :style="{'backgroundImage':`url(${profile.coverImg})` }">
+        <div class="profile-name">
+          <img :src="profile?.picture" style="height: 100px; width: 100px;  " class="rounded-circle" alt="">
+        </div>
+        <div class="profile-name">
+          <div class="text-light">
+            <h1>
+              {{ profile?.name }}
+            </h1>
+            <br>
+          </div>
+          <div class="text-light" v-if="profile?.id !== account?.id">
+            <a @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="selectable">
+              Unfollow
+            </a>
+            <a @click="subscribeToUser()" v-else class="selectable">
+              Follow
+            </a>
           </div>
         </div>
-        <router-view />
+        <div class="profile-name text-light">
+          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
+            Followers: {{ subscribers?.length }}
+          </p>
+          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
+            Following: {{ subscribing?.length }}
+          </p>
+          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
+            Projects Following:{{ usersProjectsSubscriptions?.length }}
+          </p>
+        </div>
       </div>
+
+      <div v-if="profile">
+        <nav class="navbar top-bar bg-dark text-light navbar-light bg-dark text-light justify-content-around">
+          <router-link :to="{ name: 'Profile.Originals' }">
+            <li class="nav-link selectable text-uppercase text-light">
+              Originals {{ projects.length }}
+            </li>
+          </router-link>
+
+          <router-link :to="{ name: 'Profile.Contributions', }">
+            <li class="nav-link selectable text-uppercase text-light">
+              Contributions {{ contributions.length }}
+            </li>
+          </router-link>
+
+          <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
+            <b class="text-light">New Project</b>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <body class="bg-dark text-light">
+    <div class="container-fluid ">
+      <router-view />
+    </div>
+    <div>
+      <p>Instruments</p>
+      <p>{{ profile?.instrumentTags }}</p>
+    </div>
+    <div>
+      <p>
+        Genres
+      </p>
+      <p>
+        {{ profile?.genreTags }}
+      </p>
+    </div>
+    <div>
+      <h5>
+        About Me:
+      </h5>
+      <p>{{ profile?.bio }} </p>
     </div>
   </body>
 
@@ -132,9 +134,9 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(() => {
-      AppState.currentProfile = null
-      AppState.projects = []
-      AppState.profileSubscribers = []
+      // AppState.currentProfile = null
+      // AppState.projects = []
+      // AppState.profileSubscribers = []
     })
     watchEffect(async() => {
       if (route.params.profileId) {
@@ -207,4 +209,13 @@ transition: .5;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
+.tall{
+  height: 15rem;
+}
+.profile-name{
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 </style>

@@ -1,14 +1,13 @@
 <template>
-  <div class="col-10">
+  <div class="container-flui">
     <div class="row">
       <div class="col-6 m-auto">
         <form @submit.prevent="showHiddenProject()">
           <div class="form-group">
-            <label for="name">Project Code</label>
             <input type="text"
                    class="form-control"
                    id="exampleFormControlInput1"
-                   placeholder=""
+                   placeholder="Project Code"
                    v-model="query"
                    required
             >
@@ -103,5 +102,9 @@ transition: .5;
   border-bottom: 2px solid var(--bs-light);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.track-list{
+  height: 30rem;
+
 }
 </style>
