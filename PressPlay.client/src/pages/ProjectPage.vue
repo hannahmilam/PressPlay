@@ -127,7 +127,7 @@ export default {
         try {
           await projectsService.removeProject(route.params.projectId)
           router.push({
-            name: 'Profile',
+            name: 'Profile.Orginals',
             params: { profileId: accountId }
           })
         } catch (error) {
