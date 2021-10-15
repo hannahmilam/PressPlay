@@ -54,7 +54,6 @@
              name="neededInstrumentTag"
              class="form-control"
              minlength="1"
-             required
              v-model="otherTemp"
       >
       <button class="btn btn-info mt-2" type="button" @click="addInstrumentTag()">
@@ -68,7 +67,6 @@
              name="neededInstrumentTag"
              class="form-control"
              minlength="1"
-             required
              v-model="temp"
       >
       <button class="btn btn-info mt-2" type="button" @click="addNeededInstrumentTag()">
