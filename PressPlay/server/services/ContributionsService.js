@@ -11,7 +11,7 @@ class ContributionsService {
   // }
 
   async getContributionsByProfileId(profileId) {
-    const contributions = await dbContext.Contributions.find({ accountId: profileId })
+    const contributions = await dbContext.Contributions.find({ accountId: profileId }).populate('project')
     return contributions
   }
 

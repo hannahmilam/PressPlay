@@ -1,25 +1,28 @@
 <template>
-  <div class="col-12 my-3">
-    <router-link :to="{name: 'Project', params: {projectId: contribution.projectId}}" class="selectable text-light">
-      <p class="p-0 m-0">
-        <b>{{ contribution.title }}</b>
-      </p>
-      <div class="row">
-        <div class="col">
-          <p class="p-0 m-0">
-            {{ contribution.collaborator?.name }}
-          </p>
-          <p>
-            <!-- {{ contribution.project.name }} -->
-          </p>
-        </div>
-        <div class="col-md-4">
-          <!-- <i class="mdi mdi-play f-20"></i> -->
-          <audio :src="contribution.contributionMp3" controls style="width: 100px"></audio>
-        </div>
-      </div>
-    </router-link>
+  <div class="col-6 my-3 d-flex">
+    <div>
+      <router-link :to="{name: 'Project', params: {projectId: contribution.projectId}}" class="selectable text-light ">
+        <img :src="contribution.project.albumArt" height="50" width="50" alt="">
+      </router-link>
+    </div>
+    <div class="ps-3">
+      Project:
+      <h5>
+        {{ contribution.project.name }}
+      </h5>
+    </div>
   </div>
+
+  <div class="col-6 d-flex">
+    <div>
+      <b>{{ contribution.title }}</b>
+    </div>
+    <div class="">
+      <audio :src="contribution.contributionMp3" controls style="width: 100px"></audio>
+    </div>
+  </div>
+
+  <!-- <i class="mdi mdi-play f-20"></i> -->
 </template>
 
 <script>
@@ -46,6 +49,23 @@ export default {
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   display: inline-block;
+}
+.show-inline{
+  display: flex;
+  justify-content: space-between;
+}
+.front{
+  display: flex;
+  justify-content: space-between;
+}
+.back{
+  display: flex;
+  align-self: flex-start;
+}
+  .one-line{
+
+  justify-content: flex-end;
+
 }
 
 </style>
