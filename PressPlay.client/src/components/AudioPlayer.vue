@@ -1,36 +1,26 @@
 <template>
   <div v-if="currentSong.src">
     <div id="app-cover">
-      <div id="player">
-        <div id="player-track">
-          <div id="album-name"></div>
-          <div id="track-name"></div>
-          <div id="track-time">
-            <div id="current-time"></div>
-            <div id="track-length"></div>
-          </div>
-          <div id="s-area">
-            <div id="ins-time"></div>
-            <div id="s-hover"></div>
-            <div id="seek-bar"></div>
+      <div id="player-content">
+        <div id="album-art" class="active">
+          <img :src="currentSong.albumArt" class="active" id="_1">
+          <div id="buffer-box">
+            Buffering ...
           </div>
         </div>
-        <div id="player-content">
-          <div id="album-art" class="active">
-            <img :src="currentSong.albumArt" class="active" id="_1">
-            <div id="buffer-box">
-              Buffering ...
+        <div id="player-controls">
+          <div class="control row ms-5">
+            <div class="button pt-4 text-center col-2 offset-5 selectable" id="play-pause-button" @click="toggleAudio">
+              <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
+              <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
+            </div>
+            <div class="col-1 pt-3">
+              <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
             </div>
           </div>
-          <div id="player-controls">
-            <div class="control">
-              <div class="button selectable" id="play-pause-button" @click="toggleAudio">
-                <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
-                <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
-              </div>
-            </div>
-            <div class="pt-4">
-              <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
+          <div class="row">
+            <div class="col text-center">
+              <p><b>{{ (currentSong.name).toUpperCase() }} - {{ (currentSong.creator.name).toUpperCase() }}</b></p>
             </div>
           </div>
         </div>
@@ -93,7 +83,7 @@ body {
 #app-cover {
   right: 0;
   left: 0;
-  width: 430px;
+  width: 350px;
   height: 100px;
   margin: -4px auto;
 }
@@ -177,23 +167,11 @@ body {
 }
 
 #player-controls {
-  width: 250px;
   height: 100%;
-  margin: 0 5px 0 141px;
-  float: right;
   overflow: hidden;
 }
 
-.control {
-  width: 33.333%;
-  float: left;
-  padding: 12px 0;
-}
-
 .button {
-
-  padding: 25px;
-  background-color: #fff;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -203,8 +181,5 @@ body {
   color: #3f4144;
   font-size: 26px;
   text-align: center;
-}
-audio{
-  background: transparent;
 }
 </style>
