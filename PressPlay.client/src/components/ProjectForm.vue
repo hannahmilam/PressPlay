@@ -26,13 +26,6 @@
       >
     </div>
     <div class="form-group">
-      <label for="originalMp3">Password</label>
-      <input type="text"
-             class="form-control"
-             v-model="editable.password"
-      >
-    </div>
-    <div class="form-group">
       <label for="albumArt">Album Art</label>
       <input type="file"
              accept="image/*"
@@ -57,7 +50,13 @@
     </div>
     <div class="form-group">
       <label for="instrumentTag">Instruments on project</label>
-      <input type="text" name="neededInstrumentTag" class="form-control" v-model="otherTemp">
+      <input type="text"
+             name="neededInstrumentTag"
+             class="form-control"
+             minlength="1"
+             required
+             v-model="otherTemp"
+      >
       <button class="btn btn-info mt-2" type="button" @click="addInstrumentTag()">
         Add Tag
       </button>
@@ -65,17 +64,27 @@
     <div>Tags:  <small v-for="e in editable.instrumentTags" :key="e">{{ e }} , </small> </div>
     <div class="form-group">
       <label for="neededInstrumentTag">Needed Instruments</label>
-      <input type="text" name="neededInstrumentTag" class="form-control" v-model="temp">
+      <input type="text"
+             name="neededInstrumentTag"
+             class="form-control"
+             minlength="1"
+             required
+             v-model="temp"
+      >
       <button class="btn btn-info mt-2" type="button" @click="addNeededInstrumentTag()">
         Add Tag
       </button>
     </div>
     <div>Tags:  <small v-for="e in editable.neededInstrumentTags" :key="e">{{ e }}, </small> </div>
+    <div class="form-group">
+      <label for="originalMp3">Password</label>
+      <input type="text"
+             class="form-control"
+             v-model="editable.password"
+      >
+    </div>
     <button @click="upload" class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0 && editable.instrumentTags.length > 0" type="submit">
       Submit
-    </button>
-    <button @click="generateProjectId">
-      Test
     </button>
   </form>
 </template>
