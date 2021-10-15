@@ -11,8 +11,8 @@
         <div id="player-controls">
           <div class="control row ms-5">
             <div class="button pt-4 text-center col-2 offset-5 selectable" id="play-pause-button" @click="toggleAudio">
-              <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
-              <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
+              <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause" v-if="currentSong.id && playing"></i>
+              <i :id="'audio-play-'+currentSong.id" class="fas fa-play" v-else></i>
             </div>
             <div class="col-1 pt-3">
               <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
@@ -35,13 +35,9 @@ import { AppState } from '../AppState'
 import { logger } from '../utils/Logger'
 export default {
   setup() {
-    watchEffect(() => {
-      if (AppState.currentSong.id !== null) {
-        logger.log('audio player current song', AppState.currentSong)
-      }
-    })
     return {
       currentSong: computed(() => AppState.currentSong),
+      playing: computed(() => AppState.playing),
       toggleAudio() {
         const currentSong = document.getElementById(this.currentSong.id)
         if (!currentSong) {
@@ -49,14 +45,18 @@ export default {
         }
         if (currentSong.paused) {
           currentSong.play()
+          const elem = document.getElementById(this.currentSong.id)
+          elem.onplay = () => {
+            AppState.playing = true
+          }
           document.getElementById('album-art').classList.add('active')
-          document.getElementById(`audio-pause-${currentSong.id}`).classList.remove('visually-hidden')
-          document.getElementById(`audio-play-${currentSong.id}`).classList.add('visually-hidden')
         } else {
           currentSong.pause()
+          const elem = document.getElementById(this.currentSong.id)
+          elem.onpause = () => {
+            AppState.playing = false
+          }
           document.getElementById('album-art').classList.remove('active')
-          document.getElementById(`audio-pause-${currentSong.id}`).classList.add('visually-hidden')
-          document.getElementById(`audio-play-${currentSong.id}`).classList.remove('visually-hidden')
         }
       },
       downloadMp3() {
