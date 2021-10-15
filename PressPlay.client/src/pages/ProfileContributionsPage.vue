@@ -1,5 +1,5 @@
 <template>
-  <div class="col-10">
+  <div class="col-10 m-auto">
     <div class="row">
       <ContributionCards v-for="c in contributions" :key="c.id" :contribution="c" />
     </div>

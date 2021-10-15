@@ -1,35 +1,30 @@
 <template>
-  <div class="col-md-4 my-3">
-    <div class="card">
-      <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
-        <div class="card-header m-0 p-0">
-          <img class="img-fluid rounded-top" :src="project.albumArt" alt="">
-        </div>
-      </router-link>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-10 pt-2">
-            <p><b>{{ project.name }}</b></p>
+  <div class="col-md-10 col-sm-12 m-auto p-2 bg-dark text-light">
+    <div class="row song-shadow">
+      <div class="col-6 ps-0 ms-0">
+        <div class="d-flex">
+          <div>
+            <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
+              <img :src="project.albumArt" height="50" width="50" alt="">
+            </router-link>
           </div>
-          <div class="col-2">
-            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
-            <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
+
+          <div class="ps-3 d-flex align-self-end">
+            <h4>{{ project.name }}</h4>
           </div>
         </div>
-        <div class="row">
-          <div class="col-2 text-center">
-            <img :src="project.creator.picture" height="40" class="rounded-circle" alt="">
-          </div>
-          <div class="col-10 pt-2">
-            <p>
-              {{ project.creator.name }}
-            </p>
-          </div>
-        </div>
-        <div class="row">
+      </div>
+      <div class="col-6 one-line">
+        <div class="d-flex align-self-end">
           <small>
-            <p>Contributions: {{ contributions.length }}</p>
+            <p> <strong>
+              Contributions: {{ contributions.length }}</strong></p>
+
           </small>
+        </div>
+        <div>
+          <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
+          <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
         </div>
       </div>
     </div>
@@ -107,5 +102,21 @@ export default {
   height: 100px;
   width: 100px;
 }
+.short {
+  height: 3rem;
+}
 
+  .one-line{
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.col-line{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.song-shadow{
+  box-shadow: 0 4px 2px -2px rgba(128, 128, 128, 0.438);
+}
 </style>
