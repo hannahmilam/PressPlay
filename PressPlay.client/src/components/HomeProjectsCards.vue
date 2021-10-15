@@ -8,14 +8,16 @@
       </router-link>
       <div class="card-body">
         <div class="row justify-content-between me-2 text-black">
-          <div class="col-10">
-            <h5 class="card-text p-0 m-0 clip-text" :title="project.name">
-              <b>{{ project.name }}</b>
-            </h5>
-            <p class="card-text" :title="project.creator.name">
-              {{ project.creator.name }}
-            </p>
-          </div>
+          <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creator.id}}" class="selectable text-dark">
+            <div class="col-10">
+              <h5 class="card-text p-0 m-0 clip-text" :title="project.name">
+                <b>{{ project.name }}</b>
+              </h5>
+              <p class="card-text" :title="project.creator.name">
+                {{ project.creator.name }}
+              </p>
+            </div>
+          </router-link>
           <div class="col-2">
             <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
             <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>

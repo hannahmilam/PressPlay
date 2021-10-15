@@ -1,5 +1,5 @@
 <template>
-  <div class="container-flui">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-6 m-auto pt-2">
         <form @submit.prevent="showHiddenProject()">
