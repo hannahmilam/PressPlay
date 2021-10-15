@@ -73,9 +73,11 @@ export default {
         if (currentSong.paused) {
           currentSong.play()
           AppState.playing = true
+          document.getElementById('album-art').classList.add('active')
         } else {
           currentSong.pause()
           AppState.playing = false
+          document.getElementById('album-art').classList.remove('active')
         }
       }
     }
