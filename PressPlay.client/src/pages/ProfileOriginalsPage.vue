@@ -1,7 +1,7 @@
 <template>
   <div class="container-flui">
     <div class="row">
-      <div class="col-6 m-auto">
+      <div class="col-6 m-auto pt-2">
         <form @submit.prevent="showHiddenProject()">
           <div class="form-group">
             <input type="text"
