@@ -17,8 +17,8 @@
             </p>
           </div>
           <div class="col-2">
-            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource"></i>
-            <i :id="'pause-'+project.id" class="mdi mdi-pause visually-hidden f-20 selectable" @click.stop="toggleAudio"></i>
+            <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
+            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
           </div>
         </div>
       </div>
@@ -42,12 +42,10 @@ export default {
   },
   setup(props) {
     return {
+      playing: computed(() => AppState.playing),
+      currentSong: computed(() => AppState.currentSong),
       setSource() {
         try {
-          if (AppState.currentSong.src) {
-            document.getElementById(`pause-${AppState.currentSong.id}`).classList.add('visually-hidden')
-            document.getElementById(`play-${AppState.currentSong.id}`).classList.remove('visually-hidden')
-          }
           AppState.currentSong.src = props.project.spotlightMp3
           AppState.currentSong.id = props.project.id
           AppState.currentSong.albumArt = props.project.albumArt
@@ -55,7 +53,7 @@ export default {
           AppState.currentSong.creator = props.project.creator
           AppState.currentSong.creatorId = props.project.creatorId
           const currentSong = document.getElementById(props.project.id)
-          logger.log('current song, set source', AppState.currentSong)
+          // logger.log('current song, set source', AppState.currentSong)
           if (AppState.currentSong.src) {
             setTimeout(() => this.toggleAudio(), 250)
           } else {
@@ -74,12 +72,12 @@ export default {
 
         if (currentSong.paused) {
           currentSong.play()
-          document.getElementById(`pause-${props.project.id}`).classList.remove('visually-hidden')
-          document.getElementById(`play-${props.project.id}`).classList.add('visually-hidden')
+          AppState.playing = true
+          document.getElementById('album-art').classList.add('active')
         } else {
           currentSong.pause()
-          document.getElementById(`pause-${props.project.id}`).classList.add('visually-hidden')
-          document.getElementById(`play-${props.project.id}`).classList.remove('visually-hidden')
+          AppState.playing = false
+          document.getElementById('album-art').classList.remove('active')
         }
       }
     }

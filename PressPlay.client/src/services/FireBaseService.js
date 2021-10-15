@@ -32,12 +32,6 @@ class FirebaseService {
     const fileRef = collection.child(projectId).child(accountId).child(fileName)
     await fileRef.delete()
   }
-
-  async deleteAll(projectId, type) {
-    const collection = storage.ref(type)
-    const folderRef = collection.child(projectId)
-    await folderRef.delete()
-  }
 }
 
 export const firebaseService = new FirebaseService()

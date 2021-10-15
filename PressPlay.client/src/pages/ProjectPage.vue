@@ -134,10 +134,10 @@ export default {
           Pop.toast(error.message, 'error')
         }
       },
-      async removeProjectFromFirebase(accountId, project, account) {
+      async removeProjectFromFirebase(accountId, project) {
         if (await Pop.confirm()) {
           try {
-            await firebaseService.delete(project.artName, 'Image', project.id, account.id)
+            await firebaseService.delete(project.artName, 'Image', project.id, accountId)
             await this.removeProject(accountId)
           } catch (error) {
             Pop.toast(error, 'error')
