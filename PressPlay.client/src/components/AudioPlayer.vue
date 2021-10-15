@@ -16,7 +16,7 @@
           </div>
         </div>
         <div id="player-content">
-          <div id="album-art">
+          <div id="album-art" class="active">
             <img :src="currentSong.albumArt" class="active" id="_1">
             <div id="buffer-box">
               Buffering ...
@@ -59,10 +59,12 @@ export default {
         }
         if (currentSong.paused) {
           currentSong.play()
+          document.getElementById('album-art').classList.add('active')
           document.getElementById(`audio-pause-${currentSong.id}`).classList.remove('visually-hidden')
           document.getElementById(`audio-play-${currentSong.id}`).classList.add('visually-hidden')
         } else {
           currentSong.pause()
+          document.getElementById('album-art').classList.remove('active')
           document.getElementById(`audio-pause-${currentSong.id}`).classList.add('visually-hidden')
           document.getElementById(`audio-play-${currentSong.id}`).classList.remove('visually-hidden')
         }
@@ -84,7 +86,6 @@ export default {
 }
 
 body {
-  font-family: Helvetica, Arial;
   margin: 0;
   background-color: #ffeff5;
 }
@@ -95,21 +96,6 @@ body {
   width: 430px;
   height: 100px;
   margin: -4px auto;
-}
-
-#bg-artwork {
-  position: fixed;
-  top: -30px;
-  right: -30px;
-  bottom: -30px;
-  left: -30px;
-  background-image: url("https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  filter: blur(40px);
-  -webkit-filter: blur(40px);
-  z-index: 1;
 }
 
 #player {
@@ -188,44 +174,6 @@ body {
   100% {
     transform: rotateZ(360deg);
   }
-}
-
-#buffer-box {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  height: 13px;
-  color: #1f1f1f;
-  font-size: 13px;
-  font-family: Helvetica;
-  text-align: center;
-  font-weight: bold;
-  line-height: 1;
-  padding: 6px;
-  margin: -12px auto 0 auto;
-  background-color: rgba(255, 255, 255, 0.19);
-  opacity: 0;
-  z-index: 2;
-}
-
-#album-art img,
-#buffer-box {
-  transition: 0.1s linear all;
-}
-
-#album-art.buffering img {
-  opacity: 0.25;
-}
-
-#album-art.buffering img.active {
-  opacity: 0.8;
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-}
-
-#album-art.buffering #buffer-box {
-  opacity: 1;
 }
 
 #player-controls {
