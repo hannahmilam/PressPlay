@@ -46,6 +46,8 @@ export default {
   },
   setup(props) {
     return {
+      playing: computed(() => AppState.playing),
+      currentSong: computed(() => AppState.currentSong),
       contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
       setSource() {
         try {
