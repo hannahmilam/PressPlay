@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 
 import { Project } from '../models/Project'
@@ -50,6 +51,9 @@ export default {
           AppState.currentSong.src = props.project.spotlightMp3
           AppState.currentSong.id = props.project.id
           AppState.currentSong.albumArt = props.project.albumArt
+          AppState.currentSong.name = props.project.name
+          AppState.currentSong.creator = props.project.creator
+          AppState.currentSong.creatorId = props.project.creatorId
           const currentSong = document.getElementById(props.project.id)
           logger.log('current song, set source', AppState.currentSong)
           if (AppState.currentSong.src) {

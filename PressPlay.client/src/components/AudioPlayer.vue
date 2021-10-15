@@ -1,36 +1,26 @@
 <template>
   <div v-if="currentSong.src">
     <div id="app-cover">
-      <div id="player">
-        <div id="player-track">
-          <div id="album-name"></div>
-          <div id="track-name"></div>
-          <div id="track-time">
-            <div id="current-time"></div>
-            <div id="track-length"></div>
-          </div>
-          <div id="s-area">
-            <div id="ins-time"></div>
-            <div id="s-hover"></div>
-            <div id="seek-bar"></div>
+      <div id="player-content">
+        <div id="album-art" class="active">
+          <img :src="currentSong.albumArt" class="active" id="_1">
+          <div id="buffer-box">
+            Buffering ...
           </div>
         </div>
-        <div id="player-content">
-          <div id="album-art">
-            <img :src="currentSong.albumArt" class="active" id="_1">
-            <div id="buffer-box">
-              Buffering ...
+        <div id="player-controls">
+          <div class="control row ms-5">
+            <div class="button pt-4 text-center col-2 offset-5 selectable" id="play-pause-button" @click="toggleAudio">
+              <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
+              <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
+            </div>
+            <div class="col-1 pt-3">
+              <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
             </div>
           </div>
-          <div id="player-controls">
-            <div class="control">
-              <div class="button selectable" id="play-pause-button" @click="toggleAudio">
-                <i :id="'audio-play-'+currentSong.id" class="fas fa-play visually-hidden"></i>
-                <i :id="'audio-pause-'+currentSong.id" class="fas fa-pause"></i>
-              </div>
-            </div>
-            <div class="pt-4">
-              <audio :id="currentSong.id" controls style="width: 25px;" :src="currentSong.src"> </audio>
+          <div class="row">
+            <div class="col text-center">
+              <p><b>{{ (currentSong.name).toUpperCase() }} - {{ (currentSong.creator.name).toUpperCase() }}</b></p>
             </div>
           </div>
         </div>
@@ -59,10 +49,12 @@ export default {
         }
         if (currentSong.paused) {
           currentSong.play()
+          document.getElementById('album-art').classList.add('active')
           document.getElementById(`audio-pause-${currentSong.id}`).classList.remove('visually-hidden')
           document.getElementById(`audio-play-${currentSong.id}`).classList.add('visually-hidden')
         } else {
           currentSong.pause()
+          document.getElementById('album-art').classList.remove('active')
           document.getElementById(`audio-pause-${currentSong.id}`).classList.add('visually-hidden')
           document.getElementById(`audio-play-${currentSong.id}`).classList.remove('visually-hidden')
         }
@@ -84,7 +76,6 @@ export default {
 }
 
 body {
-  font-family: Helvetica, Arial;
   margin: 0;
   background-color: #ffeff5;
 }
@@ -92,24 +83,9 @@ body {
 #app-cover {
   right: 0;
   left: 0;
-  width: 430px;
+  width: 350px;
   height: 100px;
   margin: -4px auto;
-}
-
-#bg-artwork {
-  position: fixed;
-  top: -30px;
-  right: -30px;
-  bottom: -30px;
-  left: -30px;
-  background-image: url("https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
-  filter: blur(40px);
-  -webkit-filter: blur(40px);
-  z-index: 1;
 }
 
 #player {
@@ -190,62 +166,12 @@ body {
   }
 }
 
-#buffer-box {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  height: 13px;
-  color: #1f1f1f;
-  font-size: 13px;
-  font-family: Helvetica;
-  text-align: center;
-  font-weight: bold;
-  line-height: 1;
-  padding: 6px;
-  margin: -12px auto 0 auto;
-  background-color: rgba(255, 255, 255, 0.19);
-  opacity: 0;
-  z-index: 2;
-}
-
-#album-art img,
-#buffer-box {
-  transition: 0.1s linear all;
-}
-
-#album-art.buffering img {
-  opacity: 0.25;
-}
-
-#album-art.buffering img.active {
-  opacity: 0.8;
-  filter: blur(2px);
-  -webkit-filter: blur(2px);
-}
-
-#album-art.buffering #buffer-box {
-  opacity: 1;
-}
-
 #player-controls {
-  width: 250px;
   height: 100%;
-  margin: 0 5px 0 141px;
-  float: right;
   overflow: hidden;
 }
 
-.control {
-  width: 33.333%;
-  float: left;
-  padding: 12px 0;
-}
-
 .button {
-
-  padding: 25px;
-  background-color: #fff;
   border-radius: 6px;
   cursor: pointer;
 }
@@ -255,8 +181,5 @@ body {
   color: #3f4144;
   font-size: 26px;
   text-align: center;
-}
-audio{
-  background: transparent;
 }
 </style>
