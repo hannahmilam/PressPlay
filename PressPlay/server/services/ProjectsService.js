@@ -1,5 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest, Forbidden } from '../utils/Errors'
+import { firebaseService } from './FirebaseService'
 
 class ProjectsService {
   async getProjects(query = {}) {
@@ -31,6 +32,7 @@ class ProjectsService {
     if (userId !== project.creatorId.toString()) {
       throw new Forbidden('Not Authorized to Delete')
     }
+    await firebaseService.deleteAll(projectId, 'Audio')
     await dbContext.Comments.deleteMany({ projectId: projectId })
     await dbContext.Contributions.deleteMany({ projectId: projectId })
     await project.remove()

@@ -74,6 +74,9 @@
     <button @click="upload" class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0 && editable.instrumentTags.length > 0" type="submit">
       Submit
     </button>
+    <button @click="generateProjectId">
+      Test
+    </button>
   </form>
 </template>
 
@@ -87,6 +90,7 @@ import { logger } from '../utils/Logger'
 import { firebaseService } from '../services/FirebaseService'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import mongoose from 'mongoose'
 export default {
   setup() {
     const temp = ref()
@@ -94,7 +98,6 @@ export default {
     const editable = ref({ neededInstrumentTags: [], instrumentTags: [] })
     const mp3File = ref([])
     const albumArtFile = ref([])
-
     return {
       temp,
       otherTemp,
@@ -136,14 +139,20 @@ export default {
         logger.log('AlbumArt files ref value', albumArtFile.value)
       },
       async upload() {
-        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio', AppState.account.id)
+        const projectId = await this.generateProjectId()
+        logger.log('Here he is', projectId)
+        const mp3Url = await firebaseService.upload(mp3File.value[0], 'Audio', projectId, AppState.account.id)
         editable.value.originalMp3 = mp3Url
         editable.value.mp3Name = mp3File.value[0].name
-        const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image', AppState.account.id)
+        editable.value._id = projectId
+        const albumArtUrl = await firebaseService.upload(albumArtFile.value[0], 'Image', projectId, AppState.account.id)
         editable.value.albumArt = albumArtUrl
         editable.value.artName = albumArtFile.value[0].name
         logger.log(albumArtUrl, mp3Url)
         await this.createProject()
+      },
+      async generateProjectId() {
+        return mongoose.Types.ObjectId().toString()
       }
     }
   }

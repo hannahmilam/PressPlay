@@ -12,5 +12,11 @@ class FirebaseService {
     const firebaseToken = await firebaseAdmin.auth().createCustomToken(userInfo.id)
     return firebaseToken
   }
+
+  async deleteAll(projectId, type) {
+    const collection = storage.ref(type)
+    const folderRef = collection.child(projectId)
+    await folderRef.delete()
+  }
 }
 export const firebaseService = new FirebaseService()

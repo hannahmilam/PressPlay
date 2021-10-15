@@ -4,10 +4,10 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class FirebaseService {
-  async upload(data, type, accountId) {
+  async upload(data, type, projectId, accountId) {
     const collection = storage.ref(type)
     // const resource = collection.child(data.name)
-    const resource = collection.child(accountId).child(data.name)
+    const resource = collection.child(projectId).child(accountId).child(data.name)
     const media = await resource.put(data, {
       customMetadata: {
         uid: AppState.account.id, size: data.size, type: data.type
@@ -27,11 +27,16 @@ class FirebaseService {
     }
   }
 
-  async delete(fileName, type) {
-    logger.log('this is the firebase file name', fileName)
+  async delete(fileName, type, projectId, accountId) {
     const collection = storage.ref(type)
-    const fileRef = collection.child(fileName)
+    const fileRef = collection.child(projectId).child(accountId).child(fileName)
     await fileRef.delete()
+  }
+
+  async deleteAll(projectId, type) {
+    const collection = storage.ref(type)
+    const folderRef = collection.child(projectId)
+    await folderRef.delete()
   }
 }
 

@@ -20,7 +20,7 @@ import { contributionsService } from '../services/ContributionsService'
 import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
-import { firebaseService } from '../services/FirebaseService'
+import { firebaseService } from '../services/FireBaseService'
 
 export default {
   props: {
@@ -53,15 +53,12 @@ export default {
       async deleteFirebaseContribution() {
         if (await Pop.confirm()) {
           try {
-            await firebaseService.delete(props.contribution.fileName, 'Audio')
+            await firebaseService.delete(props.contribution.fileName, 'Audio', AppState.project.id, AppState.account.id)
             await this.removeContribution()
           } catch (error) {
             Pop.toast(error, 'error')
           }
         }
-      },
-      async downloadContribution() {
-
       }
     }
   }
