@@ -44,7 +44,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-4">
+      <div class="col-md-4">
         <div class="card-wrapper">
           <div class="profile-card js-profile-card">
             <div class="profile-card__img">
@@ -82,7 +82,7 @@
           </defs>
         </svg>
       </div>
-      <div class="col-4">
+      <div class="col-md-4">
         <div class="card-wrapper">
           <div class="profile-card js-profile-card">
             <div class="profile-card__img">
@@ -120,7 +120,7 @@
           </defs>
         </svg>
       </div>
-      <div class="col-4">
+      <div class="col-md-4">
         <div class="card-wrapper">
           <div class="profile-card js-profile-card">
             <div class="profile-card__img">
