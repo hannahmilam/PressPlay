@@ -1,5 +1,5 @@
 <template>
-  <div class="about bg-white">
+  <div class="container-fluid">
     <div class="row">
       <div class="overlay hidden-mobile">
         <div class="text">
@@ -46,43 +46,36 @@
 
     <div class="row justify-content-between m-5">
       <div class="col-md-3 my-3">
-        <h3>Jeremy Fowler</h3>
-        <div class="card">
-          <div class="card-header p-0 m-0">
-            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFuabiEJOCi1w/profile-displayphoto-shrink_800_800/0/1633578363008?e=1639008000&v=beta&t=ReJCaXUjRMvdiouFx-YqQ1NQqv8mmRdMBRcfq8-dS8U" class="rounded-top img-fluid" alt="">
+        <div class="card" style="background-image: url('https://media-exp1.licdn.com/dms/image/C4E03AQFuabiEJOCi1w/profile-displayphoto-shrink_800_800/0/1633578363008?e=1639008000&v=beta&t=ReJCaXUjRMvdiouFx-YqQ1NQqv8mmRdMBRcfq8-dS8U')">
+          <div class="card-title">
+            <h3>Jeremy Fowler</h3>
           </div>
           <div class="card-body">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus aliquam autem quod reprehenderit impedit aspernatur id quasi facilis, maxime quam amet placeat blanditiis.
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam quasi recusandae magni?</p>
           </div>
         </div>
       </div>
 
       <div class="col-md-3 mb-3">
-        <h3>Cam Olson</h3>
-        <div class="card">
-          <div class="card-header p-0 m-0">
-            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFV87LwfR3-qw/profile-displayphoto-shrink_800_800/0/1592784538938?e=1639008000&v=beta&t=v-DJ1eOozyy6Ni44FCLQ82ylp6aajEZWwUS9cWvFS7w" class="rounded-top img-fluid" alt="">
+        <div class="card" style="background-image: url('https://media-exp1.licdn.com/dms/image/C4E03AQFV87LwfR3-qw/profile-displayphoto-shrink_800_800/0/1592784538938?e=1639008000&v=beta&t=v-DJ1eOozyy6Ni44FCLQ82ylp6aajEZWwUS9cWvFS7w')">
+          <div class="card-title">
+            <h3>Cam Olson</h3>
           </div>
           <div class="card-body">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus aliquam autem quod reprehenderit impedit aspernatur id quasi facilis, maxime quam amet placeat blanditiis.
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam quasi recusandae magni?</p>
           </div>
         </div>
       </div>
 
       <div class="col-md-3">
-        <h3>Hannah Milam</h3>
-        <div class="card">
-          <div class="card-header p-0 m-0">
-            <img src="https://avatars.githubusercontent.com/u/87681889?v=4" class="rounded-top img-fluid" alt="">
+        <div class="card" style="background-image: url('https://avatars.githubusercontent.com/u/87681889?v=4')">
+          <div class="card-title">
+            <h3>
+              Hannah Milam
+            </h3>
           </div>
           <div class="card-body">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minus aliquam autem quod reprehenderit impedit aspernatur id quasi facilis, maxime quam amet placeat blanditiis.
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam quasi recusandae magni?</p>
           </div>
         </div>
       </div>
@@ -97,8 +90,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.card{
+  height: 350px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: transform 500ms ease;
+  overflow: hidden;
+}
+.card:hover{
+  transform: scale(1.02);
+}
+.card-body{
+padding: 1.5em;
+transform: translateY(95%);
+color: white;
+text-shadow: 2px 2px 8px #363434;
+}
+.card:hover .card-body{
+transform: translateY(60%);
+}
 h3{
+text-shadow: 2px 2px 8px #242121a6;
 font-family: 'Scheherazade New', serif;
+color: white;
+backdrop-filter: blur(10px);
+padding: 15px;
 }
 .overlay {
 position: absolute;
@@ -148,5 +164,8 @@ transform: translateY(-30%);
        display: none;
      }
  }
-
+ .container-fluid{
+   height: 100vh;
+   background-color: white;
+ }
 </style>

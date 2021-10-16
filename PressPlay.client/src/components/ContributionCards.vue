@@ -18,7 +18,10 @@
       <b>{{ contribution.title }}</b>
     </div>
     <div class="">
-      <audio :src="contribution.contributionMp3" controls style="width: 100px"></audio>
+      <div>
+        <i :id="'pause-'+contribution.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === contribution.id && playing"></i>
+        <i :id="'play-'+contribution.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
+      </div>
     </div>
   </div>
 
@@ -27,6 +30,11 @@
 
 <script>
 import { Contribution } from '../models/Contribution'
+import { computed } from '@vue/runtime-core'
+import { Project } from '../models/Project'
+import { AppState } from '../AppState'
+import Pop from '../utils/Pop'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
@@ -34,8 +42,47 @@ export default {
       type: Contribution, default: () => new Contribution()
     }
   },
-  setup() {
+  setup(props) {
     return {
+      playing: computed(() => AppState.playing),
+      currentSong: computed(() => AppState.currentSong),
+      contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
+      setSource() {
+        try {
+          AppState.currentSong.src = props.contribution.contributionMp3
+          AppState.currentSong.id = props.contribution.id
+          AppState.currentSong.albumArt = props.contribution.project.albumArt
+          AppState.currentSong.name = props.contribution.title
+          AppState.currentSong.creator = props.contribution.project
+          AppState.currentSong.creatorId = props.contribution.creatorId
+          const currentSong = document.getElementById(props.contribution.id)
+          // logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
+          } else {
+            currentSong.src = props.contribution.contributionMp3
+            this.toggleAudio()
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      toggleAudio() {
+        const currentSong = document.getElementById(props.contribution.id)
+        if (!currentSong) {
+          return logger.log('no audio element found')
+        }
+
+        if (currentSong.paused) {
+          currentSong.play()
+          AppState.playing = true
+          document.getElementById('album-art').classList.add('active')
+        } else {
+          currentSong.pause()
+          AppState.playing = false
+          document.getElementById('album-art').classList.remove('active')
+        }
+      }
     }
   }
 }
