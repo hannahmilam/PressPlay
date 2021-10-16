@@ -13,6 +13,8 @@
           <i v-if="currentProject.spotlightMp3 === contribution.contributionMp3" title="Set to Spotlight" class="selectable mdi text-success mdi-star-circle-outline"></i>
           <i v-else title="Set to Spotlight" class="selectable mdi mdi-star-circle-outline"></i>
         </span>
+        <i :id="'pause-'+contribution.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === contribution.id && playing"></i>
+        <i :id="'play-'+contribution.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
       </h5>
     </div>
     <div>
@@ -32,20 +34,29 @@ import Pop from '../utils/Pop'
 import { AppState } from '../AppState'
 import { projectsService } from '../services/ProjectsService'
 import { firebaseService } from '../services/FireBaseService'
+import { logger } from '../utils/Logger'
 
 export default {
   props: {
     contribution: {
       type: Contribution,
-      required: true
+      default: () => new Contribution()
     }
   },
   setup(props) {
     const editable = ref({ spotlightMp3: props.contribution.contributionMp3, spotlightName: props.contribution.title })
     return {
+      project: computed(() => AppState.project),
+      currentSong: computed(() => AppState.currentSong),
+      playing: computed(() => AppState.playing),
+      contributions: computed(() => AppState.contributions.filter(c => c.projectId === props.project.id)),
+      account: computed(() => AppState.account),
+      projectSubs: computed(() => AppState.projectSubscriptions),
+      comments: computed(() => AppState.comments),
+      profile: computed(() => AppState.profile),
       editable,
       currentProject: computed(() => AppState.project),
-      account: computed(() => AppState.account),
+
       async removeContribution() {
         try {
           await contributionsService.removeContribution(props.contribution.id)
@@ -69,6 +80,42 @@ export default {
           } catch (error) {
             Pop.toast(error, 'error')
           }
+        }
+      },
+      setSource() {
+        try {
+          AppState.currentSong.src = props.contribution.contributionMp3
+          AppState.currentSong.id = props.contribution.id
+          AppState.currentSong.albumArt = props.contribution.project.albumArt
+          AppState.currentSong.name = props.contribution.title
+          AppState.currentSong.creator = props.contribution.project
+          AppState.currentSong.creatorId = props.contribution.creatorId
+          const currentSong = document.getElementById(props.contribution.id)
+          // logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
+          } else {
+            currentSong.src = props.contribution.contributionMp3
+            this.toggleAudio()
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      toggleAudio() {
+        const currentSong = document.getElementById(props.contribution.id)
+        if (!currentSong) {
+          return logger.log('no audio element found')
+        }
+
+        if (currentSong.paused) {
+          currentSong.play()
+          AppState.playing = true
+          document.getElementById('album-art').classList.add('active')
+        } else {
+          currentSong.pause()
+          AppState.playing = false
+          document.getElementById('album-art').classList.remove('active')
         }
       }
     }
