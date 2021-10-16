@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header">
           <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#contribution-form">
-            <b class="text-light">New Contribution</b>
+            <b>New Contribution</b>
           </button>
         </div>
         <div class="card-body">

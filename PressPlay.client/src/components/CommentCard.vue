@@ -1,7 +1,10 @@
 <template>
-  <div class="p-2 jc-around">
+  <div class="p-2 jc-around comments-shadow">
     <div class="in-line">
-      <img class="small p-1" :src="comment.creator.picture" alt="">
+      <router-link :to="{name: 'Profile.Originals', params: {profileId: comment.creator.id}}" class="selectable text-dark">
+        <img class="small p-1" :src="comment.creator.picture" alt="">
+      </router-link>
+
       <p>
         {{ comment.body }}
       </p>
@@ -52,6 +55,8 @@ export default {
 
 <style lang="scss" scoped>
 .small {
+  height: 40px;
+  width: 40px;
   border-radius: 50%;
   width: 30px
 }
@@ -61,6 +66,9 @@ display: flex;
 .jc-around {
   display: flex;
   justify-content: space-between;
+}
+.comments-shadow{
+  box-shadow: 0 4px 2px -2px rgba(128, 128, 128, 0.438);
 }
 
 </style>
