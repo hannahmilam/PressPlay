@@ -60,6 +60,7 @@
                 </h3>
               </div>
               <div class="col-2">
+                <!-- original Mp3 -->
                 <h1 class="mdi mdi-play selectable"></h1>
               </div>
             </div>
@@ -75,6 +76,7 @@
                 </h3>
               </div>
               <div class="col-2">
+                <!-- Spotlight Mp3 -->
                 <h1 class="mdi mdi-play selectable"></h1>
               </div>
             </div>
