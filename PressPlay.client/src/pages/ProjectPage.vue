@@ -1,23 +1,30 @@
 <template>
   <header>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-10 m-auto">
+        <div class="col-11 m-auto">
           <div class="card">
-            <div class="card-body">
-              <div class="card-header">
-                <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
-                  Delete Project
-                </button>
-                <h1>{{ project.name }}</h1>
+            <div class="row g-0">
+              <div class="col-5">
+                <img class="img-fluid" :src="project.albumArt" alt="">
+              </div>
+              <div class="col-7">
                 <div class="card-body">
-                  {{ project.description }}
-                </div>
-                <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
-                  Followers: {{ projectSubs.length }}
-                </div>
-                <div v-if="project.spotlightName !== null">
-                  {{ project.spotlightName }}
+                  <div class="card-header">
+                    <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
+                      <i class="mdi mdi-close"></i> Delete Project
+                    </button>
+                    <h1>{{ project.name }}</h1>
+                    <div class="card-body">
+                      {{ project.description }}
+                    </div>
+                    <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
+                      Followers: {{ projectSubs.length }}
+                    </div>
+                    <div v-if="project.spotlightName !== null">
+                      {{ project.spotlightName }}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -36,14 +43,15 @@
       <div class="row">
         <div class="col-12 button-stuff">
           <router-link :to="{name: 'Project.Contributions'}">
-            <button class="btn btn-primary">
-              Contributions
-            </button>
+            <li class="nav-link selectable text-uppercase text-light">
+              Contributions {{ contributions.length }}
+            </li>
           </router-link>
+
           <router-link :to="{name: 'Project.Comments'}">
-            <button class="btn btn-danger">
-              Comments
-            </button>
+            <li class="nav-link selectable text-uppercase text-light">
+              Comments {{ comments.length }}
+            </li>
           </router-link>
         </div>
       </div>
