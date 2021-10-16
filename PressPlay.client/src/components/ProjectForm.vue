@@ -56,7 +56,7 @@
              minlength="1"
              v-model="otherTemp"
       >
-      <button class="btn btn-info mt-2" type="button" @click="addInstrumentTag()">
+      <button class="btn btn-info mt-2" type="button" @click.prevent="addInstrumentTag()">
         Add Tag
       </button>
     </div>
