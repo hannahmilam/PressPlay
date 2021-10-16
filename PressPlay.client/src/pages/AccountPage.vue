@@ -54,10 +54,10 @@
               </form>
             </div>
             <div class="col-6 text-center">
-              <h3 class="txt">
+              <h1 class="txt">
                 Welcome {{ account.name }}
-              </h3>
-              <img :src="account.picture" class="rounded-circle" alt="">
+              </h1>
+              <img :src="account.picture" style="width: 250px; height: 250px;" class="rounded-circle" alt="">
             </div>
           </div>
         </div>
