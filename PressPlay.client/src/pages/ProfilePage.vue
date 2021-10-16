@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="container-fluid p-0 m-0 bg-dark text-light text-center">
+    <div class="container-fluid bg-dark text-light text-center">
       <div class="row tall img-fill" :style="{'backgroundImage':`url(${profile.coverImg})` }">
         <div class="profile-name pt-3">
           <img :src="profile.picture" style="height: 100px; width: 100px;  " class="rounded-circle" alt="">

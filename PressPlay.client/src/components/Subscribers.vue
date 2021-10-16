@@ -4,6 +4,7 @@
     <img
       :src="subscriber.subscriber?.picture"
       height="45"
+      width="45"
       class="rounded-circle"
       alt=""
     >

@@ -81,7 +81,7 @@
              v-model="editable.password"
       >
     </div>
-    <button @click="upload" class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0 && editable.instrumentTags.length > 0" type="submit">
+    <button @click.prevent="upload" class="btn btn-success mt-2" v-if="editable.neededInstrumentTags.length > 0 && editable.instrumentTags.length > 0" type="submit">
       Submit
     </button>
   </form>
