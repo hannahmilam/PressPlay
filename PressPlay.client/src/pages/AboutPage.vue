@@ -98,7 +98,7 @@ export default {
 
 <style scoped lang="scss">
 h3{
-  font-family: 'Yanone Kaffeesatz';
+font-family: 'Scheherazade New', serif;
 }
 .overlay {
 position: absolute;
@@ -118,7 +118,7 @@ rgba(255, 255, 255, 0) 100%
 }
 
 .text {
-font-family: "Yanone Kaffeesatz";
+font-family: 'Scheherazade New', serif;
 font-size: 100px;
 display: flex;
 position: absolute;

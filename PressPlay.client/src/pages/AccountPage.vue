@@ -140,5 +140,6 @@ color: white;
 }
 .txt{
   text-shadow: 2px 2px 4px #000000;
+  font-family: 'Scheherazade New', serif;
 }
 </style>

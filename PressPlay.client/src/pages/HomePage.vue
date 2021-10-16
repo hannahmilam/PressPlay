@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid bg-dark text-white">
+  <div class="container-fluid bg-dark text-white txt">
     <div class="needs-guitar">
       <div class="row py-3">
         <div class="col-6">
@@ -214,5 +214,8 @@ export default {
   color: black;
   scroll-behavior: smooth;
 }
-
+.txt{
+  text-shadow: 0px 0px 8px #b8b0b09f;
+  font-family: 'Scheherazade New', serif;
+}
 </style>
