@@ -1,5 +1,5 @@
 <template>
-  <div class="col-3 text-center">
+  <div class="col-md-3 text-center">
     <div class="card my-3 selectable" style="width: 200px;">
       <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
         <div class="card-header p-0">

@@ -1,10 +1,12 @@
 <template>
-  <div class="container-fluid bg-dark text-white px-0">
+  <div class="container-fluid bg-dark text-white">
     <div class="needs-guitar">
-      <div class="row p-3">
-        <h3 class="my-0 ms-5">
-          Needs Guitar
-        </h3>
+      <div class="row py-3">
+        <div class="col-6">
+          <h3 class="my-0 ms-5">
+            Needs Guitar
+          </h3>
+        </div>
       </div>
 
       <div class="row justify-content-center">
@@ -27,10 +29,12 @@
     </div>
 
     <div class="needs-vocals">
-      <div class="row p-3">
-        <h3 class="my-0 ms-5">
-          Needs Vocals
-        </h3>
+      <div class="row py-3">
+        <div class="col-6">
+          <h3 class="my-0 ms-5">
+            Needs Vocals
+          </h3>
+        </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-1 text-center on-hover">
@@ -52,10 +56,12 @@
     </div>
 
     <div class="needs-drums">
-      <div class="row p-3">
-        <h3 class="my-0 ms-5">
-          Needs Drums
-        </h3>
+      <div class="row py-3">
+        <div class="col-6">
+          <h3 class="my-0 ms-5">
+            Needs Drums
+          </h3>
+        </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-1 text-center on-hover">
@@ -77,10 +83,12 @@
     </div>
 
     <div class="needs-bass">
-      <div class="row p-3">
-        <h3 class="my-0 ms-5">
-          Needs Bass
-        </h3>
+      <div class="row py-3">
+        <div class="col-6">
+          <h3 class="my-0 ms-5">
+            Needs Bass
+          </h3>
+        </div>
       </div>
       <div class="row justify-content-center">
         <div class="col-1 text-center on-hover">
@@ -102,10 +110,12 @@
     </div>
 
     <div class="needs-piano">
-      <div class="row p-3">
-        <h3 class="my-0 ms-5">
-          Needs Piano
-        </h3>
+      <div class="row py-3">
+        <div class="col-6">
+          <h3 class="my-0 ms-5">
+            Needs Piano
+          </h3>
+        </div>
       </div>
 
       <div class="row justify-content-center pb-5">
