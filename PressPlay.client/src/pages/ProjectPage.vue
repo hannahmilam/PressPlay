@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header v-if="project">
     <div class="container-fluid">
       <div class="row">
         <div class="col-11 m-auto">
@@ -8,21 +8,39 @@
               <div class="col-5">
                 <img class="img-fluid" :src="project.albumArt" alt="">
               </div>
-              <div class="col-7">
-                <div class="card-body">
+              <div class="col-7 d-flex align-items-end">
+                <div class="card-body ">
                   <div class="card-header">
-                    <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
-                      <i class="mdi mdi-close"></i> Delete Project
-                    </button>
-                    <h1>{{ project.name }}</h1>
+                    <h1 class="d-flex justify-content-between">
+                      <span>{{ project.name }}</span>
+                      <span>
+                        <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
+                          <i class="mdi mdi-close"></i> Delete Project
+                        </button>
+                      </span>
+                    </h1>
                     <div class="card-body">
-                      {{ project.description }}
+                      <h5>{{ project.description }}</h5>
                     </div>
-                    <div class="card selectable d-flex small" data-bs-toggle="modal" data-bs-target="#followers-form">
-                      Followers: {{ projectSubs.length }}
-                    </div>
-                    <div v-if="project.spotlightName !== null">
-                      {{ project.spotlightName }}
+                    <div>
+                      <span>
+                        <img class="rounded-circle" :src="project.creator?.picture" style="height: 50px" alt="">
+                      </span>
+                      <span>
+                        <b>{{ project.creator?.name }}</b>
+                      </span>
+
+                      <span data-bs-toggle="modal" data-bs-target="#followers-form">
+                        Followers: {{ projectSubs?.length }}
+                      </span>
+                      <span v-if="project.creatorId !== account?.id" class="px-3">
+                        <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-danger">
+                          Unfollow
+                        </button>
+                        <button @click="subscribeToProject()" v-else class="btn btn-primary">
+                          Follow
+                        </button>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -30,14 +48,37 @@
             </div>
           </div>
         </div>
-
-        <div v-if="project.creatorId !== account?.id">
-          <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-primary">
-            Unfollow
-          </button>
-          <button @click="subscribeToProject()" v-else class="btn btn-danger">
-            Follow
-          </button>
+      </div>
+      <div class="row d-flex justify-content-around">
+        <div class="col-4 m-3">
+          <div class="card">
+            <div class="row">
+              <small>Orginal Upload</small>
+              <div class="col-10">
+                <h3>
+                  {{ project.name }}
+                </h3>
+              </div>
+              <div class="col-2">
+                <h1 class="mdi mdi-play selectable"></h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4 m-3" v-if="project.spotlightName !== null">
+          <div class="card">
+            <div class="row">
+              <small>Current Spotlight</small>
+              <div class="col-10">
+                <h3>
+                  {{ project.spotlightName }}
+                </h3>
+              </div>
+              <div class="col-2">
+                <h1 class="mdi mdi-play selectable"></h1>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
@@ -57,6 +98,11 @@
       </div>
     </div>
   </header>
+  <header v-else>
+    <h1 class="text-light">
+      LOADING....
+    </h1>
+  </header>
 
   <router-view />
   <footer>
@@ -73,7 +119,7 @@
         <h4>Followers</h4>
       </template>
       <template #modal-body>
-        <ProjectFollowers v-for="s in projectSubs" :key="s.id" :project-sub="s.profile" />
+        <ProjectFollowers v-for="s in projectSubs" :key="s.id" :projectsub="s.profile" />
       </template>
     </Modal>
   </footer>
