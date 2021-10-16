@@ -74,9 +74,9 @@
           </div>
 
           <div class="col-6">
-            <h3>
+            <h5>
               Genres:
-            </h3>
+            </h5>
             <p>
               {{ profile?.genreTags }}
             </p>
