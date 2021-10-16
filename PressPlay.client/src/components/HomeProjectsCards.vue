@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-3 text-center">
-    <div class="card my-3 selectable" style="width: 200px;">
+    <div class="card my-3 selectable">
       <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
         <div class="card-header p-0">
           <img :src="project.albumArt" class="rounded-top img-fluid" height="198" alt="">
@@ -89,16 +89,20 @@ export default {
 
 <style scoped lang="scss">
 div.card {
-  background: white;
   display: inline-block;
   margin: 8px;
-  max-width: 300px;
+  max-width: 200px;
   perspective: 1000;
   position: relative;
   text-align: left;
   transition: all 0.3s 0s ease-in;
-  width: 300px;
+  width: 200px;
   z-index: 1;
+  // background-image: url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDZ8fGJhY2tncm91bmQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
+  box-shadow: rgba(255, 255, 255, 0.24) 0px 3px 8px;
+}
+.card-body{
+  backdrop-filter: blur(5px);
 }
 .navbar .router-link-exact-active{
   border-bottom: 2px solid var(--bs-light);

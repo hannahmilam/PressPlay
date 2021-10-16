@@ -149,11 +149,11 @@ padding-right: 20px;
 padding-top: 20px;
 .letter {
 transition: ease-out 1s;
-transform: translateY(40%);
+transform: translateY(50%);
 }
 &:hover {
 .letter {
-transform: translateY(-30%);
+transform: translateY(-5%);
 }
 }
 }

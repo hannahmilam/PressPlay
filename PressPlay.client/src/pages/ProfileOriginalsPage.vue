@@ -1,5 +1,15 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" v-if="projects.length === 0">
+    <div class="row py-3 justify-content-center">
+      <div class="col-6 text-center">
+        <h3 class="txt">
+          You don't have any projects yet
+        </h3>
+        <img src="../assets/img/microphone.png" class="img-fluid microphone" alt="">
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid" v-else>
     <div class="row">
       <div class="col-6 m-auto pt-2">
         <form @submit.prevent="showHiddenProject()">
@@ -106,5 +116,17 @@ transition: .5;
 .track-list{
   height: 30rem;
 
+}
+.txt{
+font-family: 'Scheherazade New', serif;
+color: white;
+}
+
+.microphone{
+transition: all 0.3s 0s ease-in;
+}
+.microphone:hover{
+  transform: scale(1.1);
+  transition: .5s;
 }
 </style>
