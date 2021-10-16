@@ -1,7 +1,7 @@
 <template>
   <div class="selectable" @click="goToProfile">
-    {{ projectSub?.name }}
-    <img :src="projectSub?.picture" alt="">
+    {{ projectsub?.name }}
+    <img :src="projectsub?.picture" alt="">
   </div>
 </template>
 
@@ -11,7 +11,7 @@ import Pop from '../utils/Pop'
 import { router } from '../router'
 export default {
   props: {
-    projectSub: {
+    projectsub: {
       type: Object, required: true
     }
   },
@@ -23,7 +23,7 @@ export default {
           modal.hide()
           router.push({
             name: 'Profile.Originals',
-            params: { profileId: props.projectSub.id }
+            params: { profileId: props.projectsub.id }
           })
         } catch (error) {
           Pop.toast(error.message, 'error')
