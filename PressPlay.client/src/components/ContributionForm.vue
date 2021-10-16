@@ -18,7 +18,7 @@
              required
       >
     </div>
-    <button @click="upload" class="btn btn-success mt-2" type="submit">
+    <button @click.prevent="upload" class="btn btn-success mt-2" type="submit">
       Submit
     </button>
   </form>

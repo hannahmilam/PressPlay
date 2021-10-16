@@ -6,7 +6,7 @@
           <img :src="profile.picture" style="height: 100px; width: 100px;  " class="rounded-circle" alt="">
         </div>
         <div class="profile-name">
-          <div class="text-light">
+          <div class="my-text">
             <h1>
               {{ profile.name }}
             </h1>
@@ -22,15 +22,21 @@
           </div>
         </div>
         <div class="profile-name text-light">
-          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
-            Followers: {{ subscribers?.length }}
-          </p>
-          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
-            Following: {{ subscribing?.length }}
-          </p>
-          <p class="selectable btn" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
-            Projects Following:{{ usersProjectsSubscriptions?.length }}
-          </p>
+          <div class="p-1">
+            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
+              Followers: {{ subscribers?.length }}
+            </button>
+          </div>
+          <div class="p-1">
+            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
+              Following: {{ subscribing?.length }}
+            </button>
+          </div>
+          <div class="p-1">
+            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
+              Projects Following:{{ usersProjectsSubscriptions?.length }}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -78,6 +84,9 @@
       <p>{{ profile?.bio }} </p>
     </div>
   </body>
+  <footer>
+    <div class="short"></div>
+  </footer>
 
   <Modal id="project-form">
     <template #modal-title>
@@ -212,10 +221,19 @@ transition: .5;
 .tall{
   height: 15rem;
 }
+.short{
+  height: 4rem;
+}
 .profile-name{
   display: flex;
   align-items: flex-end;
   justify-content: center;
+}
+.my-text {
+color:aliceblue;
+// -webkit-text-stroke-width:.5px;
+// -webkit-text-stroke-color: black;
+text-shadow: 2px 2px 4px #000000;
 }
 
 </style>
