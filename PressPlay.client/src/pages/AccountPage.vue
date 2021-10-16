@@ -57,7 +57,7 @@
               <h1 class="txt">
                 Welcome {{ account.name }}
               </h1>
-              <img :src="account.picture" style="width: 250px; height: 250px;" class="rounded-circle" alt="">
+              <img :src="account.picture" style="width: 250px; height: 250px;" class="rounded-circle hidden-mobile" alt="">
             </div>
           </div>
         </div>
@@ -142,4 +142,10 @@ color: white;
   text-shadow: 2px 2px 4px #000000;
   font-family: 'Scheherazade New', serif;
 }
+
+   @media only screen and (max-width: 768px) {
+     .hidden-mobile {
+       display: none;
+     }
+   }
 </style>

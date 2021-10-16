@@ -1,26 +1,23 @@
 <template>
   <div class="col-md-3 text-center">
-    <div class="card my-3 selectable">
-      <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
-        <div class="card-header p-0">
-          <img :src="project.albumArt" class="rounded-top img-fluid" height="198" alt="">
-        </div>
-      </router-link>
-      <div class="card-body">
-        <div class="row justify-content-between me-2 text-black">
-          <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creator.id}}" class="selectable text-dark">
-            <div class="col-10">
-              <h5 class="card-text p-0 m-0 clip-text" :title="project.name">
+    <div class="card my-3 selectable" :style="{'backgroundImage': `url(${project.albumArt})`}">
+      <!-- <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-dark">
+      </router-link> -->
+      <div class="card-footer">
+        <div class="row justify-content-between">
+          <div class="col-10">
+            <router-link :to="{name: 'Profile.Originals', params: {profileId: project.creator.id}}" class="selectable text-white">
+              <h5 class="p-0 m-0 clip-text" :title="project.name">
                 <b>{{ project.name }}</b>
               </h5>
-              <p class="card-text" :title="project.creator.name">
+              <p :title="project.creator.name">
                 {{ project.creator.name }}
               </p>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
           <div class="col-2">
-            <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
-            <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
+            <i :id="'pause-'+project.id" class="fas fa-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
+            <i :id="'play-'+project.id" class="fas fa-play f-20 selectable" @click.stop="setSource" v-else></i>
           </div>
         </div>
       </div>
@@ -89,20 +86,22 @@ export default {
 
 <style scoped lang="scss">
 div.card {
-  display: inline-block;
-  margin: 8px;
-  max-width: 200px;
-  perspective: 1000;
-  position: relative;
+  max-width: 300px;
+  height: 300px;
+  background-size: cover;
   text-align: left;
   transition: all 0.3s 0s ease-in;
-  width: 200px;
   z-index: 1;
-  // background-image: url('https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDZ8fGJhY2tncm91bmQlMjBpbWFnZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60');
   box-shadow: rgba(255, 255, 255, 0.24) 0px 3px 8px;
+  border: none;
 }
-.card-body{
-  backdrop-filter: blur(5px);
+.card-footer{
+  backdrop-filter: blur(10px);
+  margin-top: 80%;
+  background: linear-gradient(
+          rgba(0, 0, 0, 0.473),
+          rgba(0, 0, 0, 0.459)
+        ),;
 }
 .navbar .router-link-exact-active{
   border-bottom: 2px solid var(--bs-light);
@@ -110,7 +109,7 @@ div.card {
   border-bottom-right-radius: 0;
 }
 .card:hover{
-   transform: scale(1.1);
+   transform: scale(1.05);
     transition: .5s;
 }
 </style>
