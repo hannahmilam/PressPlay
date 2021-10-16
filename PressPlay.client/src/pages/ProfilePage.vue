@@ -61,32 +61,39 @@
       </div>
     </div>
   </header>
-  <body class="bg-dark text-light">
-    <div class="container-fluid ">
-      <router-view />
+  <router-view />
+  <div class="container-fluid text-light d-flex justify-content-center">
+    <div class="col-10 mt-5">
+      <div class="card p-3">
+        <div class="row">
+          <div class="col-6">
+            <h5 v-if="profile.instrumentTags">
+              Instruments:
+            </h5>
+            <p>{{ profile.instrumentTags }}</p>
+          </div>
+
+          <div class="col-6">
+            <h3 v-if="profile.genreTags">
+              Genres:
+            </h3>
+            <p>
+              {{ profile?.genreTags }}
+            </p>
+          </div>
+        </div>
+        <div>
+          <h5>
+            About Me:
+          </h5>
+          <p>{{ profile?.bio }} </p>
+        </div>
+        <footer>
+          <div class="short"></div>
+        </footer>
+      </div>
     </div>
-    <div>
-      <p>Instruments</p>
-      <p>{{ profile?.instrumentTags }}</p>
-    </div>
-    <div>
-      <p>
-        Genres
-      </p>
-      <p>
-        {{ profile?.genreTags }}
-      </p>
-    </div>
-    <div>
-      <h5>
-        About Me:
-      </h5>
-      <p>{{ profile?.bio }} </p>
-    </div>
-  </body>
-  <footer>
-    <div class="short"></div>
-  </footer>
+  </div>
 
   <Modal id="project-form">
     <template #modal-title>
@@ -187,6 +194,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.img-fill{
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 .sidebar{
   background: white;
   height: 100vh;
@@ -234,6 +245,9 @@ color:aliceblue;
 // -webkit-text-stroke-width:.5px;
 // -webkit-text-stroke-color: black;
 text-shadow: 2px 2px 4px #000000;
+}
+.card{
+  background-color: #e55dd54b;
 }
 
 </style>
