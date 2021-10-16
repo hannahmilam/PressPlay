@@ -54,7 +54,6 @@
              name="neededInstrumentTag"
              class="form-control"
              minlength="1"
-             required
              v-model="otherTemp"
       >
       <button class="btn btn-info mt-2" type="button" @click="addInstrumentTag()">
@@ -68,7 +67,6 @@
              name="neededInstrumentTag"
              class="form-control"
              minlength="1"
-             required
              v-model="temp"
       >
       <button class="btn btn-info mt-2" type="button" @click="addNeededInstrumentTag()">
@@ -132,7 +130,7 @@ export default {
           const modal = Modal.getInstance(document.getElementById('project-form'))
           modal.hide()
           router.push({
-            name: 'Project',
+            name: 'Project.Contributions',
             params: { projectId: projectId }
           })
         } catch (error) {
