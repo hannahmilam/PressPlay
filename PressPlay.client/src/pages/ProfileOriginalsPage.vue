@@ -28,8 +28,10 @@
         </form>
       </div>
     </div>
-    <div class="row">
-      <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+    <div class="container">
+      <div class="row">
+        <ProjectsCards v-for="p in projects" :key="p.id" :project="p" />
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +88,10 @@ export default {
 </script>
 
 <style>
+.contanier{
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.315);
+}
 .container-fluid{
   font-family: 'Scheherazade New', serif;
 }
