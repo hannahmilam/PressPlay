@@ -61,7 +61,8 @@
               </div>
               <div class="col-2">
                 <!-- original Mp3 -->
-                <h1 class="mdi mdi-play selectable"></h1>
+                <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
+                <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setOriginalSource" v-else></i>
               </div>
             </div>
           </div>
@@ -77,7 +78,8 @@
               </div>
               <div class="col-2">
                 <!-- Spotlight Mp3 -->
-                <h1 class="mdi mdi-play selectable"></h1>
+                <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
+                <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
               </div>
             </div>
           </div>
@@ -137,6 +139,7 @@ import { contributionsService } from '../services/ContributionsService'
 import { commentsService } from '../services/CommentsService'
 import { router } from '../router'
 import { firebaseService } from '../services/FirebaseService'
+import { logger } from '../utils/Logger'
 export default {
   name: 'Project',
   setup() {
@@ -161,11 +164,70 @@ export default {
     })
     return {
       project: computed(() => AppState.project),
+      currentSong: computed(() => AppState.currentSong),
+      playing: computed(() => AppState.playing),
       contributions: computed(() => AppState.contributions),
       account: computed(() => AppState.account),
       projectSubs: computed(() => AppState.projectSubscriptions),
       comments: computed(() => AppState.comments),
       profile: computed(() => AppState.profile),
+      setOriginalSource() {
+        try {
+          AppState.currentSong.src = AppState.project.originalMp3
+          AppState.currentSong.id = AppState.project.id
+          AppState.currentSong.albumArt = AppState.project.albumArt
+          AppState.currentSong.name = AppState.project.name
+          AppState.currentSong.creator = AppState.project.creator
+          AppState.currentSong.creatorId = AppState.project.creatorId
+          const currentSong = document.getElementById(AppState.project.id)
+          // logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
+          } else {
+            currentSong.src = AppState.project.spotlightMp3
+            this.toggleAudio()
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+
+      setSource() {
+        try {
+          AppState.currentSong.src = AppState.project.spotlightMp3
+          AppState.currentSong.id = AppState.project.id
+          AppState.currentSong.albumArt = AppState.project.albumArt
+          AppState.currentSong.name = AppState.project.name
+          AppState.currentSong.creator = AppState.project.creator
+          AppState.currentSong.creatorId = AppState.project.creatorId
+          const currentSong = document.getElementById(AppState.project.id)
+          // logger.log('current song, set source', AppState.currentSong)
+          if (AppState.currentSong.src) {
+            setTimeout(() => this.toggleAudio(), 250)
+          } else {
+            currentSong.src = AppState.project.spotlightMp3
+            this.toggleAudio()
+          }
+        } catch (error) {
+          Pop.toast(error, 'error')
+        }
+      },
+      toggleAudio() {
+        const currentSong = document.getElementById(AppState.project.id)
+        if (!currentSong) {
+          return logger.log('no audio element found')
+        }
+
+        if (currentSong.paused) {
+          currentSong.play()
+          AppState.playing = true
+          document.getElementById('album-art').classList.add('active')
+        } else {
+          currentSong.pause()
+          AppState.playing = false
+          document.getElementById('album-art').classList.remove('active')
+        }
+      },
 
       myProjectSubscriptions: computed(() => AppState.projectSubscriptions.filter(s => s.profileId === AppState.account.id)),
       async subscribeToProject() {
