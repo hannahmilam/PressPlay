@@ -5,7 +5,7 @@
   <main class="bg-dark">
     <router-view />
   </main>
-  <footer class="bg-white">
+  <footer class="fixed-bottom">
     <AudioPlayer />
   </footer>
 </template>
@@ -24,7 +24,8 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
-footer{
-  background: radial-gradient(circle, #F963EA, #493240);
+
+main{
+  padding-bottom:150px;
 }
 </style>

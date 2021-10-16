@@ -1,6 +1,6 @@
 <template>
   <div v-if="currentSong.src">
-    <div id="app-cover">
+    <div id="app-cover" class="w-100">
       <div id="player-content">
         <div id="album-art" class="active">
           <img :src="currentSong.albumArt" class="active" id="_1">
@@ -114,6 +114,7 @@ body {
   box-shadow: 0 0 0 10px #fff;
   border-radius: 50%;
   overflow: hidden;
+  left: calc(40% - 115px);
 }
 
 #album-art.active {
