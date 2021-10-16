@@ -86,6 +86,9 @@ export default {
 </script>
 
 <style>
+.container-fluid{
+  font-family: 'Scheherazade New', serif;
+}
 .bg-img{
   background-image: url('https://images.unsplash.com/photo-1602292678572-16cb94ea0d88?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBqYXp6fGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
   background-repeat: no-repeat;
