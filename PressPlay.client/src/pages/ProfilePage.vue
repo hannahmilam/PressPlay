@@ -67,14 +67,14 @@
       <div class="card p-3">
         <div class="row">
           <div class="col-6">
-            <h5 v-if="profile.instrumentTags">
+            <h5>
               Instruments:
             </h5>
             <p>{{ profile.instrumentTags }}</p>
           </div>
 
           <div class="col-6">
-            <h3 v-if="profile.genreTags">
+            <h3>
               Genres:
             </h3>
             <p>
