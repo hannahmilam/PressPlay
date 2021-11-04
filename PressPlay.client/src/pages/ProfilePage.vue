@@ -1,39 +1,68 @@
 <template>
   <header>
     <div class="container-fluid bg-dark text-light text-center">
-      <div class="row tall img-fill" :style="{'backgroundImage':`url(${profile.coverImg})` }">
-        <div class="profile-name pt-3">
-          <img :src="profile.picture" style="height: 100px; width: 100px;  " class="rounded-circle" alt="">
+      <div
+        class="row tall img-fill"
+        :style="{ backgroundImage: `url(${profile.coverImg})` }"
+      >
+        <div>
+          <img
+            :src="profile.picture"
+            style="height: 100px; width: 100px"
+            class="rounded-circle"
+            alt=""
+          />
         </div>
-        <div class="profile-name">
-          <div class="my-text">
+        <div class="row justify-content-center">
+          <div class="col-6 text-center my-text">
             <h1>
               {{ profile.name }}
             </h1>
-            <br>
-          </div>
-          <div class="text-light" v-if="profile?.id !== account?.id">
-            <a @click="subscribeToUser()" v-if="myUserSubscribe.length > 0" class="selectable">
-              Unfollow
-            </a>
-            <a @click="subscribeToUser()" v-else class="selectable">
-              Follow
-            </a>
           </div>
         </div>
-        <div class="profile-name text-light">
-          <div class="p-1">
-            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#subscribers-modal">
+        <div class="row justify-content-center">
+          <div
+            class="text-light text-center col-md-"
+            v-if="profile?.id !== account?.id"
+          >
+            <button
+              class="btn btn-info"
+              @click="subscribeToUser()"
+              v-if="myUserSubscribe.length > 0"
+            >
+              Unfollow
+            </button>
+            <button class="btn btn-info" @click="subscribeToUser()" v-else>
+              Follow
+            </button>
+          </div>
+        </div>
+
+        <div class="row text-light justify-content-center">
+          <div class="p-1 col-md-2">
+            <button
+              class="selectable btn btn-dark text-light"
+              data-bs-toggle="modal"
+              data-bs-target="#subscribers-modal"
+            >
               Followers: {{ subscribers?.length }}
             </button>
           </div>
-          <div class="p-1">
-            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#subscribing-modal">
+          <div class="p-1 col-md-2">
+            <button
+              class="selectable btn btn-dark text-light"
+              data-bs-toggle="modal"
+              data-bs-target="#subscribing-modal"
+            >
               Following: {{ subscribing?.length }}
             </button>
           </div>
-          <div class="p-1">
-            <button class="selectable btn btn-dark text-light" data-bs-toggle="modal" data-bs-target="#projects-following-modal">
+          <div class="p-1 col-md-2">
+            <button
+              class="selectable btn btn-dark text-light"
+              data-bs-toggle="modal"
+              data-bs-target="#projects-following-modal"
+            >
               Projects Following:{{ usersProjectsSubscriptions?.length }}
             </button>
           </div>
@@ -41,20 +70,35 @@
       </div>
 
       <div v-if="profile">
-        <nav class="navbar top-bar bg-dark text-light navbar-light bg-dark text-light justify-content-around">
+        <nav
+          class="
+            navbar
+            top-bar
+            bg-dark
+            text-light
+            navbar-light
+            bg-dark
+            text-light
+            justify-content-around
+          "
+        >
           <router-link :to="{ name: 'Profile.Originals' }">
             <li class="nav-link selectable text-uppercase text-light">
               Originals {{ projects.length }}
             </li>
           </router-link>
 
-          <router-link :to="{ name: 'Profile.Contributions', }">
+          <router-link :to="{ name: 'Profile.Contributions' }">
             <li class="nav-link selectable text-uppercase text-light">
               Contributions {{ contributions.length }}
             </li>
           </router-link>
 
-          <button class="btn btn-project" data-bs-toggle="modal" data-bs-target="#project-form">
+          <button
+            class="btn btn-project"
+            data-bs-toggle="modal"
+            data-bs-target="#project-form"
+          >
             <b class="text-light">New Project</b>
           </button>
         </nav>
@@ -67,26 +111,20 @@
       <div class="card p-3">
         <div class="row">
           <div class="col-6">
-            <h5>
-              Instruments:
-            </h5>
+            <h5>Instruments:</h5>
             <p>{{ profile.instrumentTags }}</p>
           </div>
 
           <div class="col-6">
-            <h5>
-              Genres:
-            </h5>
+            <h5>Genres:</h5>
             <p>
               {{ profile?.genreTags }}
             </p>
           </div>
         </div>
         <div>
-          <h5>
-            About Me:
-          </h5>
-          <p>{{ profile?.bio }} </p>
+          <h5>About Me:</h5>
+          <p>{{ profile?.bio }}</p>
         </div>
         <footer>
           <div class="short"></div>
@@ -121,7 +159,11 @@
     </template>
     <template #modal-body>
       <div class="row">
-        <Subscribing v-for="s in subscribing" :key="s.id" :subscribing="s.subscribing" />
+        <Subscribing
+          v-for="s in subscribing"
+          :key="s.id"
+          :subscribing="s.subscribing"
+        />
       </div>
     </template>
   </Modal>
@@ -131,7 +173,11 @@
       <h4>Followed Projects</h4>
     </template>
     <template #modal-body>
-      <ProjectsFollowing v-for="p in usersProjectsSubscriptions" :key="p.id" :project="p.project" />
+      <ProjectsFollowing
+        v-for="p in usersProjectsSubscriptions"
+        :key="p.id"
+        :project="p.project"
+      />
     </template>
   </Modal>
 </template>
@@ -154,7 +200,7 @@ export default {
       // AppState.projects = []
       // AppState.profileSubscribers = []
     })
-    watchEffect(async() => {
+    watchEffect(async () => {
       if (route.params.profileId) {
         try {
           await profilesService.getProfileById(route.params.profileId)
@@ -194,60 +240,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.img-fill{
+.img-fill {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.sidebar{
+.sidebar {
   background: white;
   height: 100vh;
 }
-.bg-img{
-  background-image: url('https://images.unsplash.com/photo-1602292678572-16cb94ea0d88?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBqYXp6fGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+.bg-img {
+  background-image: url("https://images.unsplash.com/photo-1602292678572-16cb94ea0d88?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGJsYWNrJTIwYW5kJTIwd2hpdGUlMjBqYXp6fGVufDB8MXwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
 }
-.btn-project{
-background: linear-gradient(90deg, #CB369E, #1D2EF7);
-transition: .5;
+.btn-project {
+  background: linear-gradient(90deg, #cb369e, #1d2ef7);
+  transition: 0.5;
 }
-:hover.btn-project{
-background: linear-gradient(90deg, #1D2EF7, #CB369E);
-transition: .5;
+:hover.btn-project {
+  background: linear-gradient(90deg, #1d2ef7, #cb369e);
+  transition: 0.5;
 }
-.top-bar{
-   box-shadow: 0 4px 2px -2px rgba(243, 233, 233, 0.438);
+.top-bar {
+  box-shadow: 0 4px 2px -2px rgba(243, 233, 233, 0.438);
 }
 
-.nav-link:hover{
+.nav-link:hover {
   transform: translateY(-10%);
   font-weight: 500;
 }
-.navbar .router-link-exact-active{
+.navbar .router-link-exact-active {
   border-bottom: 2px solid var(--bs-light);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.tall{
+.tall {
   height: 15rem;
 }
-.short{
+.short {
   height: 4rem;
 }
-.profile-name{
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
 .my-text {
-color:aliceblue;
-// -webkit-text-stroke-width:.5px;
-// -webkit-text-stroke-color: black;
-text-shadow: 2px 2px 4px #000000;
+  color: aliceblue;
+  text-shadow: 2px 2px 4px #000000;
 }
-.card{
+.card {
   background-color: #e55dd54b;
 }
-
 </style>
