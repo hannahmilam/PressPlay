@@ -1,21 +1,27 @@
 <template>
-  <div class="p-2 jc-around comments-shadow">
-    <div class="in-line">
-      <router-link :to="{name: 'Profile.Originals', params: {profileId: comment.creator.id}}" class="selectable text-dark">
-        <img class="small p-1" :src="comment.creator.picture" alt="">
+  <div class="p-2 row">
+    <div class="col-1">
+      <router-link
+        :to="{
+          name: 'Profile.Originals',
+          params: { profileId: comment.creator.id },
+        }"
+      >
+        <img
+          class="selectable rounded-circle profile-img"
+          :src="comment.creator.picture"
+          alt=""
+        />
       </router-link>
-
-      <p>
+    </div>
+    <div class="col-8">
+      <p class="mt-2">
         {{ comment.body }}
       </p>
     </div>
-    <div>
+    <div class="col-1">
       <div v-if="account.id === comment.creatorId">
-        <button @click="removeComment" class="btn btn-dark">
-          Delete
-        </button>
-      </div>
-      <div v-else>
+        <button @click="removeComment" class="btn btn-dark">Delete</button>
       </div>
     </div>
   </div>
@@ -54,21 +60,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.small {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  width: 30px
+.profile-img {
+  height: 45px;
+  width: 45px;
 }
-.in-line {
-display: flex;
-}
-.jc-around {
-  display: flex;
-  justify-content: space-between;
-}
-.comments-shadow{
-  box-shadow: 0 4px 2px -2px rgba(128, 128, 128, 0.438);
-}
-
 </style>

@@ -3,13 +3,12 @@
     <div class="col-10 m-auto">
       <div class="card">
         <div class="card-header">
-          <a
-            ><span
-              class="selectable ms-3"
-              data-bs-toggle="modal"
-              data-bs-target="#contribution-form"
-              >New Contribution +</span
-            ></a
+          <span
+            class="selectable ms-3"
+            data-bs-toggle="modal"
+            data-bs-target="#contribution-form"
+          >
+            New Contribution +</span
           >
         </div>
         <div class="card-body">
@@ -64,7 +63,7 @@ a:after {
   animation: gradient 3s ease-in-out infinite,
     border 1s forwards ease-in-out reverse;
 }
-a > span {
+span {
   background: linear-gradient(120deg, #6559ae, #ff7159, #6559ae);
   background-size: 400% 400%;
   -webkit-background-clip: text;

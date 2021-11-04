@@ -1,24 +1,63 @@
 <template>
-  <div class="set-inline p-2 contributions-shadow">
-    <div>
-      <router-link :to="{name: 'Profile.Originals', params: {profileId: contribution.collaborator.id}}" class="selectable text-dark">
-        <img class="contribution-picture" :src="contribution.collaborator.picture" alt="">
+  <div class="row justify-content-between p-2">
+    <div class="col-4">
+      <router-link
+        :to="{
+          name: 'Profile.Originals',
+          params: { profileId: contribution.collaborator.id },
+        }"
+        class="selectable text-dark"
+      >
+        <img
+          class="contribution-picture"
+          :src="contribution.collaborator.picture"
+          alt=""
+        />
       </router-link>
     </div>
-    <div>
+    <div class="col-6">
       <h5>
-        <span v-if="currentProject.spotlightMp3 === contribution.contributionMp3" class="text-success">{{ contribution.title }}</span>
+        <span
+          v-if="currentProject.spotlightMp3 === contribution.contributionMp3"
+          >{{ contribution.title }}</span
+        >
         <span v-else>{{ contribution.title }}</span>
-        <span @click="setSpotlight()" v-if="currentProject.creatorId === account.id" class="">
-          <i v-if="currentProject.spotlightMp3 === contribution.contributionMp3" title="Set to Spotlight" class="selectable mdi text-success mdi-star-circle-outline"></i>
-          <i v-else title="Set to Spotlight" class="selectable mdi mdi-star-circle-outline"></i>
-        </span>
-        <i :id="'pause-'+contribution.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === contribution.id && playing"></i>
-        <i :id="'play-'+contribution.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
       </h5>
     </div>
-    <div>
-      <button v-if="contribution.acccountId === account.id" @click="deleteFirebaseContribution">
+    <div class="col-1">
+      <span
+        @click="setSpotlight()"
+        v-if="currentProject.creatorId === account.id"
+      >
+        <i
+          v-if="currentProject.spotlightMp3 === contribution.contributionMp3"
+          title="Set to Spotlight"
+          class="selectable mdi mdi-star-circle-outline"
+        ></i>
+        <i
+          v-else
+          title="Set to Spotlight"
+          class="selectable mdi mdi-star-circle-outline"
+        ></i>
+      </span>
+      <i
+        :id="'pause-' + contribution.id"
+        class="fas fa-pause selectable"
+        @click.stop="toggleAudio"
+        v-if="currentSong.id === contribution.id && playing"
+      ></i>
+      <i
+        :id="'play-' + contribution.id"
+        class="fas fa-play selectable"
+        @click.stop="setSource"
+        v-else
+      ></i>
+    </div>
+    <div class="col-1">
+      <button
+        v-if="contribution.acccountId === account.id"
+        @click="deleteFirebaseContribution"
+      >
         Delete Contribution
       </button>
     </div>
@@ -124,17 +163,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contribution-picture{
+.contribution-picture {
   height: 40px;
   width: 40px;
   border-radius: 50%;
 }
-.set-inline{
+.set-inline {
   display: flex;
   justify-content: space-between;
 }
-.contributions-shadow{
+.contributions-shadow {
   box-shadow: 0 4px 2px -2px rgba(128, 128, 128, 0.438);
 }
-
 </style>
