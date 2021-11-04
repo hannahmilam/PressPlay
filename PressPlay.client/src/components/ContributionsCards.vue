@@ -4,13 +4,13 @@
       <router-link
         :to="{
           name: 'Profile.Originals',
-          params: { profileId: contribution.collaborator.id },
+          params: { profileId: contribution?.id },
         }"
         class="selectable text-dark"
       >
         <img
           class="contribution-picture"
-          :src="contribution.collaborator.picture"
+          :src="contribution.collaborator?.picture"
           alt=""
         />
       </router-link>

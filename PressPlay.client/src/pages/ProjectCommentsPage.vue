@@ -2,8 +2,11 @@
   <div class="row">
     <div class="col-8 m-auto">
       <div class="card">
-        <div class="card-body  scroll-box">
+        <div class="card-body scroll-box" v-if="comments.length > 0">
           <CommentCard v-for="c in comments" :key="c.id" :comment="c" />
+        </div>
+        <div v-else class="ms-2 mt-2">
+          <p>Be the first comment</p>
         </div>
       </div>
     </div>
@@ -13,17 +16,16 @@
       <div class="card-footer">
         <form @submit.prevent="postComment()">
           <div class="form-group">
-            <input type="text"
-                   class="form-control"
-                   id="coment-card"
-                   placeholder="Add Comment"
-                   v-model="editable.body"
-                   required
-            >
+            <input
+              type="text"
+              class="form-control"
+              id="coment-card"
+              placeholder="Add Comment"
+              v-model="editable.body"
+              required
+            />
           </div>
-          <button class="btn btn-success mt-2" type="submit">
-            Submit
-          </button>
+          <button class="btn btn-success mt-2" type="submit">Submit</button>
         </form>
       </div>
     </div>
@@ -56,9 +58,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.scroll-box{
-  height: 20rem;
+.scroll-box {
   overflow-y: scroll;
+  min-height: 100px;
+  max-height: 300px;
 }
-
 </style>

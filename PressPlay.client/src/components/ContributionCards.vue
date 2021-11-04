@@ -1,8 +1,16 @@
 <template>
   <div class="col-6 my-3 d-flex">
     <div>
-      <router-link :to="{name: 'Project', params: {projectId: contribution.projectId}}" class="selectable text-light ">
-        <img :src="contribution.project.albumArt" height="50" width="50" alt="">
+      <router-link
+        :to="{ name: 'Profile', params: { profileId: contribution.creatorId } }"
+        class="selectable text-light"
+      >
+        <img
+          :src="contribution.project.albumArt"
+          height="50"
+          width="50"
+          alt=""
+        />
       </router-link>
     </div>
     <div class="ps-3">
@@ -19,13 +27,21 @@
     </div>
     <div class="">
       <div>
-        <i :id="'pause-'+contribution.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === contribution.id && playing"></i>
-        <i :id="'play-'+contribution.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
+        <i
+          :id="'pause-' + contribution.id"
+          class="mdi mdi-pause f-20 selectable"
+          @click.stop="toggleAudio"
+          v-if="currentSong.id === contribution.id && playing"
+        ></i>
+        <i
+          :id="'play-' + contribution.id"
+          class="mdi mdi-play f-20 selectable"
+          @click.stop="setSource"
+          v-else
+        ></i>
       </div>
     </div>
   </div>
-
-  <!-- <i class="mdi mdi-play f-20"></i> -->
 </template>
 
 <script>
@@ -97,22 +113,19 @@ export default {
   backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   display: inline-block;
 }
-.show-inline{
+.show-inline {
   display: flex;
   justify-content: space-between;
 }
-.front{
+.front {
   display: flex;
   justify-content: space-between;
 }
-.back{
+.back {
   display: flex;
   align-self: flex-start;
 }
-  .one-line{
-
+.one-line {
   justify-content: flex-end;
-
 }
-
 </style>

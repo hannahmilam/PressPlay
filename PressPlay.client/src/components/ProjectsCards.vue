@@ -4,8 +4,14 @@
       <div class="col-6 ps-0 ms-0">
         <div class="d-flex">
           <div>
-            <router-link :to="{name: 'Project', params: {projectId: project.id}}" class="selectable text-light">
-              <img :src="project.albumArt" height="50" width="50" alt="">
+            <router-link
+              :to="{
+                name: 'Project.Contributions',
+                params: { projectId: project.id },
+              }"
+              class="selectable text-light"
+            >
+              <img :src="project.albumArt" height="50" width="50" alt="" />
             </router-link>
           </div>
 
@@ -17,14 +23,24 @@
       <div class="col-6 one-line">
         <div class="d-flex align-self-end">
           <small>
-            <p> <strong>
-              Contributions: {{ contributions.length }}</strong></p>
-
+            <p>
+              <strong> Contributions: {{ contributions.length }}</strong>
+            </p>
           </small>
         </div>
         <div>
-          <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
-          <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
+          <i
+            :id="'pause-' + project.id"
+            class="mdi mdi-pause f-20 selectable"
+            @click.stop="toggleAudio"
+            v-if="currentSong.id === project.id && playing"
+          ></i>
+          <i
+            :id="'play-' + project.id"
+            class="mdi mdi-play f-20 selectable"
+            @click.stop="setSource"
+            v-else
+          ></i>
         </div>
       </div>
     </div>
@@ -107,17 +123,17 @@ export default {
   height: 3rem;
 }
 
-  .one-line{
+.one-line {
   display: flex;
   justify-content: space-between;
   align-items: start;
 }
-.col-line{
+.col-line {
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
 }
-.song-shadow{
+.song-shadow {
   box-shadow: 0 4px 2px -2px rgba(128, 128, 128, 0.438);
 }
 </style>

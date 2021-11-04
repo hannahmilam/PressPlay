@@ -20,7 +20,7 @@
             />
           </div>
           <div v-else>
-            <p>Be The first contribution</p>
+            <p>Be the first contribution</p>
           </div>
         </div>
       </div>

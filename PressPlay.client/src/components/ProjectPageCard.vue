@@ -116,11 +116,7 @@
       <h4>Followers</h4>
     </template>
     <template #modal-body>
-      <ProjectFollowers
-        v-for="s in projectSubs"
-        :key="s.id"
-        :projectsub="s.profile"
-      />
+      <ProjectFollowers v-for="s in projectSubs" :key="s.id" :projectsub="s" />
     </template>
   </Modal>
 </template>
