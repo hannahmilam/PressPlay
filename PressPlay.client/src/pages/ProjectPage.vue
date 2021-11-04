@@ -1,76 +1,13 @@
 <template>
+  <ProjectPageCard />
+
   <header v-if="project">
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-11 m-auto">
-          <div class="card">
-            <div class="row g-0">
-              <div class="col-5">
-                <img class="img-fluid" :src="project.albumArt" alt="">
-              </div>
-              <div class="col-7 d-flex align-items-end">
-                <div class="card-body ">
-                  <div class="card-header">
-                    <h1 class="d-flex justify-content-between">
-                      <span>{{ project.name }}</span>
-                      <span>
-                        <button @click="removeProjectFromFirebase(account.id, project)" v-if="account.id === project.creatorId" class="btn btn-dark">
-                          <i class="mdi mdi-close"></i> Delete Project
-                        </button>
-                      </span>
-                    </h1>
-                    <div class="card-body">
-                      <h5>{{ project.description }}</h5>
-                    </div>
-                    <div>
-                      <span>
-                        <img class="rounded-circle" :src="project.creator?.picture" style="height: 50px" alt="">
-                      </span>
-                      <span>
-                        <b>{{ project.creator?.name }}</b>
-                      </span>
-
-                      <span data-bs-toggle="modal" data-bs-target="#followers-form">
-                        Followers: {{ projectSubs?.length }}
-                      </span>
-                      <span v-if="project.creatorId !== account?.id" class="px-3">
-                        <button @click="subscribeToProject()" v-if="myProjectSubscriptions.length > 0" class="btn btn-danger">
-                          Unfollow
-                        </button>
-                        <button @click="subscribeToProject()" v-else class="btn btn-primary">
-                          Follow
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row d-flex justify-content-around">
-        <div class="col-4 m-3">
-          <div class="card">
-            <div class="row">
-              <small>Orginal Upload</small>
-              <div class="col-10">
-                <h3>
-                  {{ project.name }}
-                </h3>
-              </div>
-              <div class="col-2">
-                <!-- original Mp3 -->
-                <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
-                <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setOriginalSource" v-else></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-4 m-3" v-if="project.spotlightName !== null">
-          <div class="card">
-            <div class="row">
-              <small>Current Spotlight</small>
+      <div class="row d-flex justify-content-center">
+        <div class="col-6 my-3" v-if="project.spotlightName !== null">
+          <div class="card spotlight">
+            <div class="row ms-2 pt-2">
+              <small>CURRENT SPOTLIGHT</small>
               <div class="col-10">
                 <h3>
                   {{ project.spotlightName }}
@@ -78,8 +15,18 @@
               </div>
               <div class="col-2">
                 <!-- Spotlight Mp3 -->
-                <i :id="'pause-'+project.id" class="mdi mdi-pause f-20 selectable" @click.stop="toggleAudio" v-if="currentSong.id === project.id && playing"></i>
-                <i :id="'play-'+project.id" class="mdi mdi-play f-20 selectable" @click.stop="setSource" v-else></i>
+                <i
+                  :id="'pause-' + project.id"
+                  class="fas fa-pause f-20 selectable"
+                  @click.stop="toggleAudio"
+                  v-if="currentSong.id === project.id && playing"
+                ></i>
+                <i
+                  :id="'play-' + project.id"
+                  class="fas fa-play f-20 selectable"
+                  @click.stop="setSource"
+                  v-else
+                ></i>
               </div>
             </div>
           </div>
@@ -87,15 +34,15 @@
       </div>
       <div class="row">
         <div class="col-12 button-stuff">
-          <router-link :to="{name: 'Project.Contributions'}">
+          <router-link :to="{ name: 'Project.Contributions' }">
             <li class="nav-link selectable text-uppercase text-light">
-              Contributions {{ contributions.length }}
+              Contributions: {{ contributions.length }}
             </li>
           </router-link>
 
-          <router-link :to="{name: 'Project.Comments'}">
+          <router-link :to="{ name: 'Project.Comments' }">
             <li class="nav-link selectable text-uppercase text-light">
-              Comments {{ comments.length }}
+              Comments: {{ comments.length }}
             </li>
           </router-link>
         </div>
@@ -103,9 +50,7 @@
     </div>
   </header>
   <header v-else>
-    <h1 class="text-light">
-      LOADING....
-    </h1>
+    <h1 class="text-light">LOADING....</h1>
   </header>
 
   <router-view />
@@ -116,14 +61,6 @@
       </template>
       <template #modal-body>
         <ContributionForm :project="project" />
-      </template>
-    </Modal>
-    <Modal id="followers-form">
-      <template #modal-title>
-        <h4>Followers</h4>
-      </template>
-      <template #modal-body>
-        <ProjectFollowers v-for="s in projectSubs" :key="s.id" :projectsub="s.profile" />
       </template>
     </Modal>
   </footer>
@@ -150,7 +87,7 @@ export default {
       AppState.projectSubscriptions = []
       AppState.comments = []
     })
-    watchEffect(async() => {
+    watchEffect(async () => {
       if (route.params.projectId) {
         try {
           await projectsService.getProjectById(route.params.projectId)
@@ -271,9 +208,268 @@ export default {
 .small {
   width: 85px;
 }
-.button-stuff{
+.button-stuff {
   display: flex;
   justify-content: space-around;
 }
+.spotlight {
+  color: white;
+  background: linear-gradient(120deg, #6559ae, #ff7159, #6559ae);
+  background-size: 400% 400%;
+  -webkit-background-clip: border;
+  -webkit-text-fill-color: white;
+  -moz-animation: gradient 3s ease-in-out infinite;
+  -webkit-animation: gradient 3s ease-in-out infinite;
+  animation: gradient 3s ease-in-out infinite;
+}
 
+@-moz-keyframes gradient {
+  0% {
+    background-position: 14% 0%;
+  }
+  50% {
+    background-position: 87% 100%;
+  }
+  100% {
+    background-position: 14% 0%;
+  }
+}
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 14% 0%;
+  }
+  50% {
+    background-position: 87% 100%;
+  }
+  100% {
+    background-position: 14% 0%;
+  }
+}
+@keyframes gradient {
+  0% {
+    background-position: 14% 0%;
+  }
+  50% {
+    background-position: 87% 100%;
+  }
+  100% {
+    background-position: 14% 0%;
+  }
+}
+@-moz-keyframes border {
+  0% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      4px 66px,
+      4px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  25% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      216px 66px,
+      216px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  50% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      100% 0%,
+      0% 0%
+    );
+  }
+  75% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 0%,
+      0% 0%
+    );
+  }
+  100% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      0% 100%
+    );
+  }
+}
+@-webkit-keyframes border {
+  0% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      4px 66px,
+      4px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  25% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      216px 66px,
+      216px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  50% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      100% 0%,
+      0% 0%
+    );
+  }
+  75% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 0%,
+      0% 0%
+    );
+  }
+  100% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes border {
+  0% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      4px 66px,
+      4px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  25% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 66px,
+      216px 66px,
+      216px 100%,
+      100% 100%,
+      100% 0%,
+      0% 0%
+    );
+  }
+  50% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      216px 4px,
+      100% 0%,
+      0% 0%
+    );
+  }
+  75% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 4px,
+      4px 0%,
+      0% 0%
+    );
+  }
+  100% {
+    -webkit-clip-path: polygon(
+      0% 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      4px 100%,
+      0% 100%
+    );
+  }
+}
 </style>
