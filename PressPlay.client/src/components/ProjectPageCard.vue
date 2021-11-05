@@ -312,16 +312,18 @@ export default {
   border-radius: 50%;
 }
 .artist__header .artist__info__type {
-  color: #aaaaaa;
+  color: white;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 1px;
+  text-shadow: rgb(10, 8, 1) 1px 0 4px;
 }
 .artist__header .artist__info__name {
   color: white;
   font-size: 36px;
   font-weight: 100;
   padding: 0 0 10px 0;
+  text-shadow: rgb(10, 8, 1) 1px 0 4px;
 }
 .artist__header .artist__info__actions {
   display: flex;
@@ -356,15 +358,16 @@ export default {
   z-index: 1;
   padding: 15px;
   text-align: right;
-  color: #aaaaaa;
+  color: white;
+  text-shadow: rgb(10, 8, 1) 1px 0 4px;
   font-weight: 100;
-  font-size: 16px;
+  font-size: 20px;
   letter-spacing: 1px;
 }
 .artist__header .artist__listeners__label {
   font-weight: 300;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 1px;
 }
 .artist__header .artist__navigation {
@@ -724,7 +727,8 @@ button:hover {
 
 .button-light {
   background: none;
-  color: #c8c8c8;
+  color: white;
+  text-shadow: rgb(10, 8, 1) 1px 0 4px;
   border: 1px solid #c8c8c8;
 }
 .button-light:hover {
