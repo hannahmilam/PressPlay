@@ -90,7 +90,7 @@
 
           <router-link :to="{ name: 'Profile.Contributions' }">
             <li class="nav-link selectable text-uppercase text-light">
-              Contributions {{ contributions.length }}
+              Contributions {{ profileContributions.length }}
             </li>
           </router-link>
 
@@ -197,6 +197,7 @@ export default {
   setup() {
     const route = useRoute()
     onMounted(() => {
+      // AppState.contributions = []
       // AppState.currentProfile = null
       // AppState.projects = []
       // AppState.profileSubscribers = []
@@ -223,6 +224,7 @@ export default {
       subscribers: computed(() => AppState.profileSubscribers),
       subscribing: computed(() => AppState.profileSubscriptions),
       contributions: computed(() => AppState.contributions),
+      profileContributions: computed(() => AppState.profileContributions),
       usersProjectsSubscriptions: computed(() => AppState.projectSubscriptions),
       myUserSubscribe: computed(() => AppState.profileSubscribers.filter(s => s.subscriberId === AppState.account.id)),
       async subscribeToUser() {
