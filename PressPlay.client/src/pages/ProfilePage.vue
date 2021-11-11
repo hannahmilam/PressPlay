@@ -23,7 +23,7 @@
         <div class="row justify-content-center">
           <div
             class="text-light text-center col-md-"
-            v-if="profile?.id !== account?.id"
+            v-if="profile?.id !== account?.id && user.isAuthenticated === true"
           >
             <button
               class="btn btn-info"
@@ -216,6 +216,7 @@ export default {
     })
     return {
       profile: computed(() => AppState.currentProfile),
+      user: computed(() => AppState.user),
       projects: computed(() => AppState.projects),
       account: computed(() => AppState.account),
       subscribers: computed(() => AppState.profileSubscribers),
