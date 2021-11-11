@@ -2,11 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-pink px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/3.png"
-          height="70"
-        />
+        <img alt="logo" src="../assets/img/3.png" height="70" />
       </div>
     </router-link>
     <button
@@ -23,24 +19,39 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn selectable text-uppercase text-light ">
+          <router-link
+            :to="{ name: 'About' }"
+            class="btn selectable text-uppercase text-light"
+          >
             About
           </router-link>
         </li>
 
-        <li>
-          <router-link :to="{ name: 'Profile.Originals', params: {profileId: account.id}}" class="btn selectable text-uppercase text-light ">
+        <li v-if="user.isAuthenticated === true">
+          <router-link
+            :to="{
+              name: 'Profile.Originals',
+              params: { profileId: account.id },
+            }"
+            class="btn selectable text-uppercase text-light"
+          >
             My Profile
           </router-link>
         </li>
 
         <li>
-          <router-link :to="{ name: 'Account', params: {id: account.id} }" class="btn selectable text-uppercase text-light ">
+          <router-link
+            :to="{ name: 'Account', params: { id: account.id } }"
+            class="btn selectable text-uppercase text-light"
+          >
             Account
           </router-link>
         </li>
 
-        <router-link :to="{ name: 'Search'} " class="btn selectable text-uppercase text-light ">
+        <router-link
+          :to="{ name: 'Search' }"
+          class="btn selectable text-uppercase text-light"
+        >
           Search
         </router-link>
       </ul>
@@ -78,7 +89,11 @@
               </div>
             </router-link>
             <div
-              class="list-group-item list-group-item-action hoverable text-danger"
+              class="
+                list-group-item list-group-item-action
+                hoverable
+                text-danger
+              "
               @click="logout"
             >
               <i class="mdi mdi-logout"></i>
@@ -130,15 +145,15 @@ export default {
 a:hover {
   text-decoration: none;
 }
-.nav-link{
+.nav-link {
   text-transform: uppercase;
 }
-.navbar-nav .router-link-exact-active{
+.navbar-nav .router-link-exact-active {
   border-bottom: 2px solid var(--bs-dark);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.bg-pink{
-  background: radial-gradient(circle, #F963EA, #493240);
+.bg-pink {
+  background: radial-gradient(circle, #f963ea, #493240);
 }
 </style>
