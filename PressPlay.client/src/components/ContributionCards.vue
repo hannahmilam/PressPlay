@@ -2,7 +2,10 @@
   <div class="col-6 my-3 d-flex">
     <div>
       <router-link
-        :to="{ name: 'Profile', params: { profileId: contribution.creatorId } }"
+        :to="{
+          name: 'Project.Contributions',
+          params: { projectId: contribution.projectId },
+        }"
         class="selectable text-light"
       >
         <img
