@@ -60,21 +60,22 @@
                         ></i>
                         Play
                       </button>
-
-                      <button
-                        class="button-light"
-                        @click="subscribeToProject"
-                        v-if="myProjectSubscriptions.length > 0"
-                      >
-                        Unfollow
-                      </button>
-                      <button
-                        class="button-light"
-                        @click="subscribeToProject"
-                        v-else
-                      >
-                        Follow
-                      </button>
+                      <div v-if="user.isAuthenticated === true">
+                        <button
+                          class="button-light"
+                          @click="subscribeToProject"
+                          v-if="myProjectSubscriptions.length > 0"
+                        >
+                          Unfollow
+                        </button>
+                        <button
+                          class="button-light"
+                          @click="subscribeToProject"
+                          v-else
+                        >
+                          Follow
+                        </button>
+                      </div>
                       <button
                         @click="removeProjectFromFirebase(account.id, project)"
                         v-if="account.id === project.creatorId"
@@ -174,6 +175,7 @@ export default {
       account: computed(() => AppState.account),
       projectSubs: computed(() => AppState.projectSubscriptions),
       comments: computed(() => AppState.comments),
+      user: computed(() => AppState.user),
       profile: computed(() => AppState.profile),
       setOriginalSource() {
         try {
