@@ -11,19 +11,31 @@
               >
                 <div class="artist__info">
                   <div class="profile__img">
-                    <img
-                      :src="project.creator?.picture"
-                      alt="profile picture"
-                    />
+                    <router-link
+                      :to="{
+                        name: 'Profile.Originals',
+                        params: { profileId: project.creator?.id },
+                      }"
+                    >
+                      <img
+                        :src="project.creator?.picture"
+                        alt="profile picture"
+                      />
+                    </router-link>
                   </div>
 
                   <div class="artist__info__meta">
                     <div class="artist__info__type">Artist</div>
-
-                    <div class="artist__info__name">
-                      {{ project.creator?.name }}
-                    </div>
-
+                    <router-link
+                      :to="{
+                        name: 'Profile.Originals',
+                        params: { profileId: project.creator?.id },
+                      }"
+                    >
+                      <div class="artist__info__name">
+                        {{ project.creator?.name }}
+                      </div>
+                    </router-link>
                     <div class="artist__info__actions">
                       <button
                         class="button-dark"
