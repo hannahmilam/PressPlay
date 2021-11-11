@@ -48,11 +48,12 @@
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { Project } from '../models/Project'
 import { AppState } from '../AppState'
 import Pop from '../utils/Pop'
 import { logger } from '../utils/Logger'
+import { contributionsService } from '../services/ContributionsService'
 
 export default {
   props: {
@@ -61,6 +62,10 @@ export default {
     }
   },
   setup(props) {
+    onMounted(() => {
+      AppState.contributions = []
+      contributionsService.getContributionsByProjectId(props.project.id)
+    })
     return {
       playing: computed(() => AppState.playing),
       currentSong: computed(() => AppState.currentSong),
