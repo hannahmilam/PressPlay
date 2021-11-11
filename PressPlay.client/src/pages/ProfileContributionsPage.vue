@@ -1,7 +1,11 @@
 <template>
   <div class="col-10 m-auto">
     <div class="row">
-      <ContributionCards v-for="c in contributions" :key="c.id" :contribution="c" />
+      <ContributionCards
+        v-for="c in contributions"
+        :key="c.id"
+        :contribution="c"
+      />
     </div>
   </div>
 </template>
@@ -19,11 +23,10 @@ export default {
     return {
       profile: computed(() => AppState.currentProfile),
       projects: computed(() => AppState.projects),
-      contributions: computed(() => AppState.contributions)
+      contributions: computed(() => AppState.profileContributions)
     }
   }
 }
 </script>
 <style scoped>
-
 </style>
