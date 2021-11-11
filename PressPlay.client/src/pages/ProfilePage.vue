@@ -98,6 +98,7 @@
             class="btn btn-project"
             data-bs-toggle="modal"
             data-bs-target="#project-form"
+            v-if="profile.id === account.id"
           >
             <b class="text-light">New Project</b>
           </button>
