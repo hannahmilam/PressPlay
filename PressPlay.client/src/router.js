@@ -9,8 +9,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: loadPage('HomePage')
-    // beforeEnter: authSettled
+    component: loadPage('HomePage'),
+    beforeEnter: authSettled
   },
   {
     path: '/',
@@ -32,12 +32,14 @@ const routes = [
       {
         path: 'originals',
         name: 'Profile.Originals',
-        component: loadPage('ProfileOriginalsPage')
+        component: loadPage('ProfileOriginalsPage'),
+        beforeEnter: authSettled
       },
       {
         path: 'contributions',
         name: 'Profile.Contributions',
-        component: loadPage('ProfileContributionsPage')
+        component: loadPage('ProfileContributionsPage'),
+        beforeEnter: authSettled
       }
     ]
   },
@@ -50,12 +52,14 @@ const routes = [
       {
         path: 'contributions',
         name: 'Project.Contributions',
-        component: loadPage('ProjectContributionsPage')
+        component: loadPage('ProjectContributionsPage'),
+        beforeEnter: authSettled
       },
       {
         path: 'comments',
         name: 'Project.Comments',
-        component: loadPage('ProjectCommentsPage')
+        component: loadPage('ProjectCommentsPage'),
+        beforeEnter: authSettled
       }
     ]
   },
