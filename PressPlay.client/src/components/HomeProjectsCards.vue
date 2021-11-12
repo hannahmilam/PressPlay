@@ -1,49 +1,52 @@
 <template>
   <div class="col-md-3 text-center">
-    <router-link
-      :to="{ name: 'Project.Contributions', params: { projectId: project.id } }"
-      class="selectable text-white"
+    <div
+      class="card my-3 selectable"
+      :style="{ backgroundImage: `url(${project.albumArt})` }"
     >
-      <div
-        class="card my-3 selectable"
-        :style="{ backgroundImage: `url(${project.albumArt})` }"
-      >
-        <div class="card-footer">
-          <div class="row justify-content-between">
-            <div class="col-10">
+      <div class="card-footer">
+        <div class="row justify-content-between">
+          <div class="col-10">
+            <router-link
+              :to="{
+                name: 'Profile.Originals',
+                params: { profileId: project.creator.id },
+              }"
+              class="selectable text-white"
+            >
               <router-link
                 :to="{
-                  name: 'Profile.Originals',
-                  params: { profileId: project.creator.id },
+                  name: 'Project.Contributions',
+                  params: { projectId: project.id },
                 }"
                 class="selectable text-white"
               >
                 <h5 class="p-0 m-0 clip-text" :title="project.name">
                   <b>{{ project.name }}</b>
                 </h5>
-                <p :title="project.creator.name">
-                  {{ project.creator.name }}
-                </p>
               </router-link>
-            </div>
-            <div class="col-2">
-              <i
-                :id="'pause-' + project.id"
-                class="fas fa-pause f-20 selectable"
-                @click.stop="toggleAudio"
-                v-if="currentSong.id === project.id && playing"
-              ></i>
-              <i
-                :id="'play-' + project.id"
-                class="fas fa-play f-20 selectable"
-                @click.stop="setSource"
-                v-else
-              ></i>
-            </div>
+              <p :title="project.creator.name">
+                {{ project.creator.name }}
+              </p>
+            </router-link>
+          </div>
+          <div class="col-2">
+            <i
+              :id="'pause-' + project.id"
+              class="fas fa-pause f-20 selectable"
+              @click.stop="toggleAudio"
+              v-if="currentSong.id === project.id && playing"
+            ></i>
+            <i
+              :id="'play-' + project.id"
+              class="fas fa-play f-20 selectable"
+              @click.stop="setSource"
+              v-else
+            ></i>
           </div>
         </div>
       </div>
-    </router-link>
+    </div>
   </div>
 </template>
 
