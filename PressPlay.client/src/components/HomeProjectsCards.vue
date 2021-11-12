@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!project.password" class="col-md-3 text-center">
+  <div class="col-md-3 text-center">
     <router-link
       :to="{ name: 'Project.Contributions', params: { projectId: project.id } }"
       class="selectable text-white"
