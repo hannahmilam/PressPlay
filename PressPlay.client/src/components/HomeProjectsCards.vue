@@ -8,7 +8,7 @@
       class="selectable text-white"
     >
       <div
-        class="card my-3 selectable"
+        class="card my-3"
         :style="{ backgroundImage: `url(${project.albumArt})` }"
       >
         <div class="card-footer">
@@ -33,13 +33,13 @@
               <i
                 :id="'pause-' + project.id"
                 class="fas fa-pause f-20 selectable"
-                @click.stop="toggleAudio"
+                @click.prevent="toggleAudio"
                 v-if="currentSong.id === project.id && playing"
               ></i>
               <i
                 :id="'play-' + project.id"
                 class="fas fa-play f-20 selectable"
-                @click.stop="setSource"
+                @click.prevent="setSource"
                 v-else
               ></i>
             </div>
@@ -131,7 +131,7 @@ div.card {
   border-bottom-right-radius: 0;
 }
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
   transition: 0.5s;
 }
 </style>
